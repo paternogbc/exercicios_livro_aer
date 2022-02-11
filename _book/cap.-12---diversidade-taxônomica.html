@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cap. 12 - Diversidade Taxônomica | Análises Ecológicas no R: Exercícios e Soluções</title>
+<meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
+<meta name="description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library (vegan) #&gt; Loading required package: permute #&gt; #&gt; Attaching package: 'permute' #&gt; The...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Cap. 12 - Diversidade Taxônomica | Análises Ecológicas no R: Exercícios e Soluções">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-12---diversidade-taxônomica.html">
+<meta property="og:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library (vegan) #&gt; Loading required package: permute #&gt; #&gt; Attaching package: 'permute' #&gt; The...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cap. 12 - Diversidade Taxônomica | Análises Ecológicas no R: Exercícios e Soluções">
+<meta name="twitter:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library (vegan) #&gt; Loading required package: permute #&gt; #&gt; Attaching package: 'permute' #&gt; The...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Análises Ecológicas no R: Exercícios e Soluções</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre</a></li>
+<li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
+<li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
+<li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
+<li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
+<li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
+<li><a class="active" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
+<li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-12---diversidade-taxônomica" class="section level1 unnumbered">
+<h1>Cap. 12 - Diversidade Taxônomica<a class="anchor" aria-label="anchor" href="#cap.-12---diversidade-tax%C3%B4nomica"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Pacotes necessários</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: usethis</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span> <span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: permute</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'permute'</span>
+<span class="co">#&gt; The following object is masked from 'package:devtools':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     check</span>
+<span class="co">#&gt; Loading required package: lattice</span>
+<span class="co">#&gt; This is vegan 2.5-7</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.worldagroforestry.org/output/tree-diversity-analysis">BiodiversityR</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: tcltk</span>
+<span class="co">#&gt; BiodiversityR 2.14-1: Use command BiodiversityRGUI() to launch the Graphical User Interface; </span>
+<span class="co">#&gt; to see changes use BiodiversityRGUI(changeLog=TRUE, backward.compatibility.messages=TRUE)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/daijiang/hillR">hillR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">betapart</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
+<span class="co">#&gt;   method from   </span>
+<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
+<p><strong>12.1</strong>
+Carregue os dados - anuros_composicao - que está no pacote ecodados. Este conjunto de dados representa a abundância de 211 espécies de anuros coletados em 44 localidades na Mata Atlântica. Calcule a riqueza de espécies para cada comunidade e os índices de Margalef, Menhinich, Shannon-Wiener, Gini-Simpson e Equitabilidade de Pielou. Salve todos os resultados em novo data frame. Faça uma gráfico usando o função <code>ggpairs</code> para ver a correlação entre as métricas. Qual a sua interpretação sobre os resultados?</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_1</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_composicao</span>
+
+<span class="co"># Transpor o data frame para as espécies ficarem nas colunas e as localidades nas linhas</span>
+<span class="va">exercicio_1_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">exercicio_1</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Calculando a riqueza observada de espécies para cada comunidade</span>
+<span class="va">Riqueza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">specnumber</a></span><span class="op">(</span><span class="va">exercicio_1_t</span><span class="op">)</span>
+
+<span class="co">## Calculando o Índice de Margalef para cada comunidade</span>
+<span class="va">Margalef</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">exercicio_1_t</span>, <span class="fl">1</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="co">## Calculando o Índice de Menhinick para cada comunidade</span>
+<span class="va">Menhinick</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">Riqueza</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">exercicio_1_t</span>, <span class="fl">1</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="co">## Calculando o Índice de Shannon-Wiener para cada comunidade</span>
+<span class="va">Shannon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">diversity</a></span><span class="op">(</span><span class="va">exercicio_1_t</span>, index <span class="op">=</span> <span class="st">"shannon"</span>, MARGIN <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="co">## Calculando o Índice de Gini-Simpson para cada comunidade</span>
+<span class="va">Gini_Simpson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">diversity</a></span><span class="op">(</span><span class="va">exercicio_1_t</span>, index <span class="op">=</span> <span class="st">"simpson"</span>, MARGIN <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="co">## Calculando o Índice de Equitabilidade de Pielou para cada comunidade</span>
+<span class="va">Pielou</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">Shannon</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Riqueza</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="co"># Criando data frame</span>
+<span class="va">resultados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Riqueza</span>, <span class="va">Margalef</span>, <span class="va">Menhinick</span>, <span class="va">Shannon</span>, <span class="va">Gini_Simpson</span>, <span class="va">Pielou</span><span class="op">)</span>
+
+<span class="co"># Gráfico</span>
+<span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">resultados</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="fu"><a href="https://ggobi.github.io/ggally/reference/wrap.html">wrap</a></span><span class="op">(</span><span class="st">"cor"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">tema_livro</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p><strong>11.2</strong>
+Usando os resultados anteriores, selecione as duas comunidades com os maiores e menores valores de Shannon-Wiener. Em seguida, faça um Diagrama de Whittaker. Por fim, interprete as curvas considerando as curvas teóricas (i.e., geométrica, broken-stick, etc.) descritas nos livros de ecologia.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Usando os resultados no exercício anterior, vamos verificar quais são as comunidades com maiores e menores valores de Shannon-Wienner</span>
+<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">resultados</span><span class="op">$</span><span class="va">Shannon</span><span class="op">)</span>
+<span class="co">#&gt;  [1] 43 37 12  4 41  1 16 38 19 11 22 44 20 13 10 29 17 24</span>
+<span class="co">#&gt; [19] 42  8 15 25 31  7  5 14 18  3 21 39 40 32 30 34 33 27</span>
+<span class="co">#&gt; [37] 36  9  2 35 26  6 28 23</span>
+
+<span class="co"># AS comunidades com maiores valores estão nas linhas 6 e 23 e as comunidades com menores valores nas linhas 43 e 37.</span>
+<span class="va">rank_com6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabundance</a></span><span class="op">(</span><span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">6</span>, <span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">6</span>,<span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span>
+<span class="va">rank_com23</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabundance</a></span><span class="op">(</span><span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">23</span>, <span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">23</span>,<span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span>
+<span class="va">rank_com43</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabundance</a></span><span class="op">(</span><span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">43</span>, <span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">43</span>,<span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span>
+<span class="va">rank_com37</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabundance</a></span><span class="op">(</span><span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">37</span>, <span class="va">exercicio_1_t</span><span class="op">[</span><span class="fl">37</span>,<span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabunplot</a></span><span class="op">(</span><span class="va">rank_com6</span>, scale <span class="op">=</span> <span class="st">"logabun"</span>, pch <span class="op">=</span> <span class="fl">19</span>, specnames <span class="op">=</span> <span class="cn">NULL</span>, 
+             col <span class="op">=</span> <span class="st">"darkorange"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabunplot</a></span><span class="op">(</span><span class="va">rank_com23</span>, scale <span class="op">=</span> <span class="st">"logabun"</span>, pch <span class="op">=</span> <span class="fl">19</span>, specnames <span class="op">=</span> <span class="cn">NULL</span>,
+             addit <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabunplot</a></span><span class="op">(</span><span class="va">rank_com43</span>, scale <span class="op">=</span> <span class="st">"logabun"</span>, pch <span class="op">=</span> <span class="fl">19</span>, specnames <span class="op">=</span> <span class="cn">NULL</span>,
+             addit <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"cyan4"</span> <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiodiversityR/man/rankabundance.html">rankabunplot</a></span><span class="op">(</span><span class="va">rank_com37</span>, scale <span class="op">=</span> <span class="st">"logabun"</span>, pch <span class="op">=</span> <span class="fl">19</span>, specnames <span class="op">=</span> <span class="cn">NULL</span>,
+            addit <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"darkblue"</span> <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">8</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Comunidade 6"</span>, <span class="st">"Comunidade 23"</span>, 
+                         <span class="st">"Comunidade 43"</span>, <span class="st">"Comunidade 37"</span><span class="op">)</span>,
+       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkorange"</span>, <span class="st">"red"</span>, <span class="st">"cyan4"</span>, <span class="st">"darkblue"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">3</span>, 
+       cex <span class="op">=</span> <span class="fl">1.2</span>, box.lty <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p><strong>11.3</strong>
+Usando os dados - anuros_composicao - calcule a partição da diversidade beta considerando os dados de abundância e presença e ausência. a) Faça um gráfico boxplot com os resultados. Discuta se os resultados usando abundância ou presença e ausência são congruentes ou discrepantes. b) Calcule a distância geográfica (use a planilha anuros_ambientais) entre as localidaes (use a Distância euclidiana). Em seguida, faça uma análise de regressão para verificar se as localidades que estão próximas apresentam maior similaridade na composição de espécies (use componente turnover - Bsim) do que as comunidades que estão distantes (e.g., Decaimento da similaridade).</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">anuros</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_composicao</span>
+
+<span class="co"># Transpor o data frame </span>
+<span class="va">anuros_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">anuros</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Transformando dados em presencia e ausência.</span>
+<span class="va">anuros_PA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">anuros_t</span>, method <span class="op">=</span> <span class="st">"pa"</span><span class="op">)</span>
+
+<span class="co">## Diversidade beta presença e ausência</span>
+<span class="va">resultado_PA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/betapart/man/beta.pair.html">beta.pair</a></span><span class="op">(</span><span class="va">anuros_PA</span>, index.family <span class="op">=</span> <span class="st">"sorensen"</span><span class="op">)</span>
+
+<span class="co">## Diversidade beta abundância</span>
+<span class="va">resultado_Abund</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/betapart/man/beta.pair.abund.html">beta.pair.abund</a></span><span class="op">(</span><span class="va">anuros_t</span>, index.family <span class="op">=</span> <span class="st">"bray"</span><span class="op">)</span>
+
+<span class="co">## Criando data frame com os resultados</span>
+<span class="va">diver_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_PA</span><span class="op">$</span><span class="va">beta.sor</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+                            <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_PA</span><span class="op">$</span><span class="va">beta.sim</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+                            <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_PA</span><span class="op">$</span><span class="va">beta.sne</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+                            <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_Abund</span><span class="op">$</span><span class="va">beta.bray</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+                            <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_Abund</span><span class="op">$</span><span class="va">beta.bray.bal</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+                            <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_Abund</span><span class="op">$</span><span class="va">beta.bray.gra</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">Componentes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bsor"</span>, <span class="st">"Bsim"</span>, <span class="st">"Bnes"</span>, <span class="st">"BBray"</span>, <span class="st">"BBray_bal"</span>, <span class="st">"BBray_gra"</span><span class="op">)</span>,
+             each <span class="op">=</span> <span class="fl">946</span><span class="op">)</span>
+<span class="va">Dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Incidencia"</span>, <span class="st">"Abundância"</span><span class="op">)</span>,
+             each <span class="op">=</span> <span class="fl">2838</span><span class="op">)</span>
+
+<span class="va">data_frame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">diver_beta</span>, <span class="va">Componentes</span>, <span class="va">Dados</span><span class="op">)</span>
+
+<span class="co"># Reordenando os componentes para melhorar visualização no gráfico</span>
+<span class="va">data_frame</span><span class="op">$</span><span class="va">Componentes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data_frame</span><span class="op">$</span><span class="va">Componentes</span> , levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bsor"</span>, <span class="st">"Bsim"</span>, <span class="st">"Bnes"</span>, 
+                                           <span class="st">"BBray"</span>, <span class="st">"BBray_bal"</span>, <span class="st">"BBray_gra"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data_frame</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">diver_beta</span> , x <span class="op">=</span> <span class="va">Componentes</span>, fill <span class="op">=</span> <span class="va">Dados</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.3</span>, width <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span> x <span class="op">=</span> <span class="st">"Componentes diversidade beta"</span>, y <span class="op">=</span> <span class="st">"Dissimilaridade"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co">## carregando planilha anuros_ambientais</span>
+
+<span class="va">ambientes</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_ambientais</span>
+
+<span class="co">## Distância euclidiana</span>
+<span class="va">distancia</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">ambientes</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">7</span><span class="op">)</span><span class="op">]</span>, <span class="st">"euclidean"</span><span class="op">)</span>
+
+<span class="co">## criar data frame</span>
+
+<span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultado_PA</span><span class="op">$</span><span class="va">beta.sim</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">distancia</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bsim"</span>, <span class="st">"distancia"</span><span class="op">)</span>
+
+<span class="co">## Regressão - Contudo essa não é a melhor análise porque os índices de </span>
+<span class="co"># diversidade beta apresenta um platô.</span>
+<span class="va">regr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span> <span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">Bsim</span> <span class="op">~</span> <span class="va">dados</span><span class="op">$</span><span class="va">distancia</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">regr</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = dados$Bsim ~ dados$distancia)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -0.58919 -0.21205  0.03911  0.19848  0.50133 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                  Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)     0.4729768  0.0129279   36.59   &lt;2e-16 ***</span>
+<span class="co">#&gt; dados$distancia 0.0075119  0.0007092   10.59   &lt;2e-16 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 0.2472 on 944 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.1062, Adjusted R-squared:  0.1053 </span>
+<span class="co">#&gt; F-statistic: 112.2 on 1 and 944 DF,  p-value: &lt; 2.2e-16</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">distancia</span><span class="op">*</span><span class="fl">10</span>, y <span class="op">=</span> <span class="va">Bsim</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Distância geográfica (km)"</span>, y <span class="op">=</span> <span class="st">"Componente substituição diversidade beta"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></div>
+<div class="next"><a href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-12---diversidade-tax%C3%B4nomica">Cap. 12 - Diversidade Taxônomica</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_12.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_12.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

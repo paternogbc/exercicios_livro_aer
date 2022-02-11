@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cap. 7 - Modelos lineares | Análises Ecológicas no R: Exercícios e Soluções</title>
+<meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
+<meta name="description" content="# Pacotes necessários library(ggplot2) library(ggpubr) library(lmtest) library(bbmle) library(car) library(ggforce) library(sjPlot) library(nlme) library(dplyr) 7.1 Avalie se os indivíduos machos...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Cap. 7 - Modelos lineares | Análises Ecológicas no R: Exercícios e Soluções">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-7---modelos-lineares.html">
+<meta property="og:description" content="# Pacotes necessários library(ggplot2) library(ggpubr) library(lmtest) library(bbmle) library(car) library(ggforce) library(sjPlot) library(nlme) library(dplyr) 7.1 Avalie se os indivíduos machos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cap. 7 - Modelos lineares | Análises Ecológicas no R: Exercícios e Soluções">
+<meta name="twitter:description" content="# Pacotes necessários library(ggplot2) library(ggpubr) library(lmtest) library(bbmle) library(car) library(ggforce) library(sjPlot) library(nlme) library(dplyr) 7.1 Avalie se os indivíduos machos...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Análises Ecológicas no R: Exercícios e Soluções</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre</a></li>
+<li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
+<li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
+<li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
+<li><a class="active" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
+<li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
+<li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
+<li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-7---modelos-lineares" class="section level1 unnumbered">
+<h1>Cap. 7 - Modelos lineares<a class="anchor" aria-label="anchor" href="#cap.-7---modelos-lineares"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Pacotes necessários</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bbolker/bbmle">bbmle</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://strengejacke.github.io/sjPlot/">sjPlot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<p><strong>7.1</strong>
+Avalie se os indivíduos machos de uma espécie de aranha são maiores do que as fêmeas. Qual a sua interpretação sobre o dimorfismo sexual nesta espécie? Faça um gráfico boxplot usando também a função geom_jitter.Use os dados Cap7_exercicio1 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar dados do pacote ecodados</span>
+<span class="va">exercicio_1</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio1</span>
+
+<span class="co"># Verificar as premissas do teste</span>
+<span class="va">residuos_exercicio1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Tamanho</span> <span class="op">~</span> <span class="va">Sexo</span>, data <span class="op">=</span> <span class="va">exercicio_1</span><span class="op">)</span>
+
+<span class="co"># Teste da normalidade dos resíduos</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">residuos_exercicio1</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Shapiro-Wilk normality test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  residuals(residuos_exercicio1)</span>
+<span class="co">#&gt; W = 0.96586, p-value = 0.4328</span>
+
+<span class="co"># Teste da Homogeneidade da variância dos resíduos</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">Tamanho</span> <span class="op">~</span> <span class="va">Sexo</span>, data <span class="op">=</span> <span class="va">exercicio_1</span><span class="op">)</span>
+<span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span>
+<span class="co">#&gt;       Df F value Pr(&gt;F)</span>
+<span class="co">#&gt; group  1  2.0072 0.1676</span>
+<span class="co">#&gt;       28</span>
+
+<span class="co">## Análise Teste T </span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">Tamanho</span> <span class="op">~</span> <span class="va">Sexo</span>, data <span class="op">=</span> <span class="va">exercicio_1</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Two Sample t-test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  Tamanho by Sexo</span>
+<span class="co">#&gt; t = 2.2756, df = 28, p-value = 0.03072</span>
+<span class="co">#&gt; alternative hypothesis: true difference in means between group f and group m is not equal to 0</span>
+<span class="co">#&gt; 95 percent confidence interval:</span>
+<span class="co">#&gt;  0.2356113 4.4843887</span>
+<span class="co">#&gt; sample estimates:</span>
+<span class="co">#&gt; mean in group f mean in group m </span>
+<span class="co">#&gt;           10.08            7.72</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sexo</span>, y <span class="op">=</span> <span class="va">Tamanho</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.5</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Fêmeas"</span>,<span class="st">"Machos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Dimorfismo sexual"</span>, x <span class="op">=</span> <span class="st">"Sexo"</span>, y <span class="op">=</span> <span class="st">"Tamanho (mm)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p><strong>7.2</strong>
+Avalie se o número de polinizadores visitando uma determinada espécie de planta é dependente da presença ou ausência de predadores. A mesma planta, em tempos diferentes, foi utilizada como unidade amostral para os tratamentos com e sem predadores. Qual a sua interpretação sobre os resultados? Faça um gráfico boxplot ligando os resultados da mesma planta com e sem a presença do predador.Use os dados Cap7_exercicio2 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_2</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio2</span>
+
+<span class="co">## Análise Teste T Pareado</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">Polinizadores</span> <span class="op">~</span> <span class="va">Predadores</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, data <span class="op">=</span> <span class="va">exercicio_2</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Paired t-test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  Polinizadores by Predadores</span>
+<span class="co">#&gt; t = 2.843, df = 19, p-value = 0.0104</span>
+<span class="co">#&gt; alternative hypothesis: true difference in means is not equal to 0</span>
+<span class="co">#&gt; 95 percent confidence interval:</span>
+<span class="co">#&gt;  0.4088952 2.6911048</span>
+<span class="co">#&gt; sample estimates:</span>
+<span class="co">#&gt; mean of the differences </span>
+<span class="co">#&gt;                    1.55</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggpaired.html">ggpaired</a></span><span class="op">(</span><span class="va">exercicio_2</span>, x <span class="op">=</span> <span class="st">"Predadores"</span>, y <span class="op">=</span> <span class="st">"Polinizadores"</span>,
+         color <span class="op">=</span> <span class="st">"Predadores"</span>, line.color <span class="op">=</span> <span class="st">"gray"</span>, line.size <span class="op">=</span> <span class="fl">0.8</span>, 
+         palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkorange"</span>, <span class="st">"cyan4"</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.5</span>, 
+         point.size <span class="op">=</span> <span class="fl">4</span>, xlab <span class="op">=</span> <span class="st">"Predadores"</span>, 
+         ylab <span class="op">=</span> <span class="st">"Número de polinizadores visitando a planta"</span>,
+         legend <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p><strong>7.3</strong>
+Avalie se existe correlação entre o número de filhotes nos ninhos de uma espécie de ave com o tamanho do fragmento florestal. Qual a sua interpretação dos resultados? Faça um gráfico mostrando a relação entre as variáveis. Use os dados Cap7_exercicio3 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_3</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio3</span>
+
+<span class="co">## Análise correlação de Pearson</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Filhotes</span> <span class="op">+</span> <span class="va">Fragmentos</span>, data <span class="op">=</span> <span class="va">exercicio_3</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Pearson's product-moment correlation</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  Filhotes and Fragmentos</span>
+<span class="co">#&gt; t = -0.65396, df = 33, p-value = 0.5177</span>
+<span class="co">#&gt; alternative hypothesis: true correlation is not equal to 0</span>
+<span class="co">#&gt; 95 percent confidence interval:</span>
+<span class="co">#&gt;  -0.4301428  0.2287595</span>
+<span class="co">#&gt; sample estimates:</span>
+<span class="co">#&gt;        cor </span>
+<span class="co">#&gt; -0.1131098</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Fragmentos</span>, y <span class="op">=</span> <span class="va">Filhotes</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tamanho dos fragmentos (ha)"</span>, y <span class="op">=</span> <span class="st">"Número de filhotes"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<p><strong>7.4</strong>
+Avalie se a relação entre o tamanho da área de diferentes ilhas e a riqueza de espécies de lagartos. Qual a sua interpretação dos resultados? Faça um gráfico mostrando a relação predita pelo modelo.Use os dados Cap7_exercicio4 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_4</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio4</span>
+
+<span class="co">## Análise Regressão Simples</span>
+<span class="va">modelo_regressao</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Area_ilhas</span>, data <span class="op">=</span> <span class="va">exercicio_4</span><span class="op">)</span>
+
+<span class="co">## Análise das premissas</span>
+<span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_model.html">plot_model</a></span><span class="op">(</span><span class="va">modelo_regressao</span> , type <span class="op">=</span> <span class="st">"diag"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co">## Olhar os resultados</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_regressao</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Riqueza ~ Area_ilhas, data = exercicio_4)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -2.8077 -0.9996 -0.2656  0.9026  2.5195 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)   3.8398     1.2816   2.996  0.00453 ** </span>
+<span class="co">#&gt; Area_ilhas    0.2879     0.0143  20.133  &lt; 2e-16 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 1.375 on 43 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.9041, Adjusted R-squared:  0.9019 </span>
+<span class="co">#&gt; F-statistic: 405.3 on 1 and 43 DF,  p-value: &lt; 2.2e-16</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_4</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Area_ilhas</span>, y <span class="op">=</span> <span class="va">Riqueza</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tamanho das ilhas (km2)"</span>, y <span class="op">=</span> <span class="st">"Riqueza de espécies de lagartos"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+<p><strong>7.5</strong>
+Avalie se existe relação entre a abundância de uma espécie de roedor com o tamanho da área dos fragmentos florestais e/ou a altitude. Faça uma regressão múltipla. Em seguida, crie diferentes modelos e selecione o mais parcimonioso com base no valores do teste de Likelihood-ratio test (LRT) e AIC. Qual a sua interpretação? Use os dados Cap7_exercicio5 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_5</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio5</span>
+
+<span class="co">## Análise Regressão Múltipla</span>
+<span class="va">modelo_regressao_mult</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="va">Area_fragmento</span><span class="op">*</span><span class="va">Altitude</span>, data <span class="op">=</span> <span class="va">exercicio_5</span><span class="op">)</span>
+
+<span class="co">## Multicolinearidae</span>
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">modelo_regressao_mult</span><span class="op">)</span>
+<span class="co">#&gt;          Area_fragmento                Altitude </span>
+<span class="co">#&gt;                5.403688                1.786589 </span>
+<span class="co">#&gt; Area_fragmento:Altitude </span>
+<span class="co">#&gt;                6.890149</span>
+
+<span class="co">## Análise das premissas</span>
+<span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_model.html">plot_model</a></span><span class="op">(</span><span class="va">modelo_regressao</span> , type <span class="op">=</span> <span class="st">"diag"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co">## Olhar os resultados</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo_regressao_mult</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Abundancia ~ Area_fragmento * Altitude, data = exercicio_5)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -10.4180  -1.3524  -0.2711   1.1783  12.5283 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                           Estimate Std. Error t value</span>
+<span class="co">#&gt; (Intercept)              5.747e+01  8.549e-01  67.230</span>
+<span class="co">#&gt; Area_fragmento          -3.337e-03  3.245e-03  -1.028</span>
+<span class="co">#&gt; Altitude                -5.451e-03  4.859e-04 -11.218</span>
+<span class="co">#&gt; Area_fragmento:Altitude  1.344e-06  1.471e-06   0.914</span>
+<span class="co">#&gt;                         Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)              &lt; 2e-16 ***</span>
+<span class="co">#&gt; Area_fragmento             0.308    </span>
+<span class="co">#&gt; Altitude                1.69e-15 ***</span>
+<span class="co">#&gt; Area_fragmento:Altitude    0.365    </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 2.99 on 52 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.7986, Adjusted R-squared:  0.787 </span>
+<span class="co">#&gt; F-statistic: 68.73 on 3 and 52 DF,  p-value: &lt; 2.2e-16</span>
+
+
+<span class="co">## Vamos retirar a interação</span>
+<span class="va">modelo_regressao_mult_sem_interacao</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="va">Area_fragmento</span> <span class="op">+</span> <span class="va">Altitude</span>, data <span class="op">=</span> <span class="va">exercicio_5</span><span class="op">)</span>
+
+<span class="co">## Likelihood-ratio test (LRT)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">modelo_regressao_mult</span>, <span class="va">modelo_regressao_mult_sem_interacao</span><span class="op">)</span>
+<span class="co">#&gt; Likelihood ratio test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Abundancia ~ Area_fragmento * Altitude</span>
+<span class="co">#&gt; Model 2: Abundancia ~ Area_fragmento + Altitude</span>
+<span class="co">#&gt;   #Df  LogLik Df  Chisq Pr(&gt;Chisq)</span>
+<span class="co">#&gt; 1   5 -138.71                     </span>
+<span class="co">#&gt; 2   4 -139.16 -1 0.8917      0.345</span>
+
+<span class="co">## Vamos verificar o modelo só com a altitude </span>
+<span class="va">modelo_regressao_mult_sem_fragmento</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="va">Altitude</span>, data <span class="op">=</span> <span class="va">exercicio_5</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">modelo_regressao_mult_sem_interacao</span>, <span class="va">modelo_regressao_mult_sem_fragmento</span><span class="op">)</span>
+<span class="co">#&gt; Likelihood ratio test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Abundancia ~ Area_fragmento + Altitude</span>
+<span class="co">#&gt; Model 2: Abundancia ~ Altitude</span>
+<span class="co">#&gt;   #Df  LogLik Df  Chisq Pr(&gt;Chisq)</span>
+<span class="co">#&gt; 1   4 -139.16                     </span>
+<span class="co">#&gt; 2   3 -139.28 -1 0.2364     0.6268</span>
+
+<span class="co">## Vamos verificar o modelo só com o intercepto</span>
+<span class="va">modelo_regressao_mult_nulo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">exercicio_5</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">modelo_regressao_mult_sem_fragmento</span>, <span class="va">modelo_regressao_mult_nulo</span><span class="op">)</span>
+<span class="co">#&gt; Likelihood ratio test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Abundancia ~ Altitude</span>
+<span class="co">#&gt; Model 2: Abundancia ~ 1</span>
+<span class="co">#&gt;   #Df  LogLik Df  Chisq Pr(&gt;Chisq)    </span>
+<span class="co">#&gt; 1   3 -139.28                         </span>
+<span class="co">#&gt; 2   2 -183.58 -1 88.611  &lt; 2.2e-16 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Outra alternativa é usar o AIC para seleção dos modelos</span>
+
+<span class="co">## modelo só com a área do fragmento</span>
+<span class="va">modelo_regressao_mult_sem_altitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="va">Area_fragmento</span>, data <span class="op">=</span> <span class="va">exercicio_5</span><span class="op">)</span>
+
+<span class="va">AICc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bbmle/man/ICtab.html">ICtab</a></span><span class="op">(</span><span class="va">modelo_regressao_mult</span>, <span class="va">modelo_regressao_mult_sem_interacao</span>, 
+              <span class="va">modelo_regressao_mult_sem_fragmento</span>,<span class="va">modelo_regressao_mult_nulo</span>, 
+              <span class="va">modelo_regressao_mult_sem_altitude</span>,
+              type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIC"</span><span class="op">)</span>, weights <span class="op">=</span> <span class="cn">TRUE</span>, 
+              delta <span class="op">=</span> <span class="cn">TRUE</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">AICc</span>
+<span class="co">#&gt;                                     dAIC df weight</span>
+<span class="co">#&gt; modelo_regressao_mult_sem_fragmento  0.0 3  0.61  </span>
+<span class="co">#&gt; modelo_regressao_mult_sem_interacao  1.8 4  0.25  </span>
+<span class="co">#&gt; modelo_regressao_mult                2.9 5  0.14  </span>
+<span class="co">#&gt; modelo_regressao_mult_sem_altitude  85.6 3  &lt;0.001</span>
+<span class="co">#&gt; modelo_regressao_mult_nulo          86.6 2  &lt;0.001</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_5</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Altitude</span>, y <span class="op">=</span> <span class="va">Abundancia</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Altitude (m)"</span>, y <span class="op">=</span> <span class="st">"Abundância da espécie"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-6-2.png" width="672"></div>
+<p><strong>7.6</strong>
+Avalie se o local que machos territoriais ocupam (pasto, cana, floresta) influência no peso dos indivíduos. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio6 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_6</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio6</span>
+
+<span class="co">## Análise anova um fator</span>
+<span class="va">modelo_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Peso</span> <span class="op">~</span> <span class="va">Local</span>, data <span class="op">=</span> <span class="va">exercicio_6</span><span class="op">)</span>
+
+<span class="co">## Normalidade </span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Shapiro-Wilk normality test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  residuals(modelo_aov)</span>
+<span class="co">#&gt; W = 0.95361, p-value = 0.211</span>
+
+<span class="co">## Homogeneidade da variância</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">Peso</span> <span class="op">~</span> <span class="va">Local</span>, data <span class="op">=</span> <span class="va">exercicio_6</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Bartlett test of homogeneity of variances</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  Peso by Local</span>
+<span class="co">#&gt; Bartlett's K-squared = 0.06087, df = 2, p-value =</span>
+<span class="co">#&gt; 0.97</span>
+
+<span class="co">## Olhar os resultados</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: Peso</span>
+<span class="co">#&gt;           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span>
+<span class="co">#&gt; Local      2 20.0536 10.0268  248.47 &lt; 2.2e-16 ***</span>
+<span class="co">#&gt; Residuals 27  1.0896  0.0404                      </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Diferenças entre os tratamentos</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">modelo_aov</span><span class="op">)</span>
+<span class="co">#&gt;   Tukey multiple comparisons of means</span>
+<span class="co">#&gt;     95% family-wise confidence level</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Fit: aov(formula = Peso ~ Local, data = exercicio_6)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $Local</span>
+<span class="co">#&gt;                      diff        lwr        upr p adj</span>
+<span class="co">#&gt; Floresta-Cana      1.1125  0.8897525  1.3352475     0</span>
+<span class="co">#&gt; Pastagem-Cana     -0.8859 -1.1086475 -0.6631525     0</span>
+<span class="co">#&gt; Pastagem-Floresta -1.9984 -2.2211475 -1.7756525     0</span>
+
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_6</span>, 
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Local</span>, y <span class="op">=</span> <span class="va">Peso</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.5</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">17.5</span>, label <span class="op">=</span> <span class="st">"a"</span>, color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">18.5</span>, label <span class="op">=</span> <span class="st">"b"</span>, color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3</span>, y <span class="op">=</span> <span class="fl">16.5</span>, label <span class="op">=</span> <span class="st">"c"</span>, color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">18.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Local"</span>, y <span class="op">=</span> <span class="st">"Peso (g)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<p><strong>7.7</strong>
+Avalie se a abundância de formigas está relacionada com o fato das domácias estarem abertas ou fechadas e com a idade das domácias. Verifique a interação entre os fatores. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio7 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_7</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio7</span>
+
+<span class="co">## Análise anova dois fatores</span>
+<span class="va">modelo_aov_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Abundancia</span> <span class="op">~</span> <span class="va">Domacea</span> <span class="op">*</span> <span class="va">Idade</span>, data <span class="op">=</span> <span class="va">exercicio_7</span><span class="op">)</span>
+
+
+<span class="co">## Olhar os resultados</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_aov_2</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: Abundancia</span>
+<span class="co">#&gt;               Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span>
+<span class="co">#&gt; Domacea        1  931.22  931.22  32.993 1.528e-06 ***</span>
+<span class="co">#&gt; Idade          1  555.02  555.02  19.664 8.334e-05 ***</span>
+<span class="co">#&gt; Domacea:Idade  1  455.63  455.63  16.143 0.0002862 ***</span>
+<span class="co">#&gt; Residuals     36 1016.10   28.22                      </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_7</span>, 
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">Abundancia</span>, x <span class="op">=</span> <span class="va">Domacea</span>, color <span class="op">=</span> <span class="va">Idade</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span><span class="st">"point"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">Idade</span>, x <span class="op">=</span> <span class="va">Domacea</span><span class="op">)</span>, 
+               color <span class="op">=</span> <span class="st">"black"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span>, size  <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggforce.data-imaginist.com/reference/geom_link.html">geom_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.85</span>, y <span class="op">=</span> <span class="fl">27</span>, xend <span class="op">=</span> <span class="fl">1.8</span>, yend <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"darkorange"</span>, 
+            lwd  <span class="op">=</span> <span class="fl">1.3</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggforce.data-imaginist.com/reference/geom_link.html">geom_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1.17</span>, y <span class="op">=</span> <span class="fl">26.5</span>, xend <span class="op">=</span> <span class="fl">2.15</span>, yend <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"cyan4"</span>, 
+            lwd  <span class="op">=</span> <span class="fl">1.3</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Condição da domácea"</span>, 
+       y <span class="op">=</span> <span class="st">"Abundância de formigas"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<p><strong>7.8</strong>
+Avalie se o número de parasitas está relacionado com o tamanho corporal de fêmeas de uma espécie de ave. Além disso, use a idade das aves como uma co-variável explicando o número de parasitas. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio8 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_8</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio8</span>
+
+<span class="co">## Análise ancova</span>
+<span class="va">modelo_ancova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Parasitas</span> <span class="op">~</span> <span class="va">Femeas</span> <span class="op">*</span> <span class="va">Idade</span>, data <span class="op">=</span> <span class="va">exercicio_8</span><span class="op">)</span>
+
+<span class="co">## Verificar as premissas</span>
+<span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/plot_model.html">plot_model</a></span><span class="op">(</span><span class="va">modelo_ancova</span>, type <span class="op">=</span> <span class="st">"diag"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Olhar os resultados</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_ancova</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: Parasitas</span>
+<span class="co">#&gt;              Df  Sum Sq Mean Sq F value  Pr(&gt;F)  </span>
+<span class="co">#&gt; Femeas        2 111.577  55.789  3.2153 0.06885 .</span>
+<span class="co">#&gt; Idade         1 113.527 113.527  6.5431 0.02185 *</span>
+<span class="co">#&gt; Femeas:Idade  2  10.866   5.433  0.3131 0.73582  </span>
+<span class="co">#&gt; Residuals    15 260.261  17.351                  </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Criando modelo sem interação</span>
+<span class="va">modelo_ancova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Parasitas</span> <span class="op">~</span> <span class="va">Femeas</span> <span class="op">+</span> <span class="va">Idade</span>, data <span class="op">=</span> <span class="va">exercicio_8</span><span class="op">)</span>
+
+<span class="co">## Likelihood-ratio test</span>
+<span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">modelo_ancova</span>, <span class="va">modelo_ancova2</span><span class="op">)</span>
+<span class="co">#&gt; Likelihood ratio test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Parasitas ~ Femeas * Idade</span>
+<span class="co">#&gt; Model 2: Parasitas ~ Femeas + Idade</span>
+<span class="co">#&gt;   #Df  LogLik Df Chisq Pr(&gt;Chisq)</span>
+<span class="co">#&gt; 1   7 -56.228                    </span>
+<span class="co">#&gt; 2   5 -56.657 -2 0.859     0.6508</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_ancova2</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: Parasitas</span>
+<span class="co">#&gt;           Df Sum Sq Mean Sq F value  Pr(&gt;F)  </span>
+<span class="co">#&gt; Femeas     2 111.58  55.789  3.4980 0.05341 .</span>
+<span class="co">#&gt; Idade      1 113.53 113.527  7.1183 0.01622 *</span>
+<span class="co">#&gt; Residuals 17 271.13  15.949                  </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Criando modelo sem tamanho do corpo</span>
+<span class="va">modelo_ancova3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Parasitas</span> <span class="op">~</span> <span class="va">Idade</span>, data <span class="op">=</span> <span class="va">exercicio_8</span><span class="op">)</span>
+
+<span class="co">## Likelihood-ratio test</span>
+<span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">modelo_ancova2</span>, <span class="va">modelo_ancova3</span><span class="op">)</span>
+<span class="co">#&gt; Likelihood ratio test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Parasitas ~ Femeas + Idade</span>
+<span class="co">#&gt; Model 2: Parasitas ~ Idade</span>
+<span class="co">#&gt;   #Df  LogLik Df  Chisq Pr(&gt;Chisq)</span>
+<span class="co">#&gt; 1   5 -56.657                     </span>
+<span class="co">#&gt; 2   3 -57.087 -2 0.8584      0.651</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">modelo_ancova3</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: Parasitas</span>
+<span class="co">#&gt;           Df Sum Sq Mean Sq F value   Pr(&gt;F)   </span>
+<span class="co">#&gt; Idade      1 213.79 213.792  14.382 0.001231 **</span>
+<span class="co">#&gt; Residuals 19 282.44  14.865                    </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_8</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Idade</span>, y <span class="op">=</span> <span class="va">Parasitas</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Idade das aves"</span>, y <span class="op">=</span> <span class="st">"Número de parasitas"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">19</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-9-2.png" width="672"></div>
+<p><strong>7.9</strong>
+Avalie se a presença ou ausência de predadores afeta a riqueza de macroinvertebrados em 10 lagos. Os tratamentos dos predadores foram realizados nos mesmos lagos. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados.Use os dados Cap7_exercicio9 disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_9</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap7_exercicio9</span>
+
+<span class="co">## Análise anova em blocos</span>
+<span class="va">model_bloco</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Predadores</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">Lago</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">exercicio_9</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_bloco</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error: Lago</span>
+<span class="co">#&gt;           Df Sum Sq Mean Sq F value Pr(&gt;F)</span>
+<span class="co">#&gt; Residuals  1 0.2561  0.2561               </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error: Within</span>
+<span class="co">#&gt;            Df Sum Sq Mean Sq F value Pr(&gt;F)  </span>
+<span class="co">#&gt; Predadores  1  120.0  120.05   4.743 0.0438 *</span>
+<span class="co">#&gt; Residuals  17  430.2   25.31                 </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">exercicio_9</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Predadores</span>, y <span class="op">=</span> <span class="va">Riqueza</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Predadores"</span>, y <span class="op">=</span> <span class="st">"Riqueza de macroinvertebrados"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
+<p><strong>7.10</strong>
+Avalie se a precipitação anual afeta a riqueza de espécies de anuros em 44 localidades na Mata Atlântica. Use as coordenadas geográficas para controlar o efeito da autocorrelação espacial. Qual a sua interpretação dos resultados das análises com e sem levar em consideração a autocorrelação espacial? Use os dados anuros_ambientais disponível no pacote ecodados.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
+<span class="va">exercicio_10</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_ambientais</span>
+
+<span class="co">## Modelo gls sem estrutura espacial</span>
+<span class="va">no_spat_gls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, method <span class="op">=</span> <span class="st">"REML"</span><span class="op">)</span>
+
+<span class="co">## Covariância esférica</span>
+<span class="va">espher_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, 
+                    <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corSpher.html">corSpher</a></span><span class="op">(</span>form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>, nugget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Covariância exponencial</span>
+<span class="va">expon_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, 
+                   <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corExp.html">corExp</a></span><span class="op">(</span>form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>, nugget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Covariância Gaussiana</span>
+<span class="va">gauss_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, 
+                   <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corGaus.html">corGaus</a></span><span class="op">(</span>form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>, nugget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Covariância linear</span>
+<span class="va">cor_linear_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, 
+                        <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corLin.html">corLin</a></span><span class="op">(</span>form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>, nugget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Covariância razão quadrática</span>
+<span class="va">ratio_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">Riqueza</span> <span class="op">~</span> <span class="va">Prec_anual</span>, <span class="va">exercicio_10</span>, 
+                   <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corRatio.html">corRatio</a></span><span class="op">(</span>form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>, nugget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Seleção de modelos</span>
+<span class="va">aic_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">no_spat_gls</span>, <span class="va">espher_model</span>, <span class="va">expon_model</span>, 
+               <span class="va">cor_linear_model</span>, <span class="va">gauss_model</span>,<span class="va">ratio_model</span><span class="op">)</span>
+<span class="va">aic_fit</span> <span class="op"><a href="https://rpkgs.datanovia.com/ggpubr/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AIC</span><span class="op">)</span>
+<span class="co">#&gt;                  df      AIC</span>
+<span class="co">#&gt; cor_linear_model  5 344.1434</span>
+<span class="co">#&gt; gauss_model       5 344.3118</span>
+<span class="co">#&gt; ratio_model       5 344.8400</span>
+<span class="co">#&gt; no_spat_gls       3 345.4316</span>
+<span class="co">#&gt; espher_model      5 345.6006</span>
+<span class="co">#&gt; expon_model       5 346.2936</span>
+
+
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">cor_linear_model</span>, type <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">cor_linear_model</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Varigrama</span>
+<span class="va">cor_linear_variog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/Variogram.html">Variogram</a></span><span class="op">(</span><span class="va">cor_linear_model</span>, form <span class="op">=</span> <span class="op">~</span><span class="va">Latitude</span> <span class="op">+</span> <span class="va">Longitude</span>,
+                               resType <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cor_linear_variog</span>, main <span class="op">=</span> <span class="st">"Variograma como Modelo de Covariância Linear"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_07_files/figure-html/unnamed-chunk-11-2.png" width="672"></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Resumo dos modelos</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cor_linear_model</span><span class="op">)</span><span class="op">$</span><span class="va">tTable</span> 
+<span class="co">#&gt;                   Value    Std.Error  t-value   p-value</span>
+<span class="co">#&gt; (Intercept) 17.25918513 73.686338088 0.234225 0.8159483</span>
+<span class="co">#&gt; Prec_anual   0.01316726  0.008113421 1.622899 0.1120944</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">no_spat_gls</span><span class="op">)</span><span class="op">$</span><span class="va">tTable</span>
+<span class="co">#&gt;                   Value  Std.Error    t-value      p-value</span>
+<span class="co">#&gt; (Intercept) -3.35797556 8.99912469 -0.3731447 0.7109175029</span>
+<span class="co">#&gt; Prec_anual   0.02288015 0.00630715  3.6276526 0.0007686691</span></code></pre></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></div>
+<div class="next"><a href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-7---modelos-lineares">Cap. 7 - Modelos lineares</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_07.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_07.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

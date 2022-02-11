@@ -1,0 +1,354 @@
+# Cap. 7 - Modelos lineares {-}
+
+```{r}
+# Pacotes necessários
+library(ggplot2)
+library(ggpubr)
+library(lmtest)
+library(bbmle)
+library(car)
+library(ggforce)
+library(sjPlot)
+library(nlme)
+library(dplyr)
+```
+
+**7.1**
+Avalie se os indivíduos machos de uma espécie de aranha são maiores do que as fêmeas. Qual a sua interpretação sobre o dimorfismo sexual nesta espécie? Faça um gráfico boxplot usando também a função geom_jitter.Use os dados Cap7_exercicio1 disponível no pacote ecodados.
+
+Solução:
+
+```{r warning=FALSE, message=FALSE}
+# Carregar dados do pacote ecodados
+exercicio_1 <- ecodados::Cap7_exercicio1
+
+# Verificar as premissas do teste
+residuos_exercicio1 <- lm(Tamanho ~ Sexo, data = exercicio_1)
+
+# Teste da normalidade dos resíduos
+shapiro.test(residuals(residuos_exercicio1))
+
+# Teste da Homogeneidade da variância dos resíduos
+
+leveneTest(Tamanho ~ Sexo, data = exercicio_1)
+
+## Análise Teste T 
+t.test(Tamanho ~ Sexo, data = exercicio_1, var.equal = TRUE)
+
+## Gráfico
+ggplot(data = exercicio_1, aes(x = Sexo, y = Tamanho)) +
+  geom_boxplot(width = .5, show.legend = FALSE) +
+  theme_bw(base_size = 14) +
+  geom_jitter(size = 4, width = 0.1) +
+  scale_x_discrete(labels=c("Fêmeas","Machos")) +
+  labs(title = "Dimorfismo sexual", x = "Sexo", y = "Tamanho (mm)")
+```
+
+**7.2**
+Avalie se o número de polinizadores visitando uma determinada espécie de planta é dependente da presença ou ausência de predadores. A mesma planta, em tempos diferentes, foi utilizada como unidade amostral para os tratamentos com e sem predadores. Qual a sua interpretação sobre os resultados? Faça um gráfico boxplot ligando os resultados da mesma planta com e sem a presença do predador.Use os dados Cap7_exercicio2 disponível no pacote ecodados.
+
+Solução:
+
+```{r warning=FALSE, message=FALSE}
+
+# Carregar a planilha com os dados
+exercicio_2 <- ecodados::Cap7_exercicio2
+
+## Análise Teste T Pareado
+t.test(Polinizadores ~ Predadores, paired = TRUE, data = exercicio_2)
+
+## Gráfico
+ggpaired(exercicio_2, x = "Predadores", y = "Polinizadores",
+         color = "Predadores", line.color = "gray", line.size = 0.8, 
+         palette = c("darkorange", "cyan4"), width = 0.5, 
+         point.size = 4, xlab = "Predadores", 
+         ylab = "Número de polinizadores visitando a planta",
+         legend = "none") 
+```
+
+**7.3**
+Avalie se existe correlação entre o número de filhotes nos ninhos de uma espécie de ave com o tamanho do fragmento florestal. Qual a sua interpretação dos resultados? Faça um gráfico mostrando a relação entre as variáveis. Use os dados Cap7_exercicio3 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_3 <- ecodados::Cap7_exercicio3
+
+## Análise correlação de Pearson
+cor.test(~ Filhotes + Fragmentos, data = exercicio_3, method = "pearson")
+
+## Gráfico
+ggplot(data = exercicio_3, aes(x = Fragmentos, y = Filhotes)) + 
+  labs(x = "Tamanho dos fragmentos (ha)", y = "Número de filhotes") +
+  geom_point(size = 6, shape = 21, fill = "darkorange", alpha = 0.7) +
+  theme(legend.position = "none") +
+  theme_bw(base_size = 16)
+```
+
+**7.4**
+Avalie se a relação entre o tamanho da área de diferentes ilhas e a riqueza de espécies de lagartos. Qual a sua interpretação dos resultados? Faça um gráfico mostrando a  relação predita pelo modelo.Use os dados Cap7_exercicio4 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_4 <- ecodados::Cap7_exercicio4
+
+## Análise Regressão Simples
+modelo_regressao <- lm(Riqueza ~ Area_ilhas, data = exercicio_4)
+
+## Análise das premissas
+plot_grid(plot_model(modelo_regressao , type = "diag"))
+
+
+## Olhar os resultados
+summary(modelo_regressao)
+
+## Gráfico
+ggplot(data = exercicio_4, aes(x = Area_ilhas, y = Riqueza)) + 
+  labs(x = "Tamanho das ilhas (km2)", y = "Riqueza de espécies de lagartos") +
+  geom_point(size = 6, shape = 21, fill = "darkorange", alpha = 0.7) +
+  theme(legend.position = "none") +
+  geom_smooth(method = lm, se = TRUE, color = "black") +
+  theme_bw(base_size = 16)
+```
+
+**7.5**
+Avalie se existe relação entre a abundância de uma espécie de roedor com o tamanho da área dos fragmentos florestais e/ou a altitude. Faça uma regressão múltipla. Em seguida, crie diferentes modelos e selecione o mais parcimonioso com base no valores do teste de Likelihood-ratio test (LRT) e AIC. Qual a sua interpretação? Use os dados Cap7_exercicio5 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_5 <- ecodados::Cap7_exercicio5
+
+## Análise Regressão Múltipla
+modelo_regressao_mult <- lm(Abundancia ~ Area_fragmento*Altitude, data = exercicio_5)
+
+## Multicolinearidae
+vif(modelo_regressao_mult)
+
+## Análise das premissas
+plot_grid(plot_model(modelo_regressao , type = "diag"))
+
+
+## Olhar os resultados
+summary(modelo_regressao_mult)
+
+
+## Vamos retirar a interação
+modelo_regressao_mult_sem_interacao <- lm(Abundancia ~ Area_fragmento + Altitude, data = exercicio_5)
+
+## Likelihood-ratio test (LRT)
+lrtest(modelo_regressao_mult, modelo_regressao_mult_sem_interacao)
+
+## Vamos verificar o modelo só com a altitude 
+modelo_regressao_mult_sem_fragmento <- lm(Abundancia ~ Altitude, data = exercicio_5)
+
+lrtest(modelo_regressao_mult_sem_interacao, modelo_regressao_mult_sem_fragmento)
+
+## Vamos verificar o modelo só com o intercepto
+modelo_regressao_mult_nulo <- lm(Abundancia ~ 1, data = exercicio_5)
+
+lrtest(modelo_regressao_mult_sem_fragmento, modelo_regressao_mult_nulo)
+
+## Outra alternativa é usar o AIC para seleção dos modelos
+
+## modelo só com a área do fragmento
+modelo_regressao_mult_sem_altitude <- lm(Abundancia ~ Area_fragmento, data = exercicio_5)
+
+AICc <- ICtab(modelo_regressao_mult, modelo_regressao_mult_sem_interacao, 
+              modelo_regressao_mult_sem_fragmento,modelo_regressao_mult_nulo, 
+              modelo_regressao_mult_sem_altitude,
+              type = c("AIC"), weights = TRUE, 
+              delta = TRUE, sort = TRUE)
+AICc
+
+## Gráfico
+ggplot(data = exercicio_5, aes(x = Altitude, y = Abundancia)) + 
+  labs(x = "Altitude (m)", y = "Abundância da espécie") +
+  geom_point(size = 6, shape = 21, fill = "darkorange", alpha = 0.7) +
+  theme(legend.position = "none") +
+  geom_smooth(method = lm, se = TRUE, color = "black") +
+  theme_bw(base_size = 16)
+```
+
+**7.6**
+Avalie se o local que machos territoriais ocupam (pasto, cana, floresta) influência no peso dos indivíduos. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio6 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_6 <- ecodados::Cap7_exercicio6
+
+## Análise anova um fator
+modelo_aov <- aov(Peso ~ Local, data = exercicio_6)
+
+## Normalidade 
+shapiro.test(residuals(modelo_aov))
+
+## Homogeneidade da variância
+bartlett.test(Peso ~ Local, data = exercicio_6)
+
+## Olhar os resultados
+anova(modelo_aov)
+
+## Diferenças entre os tratamentos
+TukeyHSD(modelo_aov)
+
+
+## Gráfico
+ggplot(data = exercicio_6, 
+       aes(x = Local, y = Peso)) + 
+  geom_boxplot(width = .5, show.legend = FALSE) +
+  geom_jitter(size = 4, width = 0.1) +
+  geom_text(x = 1, y = 17.5, label = "a", color = "black", size = 5) +
+  geom_text(x = 2, y = 18.5, label = "b", color = "black", size = 5) +
+  geom_text(x = 3, y = 16.5, label = "c", color = "black", size = 5) +
+  ylim(16, 18.5) +
+  theme_bw(base_size = 16) +
+  labs(x = "Local", y = "Peso (g)")
+```
+
+**7.7**
+Avalie se a abundância de formigas está relacionada com o fato das domácias estarem abertas ou fechadas e com a idade das domácias. Verifique a interação entre os fatores. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio7 disponível no pacote ecodados. 
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_7 <- ecodados::Cap7_exercicio7
+
+## Análise anova dois fatores
+modelo_aov_2 <- aov(Abundancia ~ Domacea * Idade, data = exercicio_7)
+
+
+## Olhar os resultados
+anova(modelo_aov_2)
+
+## Gráfico
+ggplot(data = exercicio_7, 
+       aes(y = Abundancia, x = Domacea, color = Idade)) + 
+  geom_boxplot() +
+  stat_summary(fun = mean, geom ="point", aes(group = Idade, x = Domacea), 
+               color = "black", position = position_dodge(0.7), size  = 4) +
+  geom_link(aes(x = 0.85, y = 27, xend = 1.8, yend = 24), color = "darkorange", 
+            lwd  = 1.3, linetype = 2) + 
+  geom_link(aes(x = 1.17, y = 26.5, xend = 2.15, yend = 10), color = "cyan4", 
+            lwd  = 1.3, linetype = 2) + 
+  labs(x = "Condição da domácea", 
+       y = "Abundância de formigas") +
+  theme_bw(base_size = 16)
+```
+
+**7.8**
+Avalie se o número de parasitas está relacionado com o tamanho corporal de fêmeas de uma espécie de ave. Além disso, use a idade das aves como uma co-variável explicando o número de parasitas. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados. Use os dados Cap7_exercicio8 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_8 <- ecodados::Cap7_exercicio8
+
+## Análise ancova
+modelo_ancova <- lm(Parasitas ~ Femeas * Idade, data = exercicio_8)
+
+## Verificar as premissas
+plot_grid(plot_model(modelo_ancova, type = "diag"))
+
+## Olhar os resultados
+anova(modelo_ancova)
+
+## Criando modelo sem interação
+modelo_ancova2 <- lm(Parasitas ~ Femeas + Idade, data = exercicio_8)
+
+## Likelihood-ratio test
+lrtest(modelo_ancova, modelo_ancova2)
+
+anova(modelo_ancova2)
+
+## Criando modelo sem tamanho do corpo
+modelo_ancova3 <- lm(Parasitas ~ Idade, data = exercicio_8)
+
+## Likelihood-ratio test
+lrtest(modelo_ancova2, modelo_ancova3)
+
+anova(modelo_ancova3)
+
+## Gráfico
+ggplot(data = exercicio_8, aes(x = Idade, y = Parasitas)) + 
+  labs(x = "Idade das aves", y = "Número de parasitas") +
+  geom_point(size = 6, shape = 19, alpha = 0.7) +
+  theme(legend.position = "none") +
+  geom_smooth(method = lm, se = TRUE, color = "black") +
+  theme_bw(base_size = 16)
+```
+
+**7.9**
+Avalie se a presença ou ausência de predadores afeta a riqueza de macroinvertebrados em 10 lagos. Os tratamentos dos predadores foram realizados nos mesmos lagos. Qual a sua interpretação dos resultados? Faça um gráfico com os resultados.Use os dados Cap7_exercicio9 disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_9 <- ecodados::Cap7_exercicio9
+
+## Análise anova em blocos
+model_bloco <- aov(Riqueza ~ Predadores + Error(Lago), data = exercicio_9)
+
+summary(model_bloco)
+
+## Gráfico
+ggplot(data = exercicio_9, aes(x = Predadores, y = Riqueza)) + 
+  geom_boxplot(color = "black", show.legend = FALSE, alpha = 0.4) +
+  geom_jitter(size = 4, width = 0.1) +
+  labs(x = "Predadores", y = "Riqueza de macroinvertebrados") +
+  theme_bw(base_size = 16)
+```
+
+**7.10**
+Avalie se a precipitação anual afeta a riqueza de espécies de anuros em 44 localidades na Mata Atlântica. Use as coordenadas geográficas para controlar o efeito da autocorrelação espacial. Qual a sua interpretação dos resultados das análises com e sem levar em consideração a autocorrelação espacial? Use os dados anuros_ambientais disponível no pacote ecodados.
+
+Solução:
+```{r warning=FALSE, message=FALSE}
+# Carregar a planilha com os dados
+exercicio_10 <- ecodados::anuros_ambientais
+
+## Modelo gls sem estrutura espacial
+no_spat_gls <- gls(Riqueza ~ Prec_anual, exercicio_10, method = "REML")
+
+## Covariância esférica
+espher_model <- gls(Riqueza ~ Prec_anual, exercicio_10, 
+                    corSpher(form = ~Latitude + Longitude, nugget = TRUE))
+
+## Covariância exponencial
+expon_model <- gls(Riqueza ~ Prec_anual, exercicio_10, 
+                   corExp(form = ~Latitude + Longitude, nugget = TRUE))
+
+## Covariância Gaussiana
+gauss_model <- gls(Riqueza ~ Prec_anual, exercicio_10, 
+                   corGaus(form = ~Latitude + Longitude, nugget = TRUE))
+
+## Covariância linear
+cor_linear_model <- gls(Riqueza ~ Prec_anual, exercicio_10, 
+                        corLin(form = ~Latitude + Longitude, nugget = TRUE))
+
+## Covariância razão quadrática
+ratio_model <- gls(Riqueza ~ Prec_anual, exercicio_10, 
+                   corRatio(form = ~Latitude + Longitude, nugget = TRUE))
+
+## Seleção de modelos
+aic_fit <- AIC(no_spat_gls, espher_model, expon_model, 
+               cor_linear_model, gauss_model,ratio_model)
+aic_fit %>% arrange(AIC)
+
+
+## Gráfico
+plot(residuals(cor_linear_model, type = "normalized") ~ fitted(cor_linear_model))
+
+## Varigrama
+cor_linear_variog <- Variogram(cor_linear_model, form = ~Latitude + Longitude,
+                               resType = "normalized")
+
+plot(cor_linear_variog, main = "Variograma como Modelo de Covariância Linear")
+
+## Resumo dos modelos
+summary(cor_linear_model)$tTable 
+summary(no_spat_gls)$tTable
+```
+

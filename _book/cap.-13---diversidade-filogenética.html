@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções</title>
+<meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
+<meta name="description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-13---diversidade-filogenética.html">
+<meta property="og:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções">
+<meta name="twitter:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Análises Ecológicas no R: Exercícios e Soluções</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre</a></li>
+<li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
+<li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
+<li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
+<li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
+<li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
+<li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
+<li><a class="active" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-13---diversidade-filogenética" class="section level1 unnumbered">
+<h1>Cap. 13 - Diversidade Filogenética<a class="anchor" aria-label="anchor" href="#cap.-13---diversidade-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Pacotes necessários</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: usethis</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">V.PhyloMaker</span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: ape</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: permute</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'permute'</span>
+<span class="co">#&gt; The following object is masked from 'package:devtools':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     check</span>
+<span class="co">#&gt; Loading required package: lattice</span>
+<span class="co">#&gt; This is vegan 2.5-7</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
+<span class="co">#&gt;   method from   </span>
+<span class="co">#&gt;   +.gg   ggplot2</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'ggpubr'</span>
+<span class="co">#&gt; The following object is masked from 'package:ape':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     rotate</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">picante</span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: nlme</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: maps</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'phytools'</span>
+<span class="co">#&gt; The following object is masked from 'package:vegan':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     scores</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mwpennell/geiger-v2">geiger</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/darunabas/phyloregion">phyloregion</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pez</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">betapart</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bbolker/bbmle">bbmle</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: stats4</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span></code></pre></div>
+<p><strong>13.1</strong>
+Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e temperatura anual na distribuição espacial da diversidade filogenética (PD) e Endemismo filogenético (PE). Calcule o SES para verificar se os resultados da diversidade filogenética (PD) diferem do esperado ao acaso devido ao número de espécies em cada comunidade. Qual a sua interpretação sobre os resultados?</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Carregar as planilhas com os dados</span>
+<span class="va">anuros</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_composicao</span>
+<span class="va">anuros_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">anuros</span><span class="op">)</span> <span class="co"># Transpor dados</span>
+<span class="va">ambiente</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_ambientais</span>
+<span class="va">filogenia</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">filogenia_anuros</span>
+
+<span class="co">## Conferir os nomes das espécies</span>
+<span class="fu"><a href="https://rdrr.io/pkg/geiger/man/name.check.html">name.check</a></span><span class="op">(</span><span class="va">filogenia</span>, <span class="va">anuros</span><span class="op">)</span>
+<span class="co">#&gt; [1] "OK"</span>
+
+
+<span class="co">## Colocar os nomes das espécies do data frame na mesma ordem que aparecem na filogenia</span>
+<span class="va">anuros_P</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/picante/man/data.checking.html">match.phylo.comm</a></span><span class="op">(</span>phy <span class="op">=</span> <span class="va">filogenia</span>, comm <span class="op">=</span> <span class="va">anuros_t</span><span class="op">)</span><span class="op">$</span><span class="va">comm</span>
+
+<span class="co">## Phylogenetic diversity (PD)</span>
+<span class="co">#*****************************************************************************</span>
+<span class="va">anuros_PD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/picante/man/pd.html">pd</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="va">filogenia</span><span class="op">)</span>
+
+<span class="co">## Criar data frame</span>
+<span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">anuros_PD</span><span class="op">$</span><span class="va">PD</span>, <span class="va">anuros_PD</span><span class="op">$</span><span class="va">SR</span>, <span class="va">ambiente</span><span class="op">$</span><span class="va">Prec_anual</span>,
+                    <span class="va">ambiente</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">ambiente</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PD"</span>, <span class="st">"SR"</span>, <span class="st">"Prec_anual"</span>, <span class="st">"Range_altitude"</span>, <span class="st">"Temp_anual"</span><span class="op">)</span>
+
+<span class="co">## Partição da variância</span>
+<span class="va">particao_PD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">PD</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Prec_anual</span>, 
+                    <span class="va">dados</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_PD</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">PD</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Precipitação anual (mm)"</span>, y <span class="op">=</span> <span class="st">"Diversidade filogenética (PD)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co">## Phylogenetic Endemism (PE)</span>
+<span class="co">#***************************************************************************</span>
+<span class="co"># Transformando data.frame em matriz.</span>
+<span class="va">anuros_matriz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">anuros_P</span><span class="op">)</span>
+<span class="va">anuros_PE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloregion/man/phylo_endemism.html">phylo_endemism</a></span><span class="op">(</span><span class="va">anuros_matriz</span>, <span class="va">filogenia</span>, weighted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co">## Adicionando no data frame</span>
+<span class="va">dados</span><span class="op">$</span><span class="va">PE</span> <span class="op">&lt;-</span> <span class="va">anuros_PE</span>
+
+<span class="co">## Partição da variância</span>
+<span class="va">particao_PE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">PE</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Prec_anual</span>, 
+                    <span class="va">dados</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_PE</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-3.png" width="672"></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">PE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Precipitação anual (mm)"</span>, y <span class="op">=</span> <span class="st">"Endemismo filogenético (PE)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-4.png" width="672"></div>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co">## Standardized Effect Size (SES) para o PD</span>
+<span class="co">#*****************************************************************************</span>
+<span class="va">resultados_SES_PD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/picante/man/ses.pd.html">ses.pd</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="va">filogenia</span>,
+                            null.model <span class="op">=</span> <span class="st">"independentswap"</span>, 
+                            runs <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> 
+
+<span class="co">## Adicionando no data frame</span>
+<span class="va">dados</span><span class="op">$</span><span class="va">SES</span> <span class="op">&lt;-</span> <span class="va">resultados_SES_PD</span><span class="op">$</span><span class="va">pd.obs.z</span>
+
+<span class="co">## Partição da variância</span>
+<span class="va">particao_SES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">SES</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Prec_anual</span>, 
+                    <span class="va">dados</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_SES</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-5.png" width="672"></div>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">SES</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Precipitação anual (mm)"</span>, y <span class="op">=</span> <span class="st">"Standardized Effect Size  (PD)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-6.png" width="672"></div>
+<p><strong>13.2</strong>
+Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e temperatura anual na distribuição espacial do NRI e NTI. Qual a sua interpretação sobre os resultados?</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Nearest Relative Index (NRI)</span>
+<span class="co">#*****************************************************************************</span>
+<span class="va">resultados_NRI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/picante/man/ses.mpd.html">ses.mpd</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cophenetic.html">cophenetic</a></span><span class="op">(</span><span class="va">filogenia</span><span class="op">)</span>,
+                              null.model <span class="op">=</span> <span class="st">"taxa.labels"</span>, 
+                              abundance.weighted <span class="op">=</span> <span class="cn">FALSE</span>,
+                              runs <span class="op">=</span> <span class="fl">999</span><span class="op">)</span>
+
+<span class="co">## Inserir no data frame</span>
+<span class="va">dados</span><span class="op">$</span><span class="va">NRI</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="op">(</span><span class="va">resultados_NRI</span><span class="op">$</span><span class="va">mpd.obs.z</span><span class="op">)</span>
+
+<span class="co">## Partição da variância</span>
+<span class="va">particao_NRI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">NRI</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Prec_anual</span>, 
+                    <span class="va">dados</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_NRI</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Range_altitude</span>, y <span class="op">=</span> <span class="va">NRI</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Range altitudinal (m)"</span>, y <span class="op">=</span> <span class="st">"Nearest Relative Index (NRI)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Nearest Taxon Index (NTI)</span>
+<span class="co">#*****************************************************************************</span>
+<span class="va">resultados_NTI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/picante/man/ses.mntd.html">ses.mntd</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cophenetic.html">cophenetic</a></span><span class="op">(</span><span class="va">filogenia</span><span class="op">)</span>,
+                              null.model <span class="op">=</span> <span class="st">"taxa.labels"</span>, 
+                              abundance.weighted <span class="op">=</span> <span class="cn">FALSE</span>,
+                              runs <span class="op">=</span> <span class="fl">999</span><span class="op">)</span>
+
+<span class="co">## Inserir no data frame</span>
+<span class="va">dados</span><span class="op">$</span><span class="va">NTI</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="op">(</span><span class="va">resultados_NTI</span><span class="op">$</span><span class="va">mntd.obs.z</span><span class="op">)</span>
+
+<span class="co">## Partição da variância</span>
+<span class="va">particao_NTI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">NTI</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Prec_anual</span>, 
+                    <span class="va">dados</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="va">dados</span><span class="op">$</span><span class="va">Temp_anual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_NTI</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-3.png" width="672"></div>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Range_altitude</span>, y <span class="op">=</span> <span class="va">NTI</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Precipitação anual (mm)"</span>, y <span class="op">=</span> <span class="st">"Nearest Taxon Index (NTI)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-4.png" width="672"></div>
+<p><strong>13.3</strong>
+Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e distância geográfica na distribuição espacial dos diferentes componentes da diversidade beta filogenética (Phylosor). Qual a sua interpretação sobre os resultados?</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># Temos que transformar os dados para presença e ausência das espécies nas comunidades.</span>
+<span class="va">anuros_PA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="st">"pa"</span><span class="op">)</span>
+
+<span class="co">## Phylosor</span>
+<span class="co">#*****************************************************************************</span>
+<span class="co"># Partição dos componentes do Phylosor.</span>
+<span class="va">resultados_Phylosor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/betapart/man/phylo.beta.pair.html">phylo.beta.pair</a></span><span class="op">(</span><span class="va">anuros_PA</span>,
+                                                <span class="va">filogenia</span>, 
+                                                index.family <span class="op">=</span> <span class="st">"sorensen"</span><span class="op">)</span>
+
+<span class="co">## vamos calcular a similaridade entre as variáveis ambientais</span>
+<span class="va">prec_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">ambiente</span><span class="op">$</span><span class="va">Prec_anual</span>, <span class="st">"euclidian"</span><span class="op">)</span>
+<span class="va">alt_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">ambiente</span><span class="op">$</span><span class="va">Range_altitude</span>, <span class="st">"euclidian"</span><span class="op">)</span>
+<span class="va">coord_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">ambiente</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span>, <span class="st">"euclidian"</span><span class="op">)</span>
+
+<span class="co"># Vamos preparar os dados .</span>
+<span class="va">dados_phylosor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+    substituicao <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultados_Phylosor</span><span class="op">$</span><span class="va">phylo.beta.sim</span><span class="op">)</span>,
+    aninhamento <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultados_Phylosor</span><span class="op">$</span><span class="va">phylo.beta.sne</span><span class="op">)</span>,
+    sorensen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">resultados_Phylosor</span><span class="op">$</span><span class="va">phylo.beta.sor</span><span class="op">)</span>,
+    dis_prec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">prec_dist</span><span class="op">)</span>,
+    dis_alt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">alt_dist</span><span class="op">)</span>,
+    dis_coord <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">coord_dist</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## Partição da variância do componente substituição do Phylosor</span>
+<span class="co">#*******************************************************************************</span>
+<span class="va">particao_subst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados_phylosor</span><span class="op">$</span><span class="va">substituicao</span>, <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_prec</span>, 
+                    <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_alt</span>, <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_coord</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_subst</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Distância'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados_phylosor</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dis_coord</span><span class="op">*</span><span class="fl">10</span>, y <span class="op">=</span> <span class="va">substituicao</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Distância geográfical (km)"</span>, 
+       y <span class="op">=</span> <span class="st">"Componente substituição da diversidade beta \n filogenética (Phylosor)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Partição da variância do componente aninhamento do Physolor</span>
+<span class="co">#*******************************************************************************</span>
+<span class="va">particao_anin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/varpart.html">varpart</a></span><span class="op">(</span><span class="va">dados_phylosor</span><span class="op">$</span><span class="va">aninhamento</span>, <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_prec</span>, 
+                    <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_alt</span>, <span class="va">dados_phylosor</span><span class="op">$</span><span class="va">dis_coord</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span> <span class="op">(</span><span class="va">particao_anin</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Distância'</span><span class="op">)</span>, 
+      bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-3.png" width="672"></div>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## Gráfico</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados_phylosor</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dis_alt</span>, y <span class="op">=</span> <span class="va">substituicao</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Range altitudinal (m)"</span>, 
+       y <span class="op">=</span> <span class="st">"Componente aninhamento da diversidade beta \n filogenética (Phylosor)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">"darkorange"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-4.png" width="672"></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></div>
+<div class="next"><a href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-13---diversidade-filogen%C3%A9tica">Cap. 13 - Diversidade Filogenética</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_13.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_13.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

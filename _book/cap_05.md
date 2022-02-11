@@ -47,12 +47,12 @@ rnorm(100) %>%
     abs() %>% 
     sqrt() %>% 
     sum()
-#> [1] 78.93276
+#> [1] 78.05671
 
 sample(1:10, 10000, rep = TRUE) %>% 
     sort() %>% 
     sum()
-#> [1] 54747
+#> [1] 54887
 ```
 
 **5.2** 
@@ -249,7 +249,7 @@ intervalo_covid <- lubridate::interval(covid_inicio_br, lubridate::today())
 intervalo_vacina <- lubridate::interval(covid_inicio_br, vacina)
 
 lubridate::as.period(intervalo_covid)
-#> [1] "1y 11m 16d 0H 0M 0S"
+#> [1] "1y 11m 15d 0H 0M 0S"
 lubridate::as.period(intervalo_vacina)
 #> [1] "1y 4m 24d 0H 0M 0S"
 ```

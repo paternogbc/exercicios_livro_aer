@@ -11,7 +11,7 @@ br <- rnaturalearth::ne_states(country = "Brazil", returnclass = "sf")
 plot(br$geometry, col = "gray", axes = TRUE, graticule = TRUE)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 **15.2**
 Dados vetoriais podem ser criados com diversos erros de topologia, e.g., sobreposição de linhas ou polígonos ou buracos. Algumas funções exigem que os objetos vetoriais aos quais são atribuídos esses dados não possuam esses erros para que o algoritmo funcione. Para verificar se há erros, podemos usar a função **st_is_valid()** do pacote **sf**. Há diversas forma de correções desses erros, mas vamos usar uma correção simples do R, com a função **st_make_valid()**. Vamos fazer essa correção para o **br** importado anteriormente e atribuindo ao objeto **br_valid**. Podemos conferir para saber se há erros e fazer um plot.
@@ -35,7 +35,7 @@ sf::st_is_valid(br_valid)
 plot(br_valid$geometry, col = "gray", axes = TRUE, graticule = TRUE)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 **15.3**
 Crie um objeto RasterLayer vazio chamado **ra** com reSolução: de 5º (~600 km). Atribua um sistema de referência de coordendas com o código **4326**. Atribua valores aleatórios de uma distribuição normal e plote o mesmo.
@@ -49,7 +49,7 @@ raster::values(ra) <- rnorm(raster::ncell(ra))
 plot(ra)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 **15.4**
 Reprojete o limite dos estados brasileiros do exercício anterior para o CRS SIRGAS 2000/Brazil Polyconic, utilizando o código EPSG:5880 e chamando de **br_poly**. Faça um mapa simples como no exercício 1. Atente para as curvaturas das linhas.
@@ -64,7 +64,7 @@ br_valid_poly <- sf::st_transform(br_valid, crs = 5880)
 plot(br_valid_poly$geometry, col = "gray", axes = TRUE, graticule = TRUE)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 **15.5**
 Utilizando a função **st_centroid** do pacote **sf**, crie um vetor chamado **br_valid_cen** que armazenará o centroide de cada estado brasileiro do objeto **br_valid** do exercício 2 e plot o resultado.
@@ -81,7 +81,7 @@ plot(br_valid_poly$geometry, col = "gray", axes = TRUE, graticule = TRUE)
 plot(br_valid_poly_cen$geometry, pch = 20, add = TRUE)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 **15.6**
 Ajuste o limite e máscara do objeto raster criado no exercício 3 para o limite do Brasil, atribuindo ao objeto **ra_br**. Depois reprojete esse raster para a mesma projeção utilizada no exercício 4 com o nome **ra_br_poly** e plote o mapa resultante.
@@ -102,7 +102,7 @@ plot(br_valid_poly$geometry, add = TRUE)
 plot(br_valid_poly_cen$geometry, pch = 20, add = TRUE)
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 **15.7**
 Extraia os valores de cada pixel do raster criado no exercício 6 para os centroides dos estados do Brasil criado no exercício 5, atribuindo à coluna **val** do objeto espacial chamado **br_valid_poly_cent_ra**.
@@ -113,8 +113,8 @@ Extraia os valores de cada pixel do raster criado no exercício 6 para os centro
 br_valid_poly_cent_ra <- br_valid_poly_cen %>% 
     dplyr::mutate(val = raster::extract(ra_br_poly, .))
 head(br_valid_poly_cent_ra$val)
-#> [1]  1.4172219 -2.6923118 -0.1657125 -2.0317262 -0.2246991
-#> [6]  1.5505676
+#> [1]  1.0238284 -1.0381480 -0.4493325  0.3284137 -0.1762245
+#> [6]  0.7180757
 ```
 
 **15.8**
@@ -149,4 +149,4 @@ tm_shape(ra_br_poly) +
               legend.title.fontface = "bold")
 ```
 
-![](cap_15_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+<img src="cap_15_files/figure-html/unnamed-chunk-8-1.png" width="672" />
