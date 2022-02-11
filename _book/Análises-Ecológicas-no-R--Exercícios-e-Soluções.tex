@@ -1022,6 +1022,242 @@ Solução:
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{cap.-4---visualizauxe7uxe3o-de-dados}{%
+\chapter*{Cap. 4 - Visualização de dados}\label{cap.-4---visualizauxe7uxe3o-de-dados}}
+\addcontentsline{toc}{chapter}{Cap. 4 - Visualização de dados}
+
+\textbf{6.1}
+
+Utilizando o banco de dados \texttt{penguins} compare o comprimento do bico entre as diferentes espécies de penguins. Utilize um gráfico de caixa (\href{https://analises-ecologicas.netlify.app/cap6.html\#gr\%C3\%A1fico-de-caixa-boxplot}{boxplot}) para ilustrar a variação intraespecífica e possíveis outiers nos dados. Para melhorar o seu gráfico, lembre-se de nomear o os dois eixos corretamente, definir um tema e posicionar a legenda.
+
+Solução
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Carregando pacotes necesários}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(ecodados)}
+
+\CommentTok{\# Dados}
+\NormalTok{penguins }\OtherTok{\textless{}{-}}\NormalTok{ palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins}
+
+\CommentTok{\# Edição dos nomes das colunas para português }
+\CommentTok{\# names(penguins)}
+\FunctionTok{colnames}\NormalTok{(penguins) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"especies"}\NormalTok{, }\StringTok{"ilha"}\NormalTok{, }\StringTok{"comprimento\_bico"}\NormalTok{, }
+                        \StringTok{"profundidade\_bico"}\NormalTok{, }\StringTok{"comprimento\_nadadeira"}\NormalTok{, }
+                        \StringTok{"massa\_corporal"}\NormalTok{, }\StringTok{"sexo"}\NormalTok{, }\StringTok{"ano"}\NormalTok{)}
+
+\CommentTok{\# Gráfico: Boxplot do tamanho do bico entre as diferentes espécies}
+\FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_bico, }\AttributeTok{x =}\NormalTok{ especies, }\AttributeTok{fill =}\NormalTok{ especies)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"top"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{fill =} \StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Espécies"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Comprimento do bico (mm)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\textbf{6.2}
+Utilizando o banco de dados \texttt{penguins} faça um \href{https://analises-ecologicas.netlify.app/cap6.html\#histograma-histogram}{histograma} com a distribuição da massa corporal para cada uma das espécies. Utilize uma cor de preenchimento para cada espécie.
+
+Solução
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ massa\_corporal, }\AttributeTok{fill =}\NormalTok{ especies)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{,  }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Massa corporal (g)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequência"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Espécie"}\NormalTok{)}
+\CommentTok{\#\textgreater{} \textasciigrave{}stat\_bin()\textasciigrave{} using \textasciigrave{}bins = 30\textasciigrave{}. Pick better value with}
+\CommentTok{\#\textgreater{} \textasciigrave{}binwidth\textasciigrave{}.}
+\CommentTok{\#\textgreater{} Warning: Removed 2 rows containing non{-}finite values}
+\CommentTok{\#\textgreater{} (stat\_bin).}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\textbf{6.3}
+Utilizando o banco de dados \texttt{penguins}, produza três gráficos com o mesmo eixo Y e eixo X. Coloque o comprimento das nadadeiras no eixo Y as espécies de pinguins no eixo X. No primeiro grafico, utilize o \texttt{geom\_jitter} para plotar os dados brutos. No segundo gráfico, utilize o \texttt{geom\_violin} para mostrar a distribuição de densidade dos dados. No terceiro gráfico, utilize o \texttt{geom\_boxplot} para destacar a mediana e os quartis.
+
+Solução
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de jitter com dados brutos}
+\NormalTok{pjitter }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_nadadeira, }\AttributeTok{x =}\NormalTok{ especies )) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{()}
+\NormalTok{pjitter}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Gráfico violin com a densidade dos dados}
+\NormalTok{pviolin }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_nadadeira, }\AttributeTok{x =}\NormalTok{ especies )) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{()}
+\NormalTok{pviolin}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Gráfico de caixa com a media e os quartis}
+\NormalTok{pcaixa  }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_nadadeira, }\AttributeTok{x =}\NormalTok{ especies )) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\NormalTok{pcaixa}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-3-3.pdf}
+
+\textbf{6.4}
+Se você conseguiu resolver o exercício 6.3, agora dê um passo a mais e compare os três gráficos lado a lado utilizando o comando \texttt{grid.arrange}. Lembre-se de colocar um título informativo em cada um dos gráficos antes de juntá-los em uma prancha única. Ao comparar os 3 tipos de gráficos, qual você considera mais informativo? Experimente combinar mais de um ``geom'' e produzir gráficos ainda mais interessantes.
+
+Solução
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# colocando um título em cada gráfico}
+\NormalTok{pjitter }\OtherTok{\textless{}{-}}\NormalTok{ pjitter }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot com jitter"}\NormalTok{)}
+\NormalTok{pviolin }\OtherTok{\textless{}{-}}\NormalTok{ pviolin }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot com violin"}\NormalTok{)}
+\NormalTok{pcaixa  }\OtherTok{\textless{}{-}}\NormalTok{ pcaixa }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot com boxplot"}\NormalTok{)}
+
+\CommentTok{\# juntando os 3 gráficos em um só}
+\CommentTok{\# Carregando o pacote gridExtra}
+\FunctionTok{library}\NormalTok{(gridExtra)}
+\FunctionTok{grid.arrange}\NormalTok{(pjitter, pviolin, pcaixa, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Agora misturando as camadas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Misturando geoms}
+\FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_nadadeira, }\AttributeTok{x =}\NormalTok{ especies )) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\AttributeTok{width =}\NormalTok{ .}\DecValTok{2}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ especies)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ especies), }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{2}\NormalTok{, }\AttributeTok{width =}\NormalTok{ .}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{fill =} \StringTok{"gray"}\NormalTok{, }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Comprimento da nadadeira (mm)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Espécie de pinguim"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\textbf{6.5}
+Utilize o banco de dados \texttt{ecodados::anova\_dois\_fatores} para construir um \href{https://analises-ecologicas.netlify.app/cap6.html\#gr\%C3\%A1fico-de-barras-bar-plot}{gráfico de barras} com a média e o erro padrão do Tempo (Tempo para eliminar a droga do corpo) no eixo Y em funçao da variável Pessoas (XX, ou XY) e Idade (jovem ou idoso). Antes de fazer o gráfico leia com a atenção a descrição do mesmo através do comando \texttt{?ecodados::anova\_dois\_fatores}. Um dica, utilize \texttt{fill} dentro do \texttt{aes} para representar um dos fatores (ex. Pessoas). O outro fator você pode representar no eixo X. Veja se consegue, se não conseguir pode olhar a cola com a solução para aprender como é feito. Outra dica, pesquise sobre a função \texttt{stat\_summary} ela pode te ajudar a calcular a média e o erro padrão dentro do comando que gera o gráfico.
+
+Solução
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# entenda o banco de dados primeiro}
+\NormalTok{?ecodados}\SpecialCharTok{::}\NormalTok{anova\_dois\_fatores}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Versão 1}: calculando a média e o erro padrão dentro do próprio gráfico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(anova\_dois\_fatores, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Tempo, }\AttributeTok{x =}\NormalTok{ Idade, }\AttributeTok{fill =}\NormalTok{ Pessoas)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{9}\NormalTok{), }\AttributeTok{size =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{9}\NormalTok{), }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{75}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_se, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{9}\NormalTok{), }
+               \AttributeTok{width =}\NormalTok{ .}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"steelblue"}\NormalTok{, }\StringTok{"orange"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Tempo (dias após administração)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Grupo etário"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\textbf{Versão 2}: calculando a média e o erro padrão antes de produzir o gráfico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calcular o desvio padrão }
+\NormalTok{anova\_media }\OtherTok{\textless{}{-}}\NormalTok{ anova\_dois\_fatores }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(Idade, Pessoas ) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{media =} \FunctionTok{mean}\NormalTok{(Tempo, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                     \AttributeTok{desvio =} \FunctionTok{sd}\NormalTok{(Tempo, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\CommentTok{\#\textgreater{} \textasciigrave{}summarise()\textasciigrave{} has grouped output by \textquotesingle{}Idade\textquotesingle{}. You can override using the \textasciigrave{}.groups\textasciigrave{} argument.}
+\CommentTok{\#Veja como ficou }
+\FunctionTok{head}\NormalTok{(anova\_media)}
+\CommentTok{\#\textgreater{} \# A tibble: 4 x 4}
+\CommentTok{\#\textgreater{} \# Groups:   Idade [2]}
+\CommentTok{\#\textgreater{}   Idade Pessoas media desvio}
+\CommentTok{\#\textgreater{}   \textless{}chr\textgreater{} \textless{}chr\textgreater{}   \textless{}dbl\textgreater{}  \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{} 1 Idoso XX       30.9   2.01}
+\CommentTok{\#\textgreater{} 2 Idoso XY       40.1   2.04}
+\CommentTok{\#\textgreater{} 3 Jovem XX       18.7   2.14}
+\CommentTok{\#\textgreater{} 4 Jovem XY       26.5   1.80}
+\end{Highlighting}
+\end{Shaded}
+
+Agora use esse banco de dados para plotar a média e o erro padrão.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de barras com desvio padrão}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ anova\_media, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ media, }\AttributeTok{x =}\NormalTok{ Idade, }\AttributeTok{fill =}\NormalTok{ Pessoas)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{75}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{()) }\SpecialCharTok{+}
+    \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ media }\SpecialCharTok{{-}}\NormalTok{ desvio, }\AttributeTok{ymax =}\NormalTok{ media }\SpecialCharTok{+}\NormalTok{ desvio), }
+                  \AttributeTok{width =}\NormalTok{ .}\DecValTok{1}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{9}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"steelblue"}\NormalTok{, }\StringTok{"orange"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{16}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Tempo (dias após administração)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Grupo etário"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\textbf{6.6}
+Utilize o banco de dados \texttt{penguins} para criar um \href{https://analises-ecologicas.netlify.app/cap6.html\#gr\%C3\%A1fico-de-dispers\%C3\%A3o-scatter-plot}{gráfico de dispersão} entre o tamanho da nadadeira (eixo Y) e a massa corporal (eixo X). Utilize o argumento \texttt{fill} para ilustrar com cores as diferenças entre os sexos e utilize o comanto \texttt{facte\_grid()} para criar um gráfico separado para cada espécie de pinguim. Se você não conhece essa função, dê uma olhada no help \texttt{?facet\_grid}. Você também pode utilizar a função \texttt{drop\_na()} para excluir os dados faltantes da coluna \texttt{sexo}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# primeiro vamos traduizir a coluna sexo para o português}
+\NormalTok{penguins}\SpecialCharTok{$}\NormalTok{sexo }\OtherTok{\textless{}{-}} \FunctionTok{fct\_recode}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{sexo, }\AttributeTok{masculino =} \StringTok{"male"}\NormalTok{, }\AttributeTok{feminino =} \StringTok{"female"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(penguins }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{(sexo), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ comprimento\_nadadeira, }\AttributeTok{x =}\NormalTok{ massa\_corporal, }
+                                       \AttributeTok{color =}\NormalTok{ sexo, }\AttributeTok{fill =}\NormalTok{ sexo)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{especies) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"steelblue"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }\AttributeTok{aesthetics =} \FunctionTok{c}\NormalTok{(}\StringTok{"fill"}\NormalTok{, }\StringTok{"color"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{y =} \StringTok{"Comprimento da nadadeira (mm)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Massa corporal (g)"}
+\NormalTok{  ) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cap_06_files/figure-latex/unnamed-chunk-10-1.pdf}
+
 \hypertarget{cap.-15---dados-geoespaciais-no-r}{%
 \chapter*{Cap. 15 - Dados geoespaciais no R}\label{cap.-15---dados-geoespaciais-no-r}}
 \addcontentsline{toc}{chapter}{Cap. 15 - Dados geoespaciais no R}
