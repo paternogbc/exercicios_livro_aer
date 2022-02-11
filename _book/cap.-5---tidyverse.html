@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções</title>
+<meta name="description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções">
+<meta name="twitter:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Análises Ecológicas no R: Exercícios e Soluções</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre</a></li>
+<li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
+<li><a class="active" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-5---tidyverse" class="section level1 unnumbered">
+<h1>Cap. 5 - Tidyverse<a class="anchor" aria-label="anchor" href="#cap.-5---tidyverse"><i class="fas fa-link"></i></a>
+</h1>
+<p><strong>5.1</strong>
+Reescreva as operações abaixo utilizando pipes <code>%&gt;%</code>.
+- <code>log10(cumsum(1:100))</code>
+- <code>sum(sqrt(abs(rnorm(100))))</code>
+- <code>sum(sort(sample(1:10, 10000, rep = TRUE)))</code></p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="co">#&gt; ── Attaching packages ─────────────────── tidyverse 1.3.1 ──</span>
+<span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
+<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.7</span>
+<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
+<span class="co">#&gt; ✓ readr   2.1.1     ✓ forcats 0.5.1</span>
+<span class="co">#&gt; ── Conflicts ────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
+<span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
+
+<span class="fl">1</span><span class="op">:</span><span class="fl">100</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;   [1] 0.0000000 0.4771213 0.7781513 1.0000000 1.1760913</span>
+<span class="co">#&gt;   [6] 1.3222193 1.4471580 1.5563025 1.6532125 1.7403627</span>
+<span class="co">#&gt;  [11] 1.8195439 1.8920946 1.9590414 2.0211893 2.0791812</span>
+<span class="co">#&gt;  [16] 2.1335389 2.1846914 2.2329961 2.2787536 2.3222193</span>
+<span class="co">#&gt;  [21] 2.3636120 2.4031205 2.4409091 2.4771213 2.5118834</span>
+<span class="co">#&gt;  [26] 2.5453071 2.5774918 2.6085260 2.6384893 2.6674530</span>
+<span class="co">#&gt;  [31] 2.6954817 2.7226339 2.7489629 2.7745170 2.7993405</span>
+<span class="co">#&gt;  [36] 2.8234742 2.8469553 2.8698182 2.8920946 2.9138139</span>
+<span class="co">#&gt;  [41] 2.9350032 2.9556878 2.9758911 2.9956352 3.0149403</span>
+<span class="co">#&gt;  [46] 3.0338257 3.0523091 3.0704073 3.0881361 3.1055102</span>
+<span class="co">#&gt;  [51] 3.1225435 3.1392492 3.1556396 3.1717265 3.1875207</span>
+<span class="co">#&gt;  [56] 3.2030329 3.2182729 3.2332500 3.2479733 3.2624511</span>
+<span class="co">#&gt;  [61] 3.2766915 3.2907022 3.3044905 3.3180633 3.3314273</span>
+<span class="co">#&gt;  [66] 3.3445887 3.3575537 3.3703280 3.3829171 3.3953264</span>
+<span class="co">#&gt;  [71] 3.4075608 3.4196254 3.4315246 3.4432630 3.4548449</span>
+<span class="co">#&gt;  [76] 3.4662743 3.4775553 3.4886917 3.4996871 3.5105450</span>
+<span class="co">#&gt;  [81] 3.5212689 3.5318619 3.5423274 3.5526682 3.5628874</span>
+<span class="co">#&gt;  [86] 3.5729877 3.5829719 3.5928427 3.6026025 3.6122539</span>
+<span class="co">#&gt;  [91] 3.6217992 3.6312408 3.6405808 3.6498215 3.6589648</span>
+<span class="co">#&gt;  [96] 3.6680130 3.6769678 3.6858313 3.6946052 3.7032914</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 78.05671</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10000</span>, rep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 54887</span></code></pre></div>
+<p><strong>5.2</strong>
+Use a função <code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> e <code><a href="https://rdrr.io/r/utils/unzip.html">unzip()</a></code> para baixar e extrair o arquivo do data paper de médios e grandes mamíferos: <a href="https://doi.org/10.1002/ecy.2785">ATLANTIC MAMMALS</a>. Em seguinda, importe para o R, usando a função <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&amp;file=ecy2785-sup-0001-DataS1.zip"</span>, 
+              destfile <span class="op">=</span> <span class="st">"ecy2785-sup-0001-DataS1.zip"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">"ecy2785-sup-0001-DataS1.zip"</span><span class="op">)</span>
+
+<span class="va">dp_lm</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for</span>
+<span class="co">#&gt; details</span>
+<span class="co">#&gt; Rows: 4680 Columns: 40</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; chr (27): ID, Country, State, Municipality, Study_locati...</span>
+<span class="co">#&gt; dbl (11): Reference_paper_number, Publication_year, Year...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<p><strong>5.3</strong>
+Use a função <code><a href="https://pillar.r-lib.org/reference/glimpse.html">tibble::glimpse()</a></code> para ter uma noção geral dos dados importados no item anterior.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dp_lm</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 4,680</span>
+<span class="co">#&gt; Columns: 40</span>
+<span class="co">#&gt; $ ID                     &lt;chr&gt; "AML01", "AML01", "AML01", …</span>
+<span class="co">#&gt; $ Reference_paper_number &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, …</span>
+<span class="co">#&gt; $ Country                &lt;chr&gt; "Brazil", "Brazil", "Brazil…</span>
+<span class="co">#&gt; $ State                  &lt;chr&gt; "rio_grande_do_sul", "rio_g…</span>
+<span class="co">#&gt; $ Municipality           &lt;chr&gt; "Sinimbu", "Sinimbu", "Sini…</span>
+<span class="co">#&gt; $ Study_location         &lt;chr&gt; "Reserva Particular do Patr…</span>
+<span class="co">#&gt; $ Latitude               &lt;dbl&gt; -29.38333, -29.38333, -29.3…</span>
+<span class="co">#&gt; $ Longitude              &lt;dbl&gt; -52.53333, -52.53333, -52.5…</span>
+<span class="co">#&gt; $ Precision              &lt;chr&gt; "not_precise", "not_precise…</span>
+<span class="co">#&gt; $ Size_ha                &lt;chr&gt; "221", "221", "221", "221",…</span>
+<span class="co">#&gt; $ Temperature            &lt;chr&gt; "18", "18", "18", "18", "18…</span>
+<span class="co">#&gt; $ Altitude               &lt;chr&gt; "150-650", "150-650", "150-…</span>
+<span class="co">#&gt; $ Annual_rainfall        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ Vegetation_type        &lt;chr&gt; "Semideciduous forest", "Se…</span>
+<span class="co">#&gt; $ Protect_area           &lt;chr&gt; "yes", "yes", "yes", "yes",…</span>
+<span class="co">#&gt; $ Matrix                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ Reference              &lt;chr&gt; "Abreu-Junior, E.F. and Koh…</span>
+<span class="co">#&gt; $ Publication_year       &lt;dbl&gt; 2009, 2009, 2009, 2009, 200…</span>
+<span class="co">#&gt; $ Type_of_publication    &lt;chr&gt; "Article", "Article", "Arti…</span>
+<span class="co">#&gt; $ Month_start            &lt;chr&gt; "November", "November", "No…</span>
+<span class="co">#&gt; $ Year_start             &lt;dbl&gt; 2007, 2007, 2007, 2007, 200…</span>
+<span class="co">#&gt; $ Month_finish           &lt;chr&gt; "April", "April", "April", …</span>
+<span class="co">#&gt; $ Year_finish            &lt;dbl&gt; 2009, 2009, 2009, 2009, 200…</span>
+<span class="co">#&gt; $ Total_of_months        &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, …</span>
+<span class="co">#&gt; $ Sampling_habitat       &lt;chr&gt; "Interior", "Interior", "In…</span>
+<span class="co">#&gt; $ Effort                 &lt;dbl&gt; 109.00, 109.00, 109.00, 109…</span>
+<span class="co">#&gt; $ Effort_method          &lt;chr&gt; "camera_days", "camera_days…</span>
+<span class="co">#&gt; $ Method                 &lt;chr&gt; "mixed_method", "mixed_meth…</span>
+<span class="co">#&gt; $ Order                  &lt;chr&gt; "Carnivora", "Rodentia", "C…</span>
+<span class="co">#&gt; $ Genus_on_paper         &lt;chr&gt; "Cerdocyon", "Cuniculus", "…</span>
+<span class="co">#&gt; $ Species_name_on_paper  &lt;chr&gt; "Cerdocyon thous", "Cunicul…</span>
+<span class="co">#&gt; $ Actual_species_Name    &lt;chr&gt; "Cerdocyon thous", "Cunicul…</span>
+<span class="co">#&gt; $ Number_of_record       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ `Density(groups/km2)`  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ `Density(ind/km2)`     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ `Density(ind/km10)`    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ `Abundance(%)`         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ Abudance_relative      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ `Abundance(10/km)`     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…</span>
+<span class="co">#&gt; $ Voucher_Specimens      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…</span></code></pre></div>
+<p><strong>5.4</strong>
+Compare os dados de penguins (<em>palmerpenguins::penguins_raw</em> e <em>palmerpenguins::penguins</em>). Monte uma série de funções dos pacotes <em>tidyr</em> e <code>dplyr</code> para limpar os dados e fazer com que o primeiro dado seja igual ao segundo.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
+
+<span class="va">penguins_raw</span>
+<span class="co">#&gt; # A tibble: 344 × 17</span>
+<span class="co">#&gt;    studyName `Sample Number` Species    Region Island Stage </span>
+<span class="co">#&gt;    &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; </span>
+<span class="co">#&gt;  1 PAL0708                 1 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  2 PAL0708                 2 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  3 PAL0708                 3 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  4 PAL0708                 4 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  5 PAL0708                 5 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  6 PAL0708                 6 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  7 PAL0708                 7 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  8 PAL0708                 8 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt;  9 PAL0708                 9 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt; 10 PAL0708                10 Adelie Pe… Anvers Torge… Adult…</span>
+<span class="co">#&gt; # … with 334 more rows, and 11 more variables:</span>
+<span class="co">#&gt; #   Individual ID &lt;chr&gt;, Clutch Completion &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Date Egg &lt;date&gt;, Culmen Length (mm) &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Culmen Depth (mm) &lt;dbl&gt;, Flipper Length (mm) &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Body Mass (g) &lt;dbl&gt;, Sex &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Delta 15 N (o/oo) &lt;dbl&gt;, Delta 13 C (o/oo) &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Comments &lt;chr&gt;</span>
+<span class="va">penguins</span>
+<span class="co">#&gt; # A tibble: 344 × 8</span>
+<span class="co">#&gt;    species island    bill_length_mm bill_depth_mm</span>
+<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 Adelie  Torgersen           39.1          18.7</span>
+<span class="co">#&gt;  2 Adelie  Torgersen           39.5          17.4</span>
+<span class="co">#&gt;  3 Adelie  Torgersen           40.3          18  </span>
+<span class="co">#&gt;  4 Adelie  Torgersen           NA            NA  </span>
+<span class="co">#&gt;  5 Adelie  Torgersen           36.7          19.3</span>
+<span class="co">#&gt;  6 Adelie  Torgersen           39.3          20.6</span>
+<span class="co">#&gt;  7 Adelie  Torgersen           38.9          17.8</span>
+<span class="co">#&gt;  8 Adelie  Torgersen           39.2          19.6</span>
+<span class="co">#&gt;  9 Adelie  Torgersen           34.1          18.1</span>
+<span class="co">#&gt; 10 Adelie  Torgersen           42            20.2</span>
+<span class="co">#&gt; # … with 334 more rows, and 4 more variables:</span>
+<span class="co">#&gt; #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,</span>
+<span class="co">#&gt; #   year &lt;int&gt;</span>
+
+<span class="va">penguins_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Species</span>, <span class="va">Island</span>, <span class="va">`Culmen Length (mm)`</span><span class="op">:</span><span class="va">Sex</span>, <span class="va">`Date Egg`</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>species <span class="op">=</span> <span class="va">Species</span>,
+                  island <span class="op">=</span> <span class="va">Island</span>,
+                  bill_length_mm <span class="op">=</span> <span class="va">`Culmen Length (mm)`</span>,
+                  bill_depth_mm <span class="op">=</span> <span class="va">`Culmen Depth (mm)`</span>,
+                  flipper_length_mm <span class="op">=</span> <span class="va">`Flipper Length (mm)`</span>,
+                  body_mass_g <span class="op">=</span> <span class="va">`Body Mass (g)`</span>,
+                  sex <span class="op">=</span> <span class="va">Sex</span>,
+                  year <span class="op">=</span> <span class="va">`Date Egg`</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">species</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>,
+                  year <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 344 × 8</span>
+<span class="co">#&gt;    species island    bill_length_mm bill_depth_mm</span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 Adelie  Torgersen           39.1          18.7</span>
+<span class="co">#&gt;  2 Adelie  Torgersen           39.5          17.4</span>
+<span class="co">#&gt;  3 Adelie  Torgersen           40.3          18  </span>
+<span class="co">#&gt;  4 Adelie  Torgersen           NA            NA  </span>
+<span class="co">#&gt;  5 Adelie  Torgersen           36.7          19.3</span>
+<span class="co">#&gt;  6 Adelie  Torgersen           39.3          20.6</span>
+<span class="co">#&gt;  7 Adelie  Torgersen           38.9          17.8</span>
+<span class="co">#&gt;  8 Adelie  Torgersen           39.2          19.6</span>
+<span class="co">#&gt;  9 Adelie  Torgersen           34.1          18.1</span>
+<span class="co">#&gt; 10 Adelie  Torgersen           42            20.2</span>
+<span class="co">#&gt; # … with 334 more rows, and 4 more variables:</span>
+<span class="co">#&gt; #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,</span>
+<span class="co">#&gt; #   year &lt;dbl&gt;</span></code></pre></div>
+<p><strong>5.5</strong>
+Usando os dados de penguins (<em>palmerpenguins::penguins</em>), calcule a correlação de Pearson entre comprimento e profundidade do bico para cada espécie e para todas as espécies. Compare os índices de correlação para exemplificar o Paradoxo de Simpsom.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">bill_depth_mm</span>, use <span class="op">=</span> <span class="st">"na.or.complete"</span><span class="op">)</span>
+<span class="co">#&gt; [1] -0.2350529</span>
+
+<span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">bill_length_mm</span>, <span class="va">.x</span><span class="op">$</span><span class="va">bill_depth_mm</span>, use <span class="op">=</span> <span class="st">"na.or.complete"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] 0.3914917</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] 0.6535362</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] 0.6433839</span></code></pre></div>
+<p><strong>5.6</strong>
+Oficialmente a pandemia de COVID-19 começou no Brasil com o primeiro caso no dia 26 de fevereiro de 2020. Calcule quantos anos, meses e dias se passou desde então. Calcule também quanto tempo se passou até você ser vacinado.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">covid_inicio_br</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="st">"26-02-2020"</span><span class="op">)</span>
+<span class="va">vacina</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="st">"20-07-2021"</span><span class="op">)</span>
+
+<span class="va">intervalo_covid</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html">interval</a></span><span class="op">(</span><span class="va">covid_inicio_br</span>, <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">intervalo_vacina</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html">interval</a></span><span class="op">(</span><span class="va">covid_inicio_br</span>, <span class="va">vacina</span><span class="op">)</span>
+
+<span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.period.html">as.period</a></span><span class="op">(</span><span class="va">intervalo_covid</span><span class="op">)</span>
+<span class="co">#&gt; [1] "1y 11m 15d 0H 0M 0S"</span>
+<span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.period.html">as.period</a></span><span class="op">(</span><span class="va">intervalo_vacina</span><span class="op">)</span>
+<span class="co">#&gt; [1] "1y 4m 24d 0H 0M 0S"</span></code></pre></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></div>
+<div class="next"><a href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-5---tidyverse">Cap. 5 - Tidyverse</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by . It was last built on 2022-02-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

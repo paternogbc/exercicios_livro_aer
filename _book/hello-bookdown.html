@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 2 Hello bookdown | Exercícios: Análises Ecológicas no R</title>
+<meta name="description" content="All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (#) per .Rmd file.  2.1 A section All chapter...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Capítulo 2 Hello bookdown | Exercícios: Análises Ecológicas no R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (#) per .Rmd file.  2.1 A section All chapter...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 2 Hello bookdown | Exercícios: Análises Ecológicas no R">
+<meta name="twitter:description" content="All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (#) per .Rmd file.  2.1 A section All chapter...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Exercícios: Análises Ecológicas no R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Sobre</a></li>
+<li><a class="active" href="hello-bookdown.html"><span class="header-section-number">2</span> Hello bookdown</a></li>
+<li><a class="" href="importados-no-item-anterior..html"><span class="header-section-number">3</span> importados no item anterior.</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hello-bookdown" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Capítulo 2</span> Hello bookdown<a class="anchor" aria-label="anchor" href="#hello-bookdown"><i class="fas fa-link"></i></a>
+</h1>
+<p>All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (<code>#</code>) per .Rmd file.</p>
+<div id="a-section" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> A section<a class="anchor" aria-label="anchor" href="#a-section"><i class="fas fa-link"></i></a>
+</h2>
+<p>All chapter sections start with a second-level (<code>##</code>) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.</p>
+<div id="an-unnumbered-section" class="section level3 unnumbered">
+<h3>An unnumbered section<a class="anchor" aria-label="anchor" href="#an-unnumbered-section"><i class="fas fa-link"></i></a>
+</h3>
+<p>Chapters and sections are numbered by default. To un-number a heading, add a <code>{.unnumbered}</code> or the shorter <code>{-}</code> at the end of the heading, like in this section.</p>
+
+</div>
+</div>
+<div id="exercícios-do-capítulo-15" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Exercícios do capítulo 15<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-15"><i class="fas fa-link"></i></a>
+</h2>
+<div id="importe-o-limite-dos-estados-brasileiros-no-formato-sf-com-o-nome-br.-para-isso-use-a-função-ne_states-do-pacote-rnaturalearth.-crie-um-mapa-simples-cinza-utilizando-a-função-plot-selecionando-a-coluna-geometry-com-o-operador-e-com-os-argumentos-axes-e-graticule-verdadeiros." class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> 15.1 Importe o limite dos estados brasileiros no formato <strong>sf</strong> com o nome <strong>br</strong>. Para isso, use a função <strong>ne_states</strong> do pacote <strong>rnaturalearth</strong>. Crie um mapa simples cinza utilizando a função <strong>plot()</strong>, selecionando a coluna <strong>geometry</strong> com o operador <strong>$</strong> e com os argumentos <strong>axes</strong> e <strong>graticule</strong> verdadeiros.<a class="anchor" aria-label="anchor" href="#importe-o-limite-dos-estados-brasileiros-no-formato-sf-com-o-nome-br.-para-isso-use-a-fun%C3%A7%C3%A3o-ne_states-do-pacote-rnaturalearth.-crie-um-mapa-simples-cinza-utilizando-a-fun%C3%A7%C3%A3o-plot-selecionando-a-coluna-geometry-com-o-operador-e-com-os-argumentos-axes-e-graticule-verdadeiros."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth">rnaturalearth</a></span><span class="op">)</span>
+<span class="va">br</span> <span class="op">&lt;-</span> <span class="fu">rnaturalearth</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_states.html">ne_states</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Brazil"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">br</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"gray"</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
+</div>
+<div id="dados-vetoriais-podem-ser-criados-com-diversos-erros-de-topologia-e.g.-sobreposição-de-linhas-ou-polígonos-ou-buracos.-algumas-funções-exigem-que-os-objetos-vetoriais-aos-quais-são-atribuídos-esses-dados-não-possuam-esses-erros-para-que-o-algoritmo-funcione.-para-verificar-se-há-erros-podemos-usar-a-função-st_is_valid-do-pacote-sf.-há-diversas-forma-de-correções-desses-erros-mas-vamos-usar-uma-correção-simples-do-r-com-a-função-st_make_valid.-vamos-fazer-essa-correção-para-o-br-importado-anteriormente-e-atribuindo-ao-objeto-br_valid.-podemos-conferir-para-saber-se-há-erros-e-fazer-um-plot." class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> 15.2 Dados vetoriais podem ser criados com diversos erros de topologia, e.g., sobreposição de linhas ou polígonos ou buracos. Algumas funções exigem que os objetos vetoriais aos quais são atribuídos esses dados não possuam esses erros para que o algoritmo funcione. Para verificar se há erros, podemos usar a função <strong>st_is_valid()</strong> do pacote <strong>sf</strong>. Há diversas forma de correções desses erros, mas vamos usar uma correção simples do R, com a função <strong>st_make_valid()</strong>. Vamos fazer essa correção para o <strong>br</strong> importado anteriormente e atribuindo ao objeto <strong>br_valid</strong>. Podemos conferir para saber se há erros e fazer um plot.<a class="anchor" aria-label="anchor" href="#dados-vetoriais-podem-ser-criados-com-diversos-erros-de-topologia-e.g.-sobreposi%C3%A7%C3%A3o-de-linhas-ou-pol%C3%ADgonos-ou-buracos.-algumas-fun%C3%A7%C3%B5es-exigem-que-os-objetos-vetoriais-aos-quais-s%C3%A3o-atribu%C3%ADdos-esses-dados-n%C3%A3o-possuam-esses-erros-para-que-o-algoritmo-funcione.-para-verificar-se-h%C3%A1-erros-podemos-usar-a-fun%C3%A7%C3%A3o-st_is_valid-do-pacote-sf.-h%C3%A1-diversas-forma-de-corre%C3%A7%C3%B5es-desses-erros-mas-vamos-usar-uma-corre%C3%A7%C3%A3o-simples-do-r-com-a-fun%C3%A7%C3%A3o-st_make_valid.-vamos-fazer-essa-corre%C3%A7%C3%A3o-para-o-br-importado-anteriormente-e-atribuindo-ao-objeto-br_valid.-podemos-conferir-para-saber-se-h%C3%A1-erros-e-fazer-um-plot."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-1" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+
+<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html">st_is_valid</a></span><span class="op">(</span><span class="va">br</span><span class="op">)</span>
+<span class="co">#&gt;  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</span>
+<span class="co">#&gt; [10]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</span>
+<span class="co">#&gt; [19]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</span>
+
+<span class="va">br_valid</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html">st_make_valid</a></span><span class="op">(</span><span class="va">br</span><span class="op">)</span>
+<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html">st_is_valid</a></span><span class="op">(</span><span class="va">br_valid</span><span class="op">)</span>
+<span class="co">#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span>
+<span class="co">#&gt; [12] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span>
+<span class="co">#&gt; [23] TRUE TRUE TRUE TRUE TRUE</span>
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"gray"</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+</div>
+<div id="crie-um-objeto-rasterlayer-vazio-chamado-ra-com-resolução-de-5º-600-km.-atribua-um-sistema-de-referência-de-coordendas-com-o-código-4326.-atribua-valores-aleatórios-de-uma-distribuição-normal-e-plote-o-mesmo." class="section level3" number="2.2.5">
+<h3>
+<span class="header-section-number">2.2.5</span> 15.3 Crie um objeto RasterLayer vazio chamado <strong>ra</strong> com resolução de 5º (~600 km). Atribua um sistema de referência de coordendas com o código <strong>4326</strong>. Atribua valores aleatórios de uma distribuição normal e plote o mesmo.<a class="anchor" aria-label="anchor" href="#crie-um-objeto-rasterlayer-vazio-chamado-ra-com-resolu%C3%A7%C3%A3o-de-5%C2%BA-600-km.-atribua-um-sistema-de-refer%C3%AAncia-de-coordendas-com-o-c%C3%B3digo-4326.-atribua-valores-aleat%C3%B3rios-de-uma-distribui%C3%A7%C3%A3o-normal-e-plote-o-mesmo."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-2" class="section level3" number="2.2.6">
+<h3>
+<span class="header-section-number">2.2.6</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-2"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
+<span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span>res <span class="op">=</span> <span class="fl">5</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span>
+<span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/getValues.html">values</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">ncell</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+</div>
+<div id="reprojete-o-limite-dos-estados-brasileiros-do-exercício-anterior-para-o-crs-sirgas-2000brazil-polyconic-utilizando-o-código-epsg5880-e-chamando-de-br_poly.-faça-um-mapa-simples-como-no-exercício-1.-atente-para-as-curvaturas-das-linhas." class="section level3" number="2.2.7">
+<h3>
+<span class="header-section-number">2.2.7</span> 15.4 Reprojete o limite dos estados brasileiros do exercício anterior para o CRS SIRGAS 2000/Brazil Polyconic, utilizando o código EPSG:5880 e chamando de <strong>br_poly</strong>. Faça um mapa simples como no exercício 1. Atente para as curvaturas das linhas.<a class="anchor" aria-label="anchor" href="#reprojete-o-limite-dos-estados-brasileiros-do-exerc%C3%ADcio-anterior-para-o-crs-sirgas-2000brazil-polyconic-utilizando-o-c%C3%B3digo-epsg5880-e-chamando-de-br_poly.-fa%C3%A7a-um-mapa-simples-como-no-exerc%C3%ADcio-1.-atente-para-as-curvaturas-das-linhas."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-3" class="section level3" number="2.2.8">
+<h3>
+<span class="header-section-number">2.2.8</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-3"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth">rnaturalearth</a></span><span class="op">)</span>
+
+<span class="va">br_valid_poly</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">br_valid</span>, crs <span class="op">=</span> <span class="fl">5880</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid_poly</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"gray"</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+</div>
+<div id="utilizando-a-função-st_centroid-do-pacote-sf-crie-um-vetor-chamado-br_valid_cen-que-armazenará-o-centroide-de-cada-estado-brasileiro-do-objeto-br_valid-do-exercício-2-e-plot-o-resultado." class="section level3" number="2.2.9">
+<h3>
+<span class="header-section-number">2.2.9</span> 15.5 Utilizando a função <strong>st_centroid</strong> do pacote <strong>sf</strong>, crie um vetor chamado <strong>br_valid_cen</strong> que armazenará o centroide de cada estado brasileiro do objeto <strong>br_valid</strong> do exercício 2 e plot o resultado.<a class="anchor" aria-label="anchor" href="#utilizando-a-fun%C3%A7%C3%A3o-st_centroid-do-pacote-sf-crie-um-vetor-chamado-br_valid_cen-que-armazenar%C3%A1-o-centroide-de-cada-estado-brasileiro-do-objeto-br_valid-do-exerc%C3%ADcio-2-e-plot-o-resultado."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-4" class="section level3" number="2.2.10">
+<h3>
+<span class="header-section-number">2.2.10</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-4"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth">rnaturalearth</a></span><span class="op">)</span>
+
+<span class="va">br_valid_poly_cen</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">br_valid_poly</span><span class="op">)</span>
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid_poly</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"gray"</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid_poly_cen</span><span class="op">$</span><span class="va">geometry</span>, pch <span class="op">=</span> <span class="fl">20</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+</div>
+<div id="ajuste-o-limite-e-máscara-do-objeto-raster-criado-no-exercício-3-para-o-limite-do-brasil-atribuindo-ao-objeto-ra_br.-depois-reprojete-esse-raster-para-a-mesma-projeção-utilizada-no-exercício-4-com-o-nome-ra_br_poly-e-plote-o-mapa-resultante." class="section level3" number="2.2.11">
+<h3>
+<span class="header-section-number">2.2.11</span> 15.6 Ajuste o limite e máscara do objeto raster criado no exercício 3 para o limite do Brasil, atribuindo ao objeto <strong>ra_br</strong>. Depois reprojete esse raster para a mesma projeção utilizada no exercício 4 com o nome <strong>ra_br_poly</strong> e plote o mapa resultante.<a class="anchor" aria-label="anchor" href="#ajuste-o-limite-e-m%C3%A1scara-do-objeto-raster-criado-no-exerc%C3%ADcio-3-para-o-limite-do-brasil-atribuindo-ao-objeto-ra_br.-depois-reprojete-esse-raster-para-a-mesma-proje%C3%A7%C3%A3o-utilizada-no-exerc%C3%ADcio-4-com-o-nome-ra_br_poly-e-plote-o-mapa-resultante."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-5" class="section level3" number="2.2.12">
+<h3>
+<span class="header-section-number">2.2.12</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-5"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
+
+<span class="va">ra_br</span> <span class="op">&lt;-</span> <span class="va">ra</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/crop.html">crop</a></span><span class="op">(</span><span class="va">br_valid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/mask.html">mask</a></span><span class="op">(</span><span class="va">br_valid</span><span class="op">)</span>
+
+<span class="va">ra_br_poly</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/projectRaster.html">projectRaster</a></span><span class="op">(</span><span class="va">ra_br</span>, crs <span class="op">=</span> <span class="st">"+init=epsg:5880"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">ra_br_poly</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid_poly</span><span class="op">$</span><span class="va">geometry</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">br_valid_poly_cen</span><span class="op">$</span><span class="va">geometry</span>, pch <span class="op">=</span> <span class="fl">20</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+</div>
+<div id="extraia-os-valores-de-cada-pixel-do-raster-criado-no-exercício-6-para-os-centroides-dos-estados-do-brasil-criado-no-exercício-5-atribuindo-à-coluna-val-do-objeto-espacial-chamado-br_valid_poly_cent_ra." class="section level3" number="2.2.13">
+<h3>
+<span class="header-section-number">2.2.13</span> 15.7 Extraia os valores de cada pixel do raster criado no exercício 6 para os centroides dos estados do Brasil criado no exercício 5, atribuindo à coluna <strong>val</strong> do objeto espacial chamado <strong>br_valid_poly_cent_ra</strong>.<a class="anchor" aria-label="anchor" href="#extraia-os-valores-de-cada-pixel-do-raster-criado-no-exerc%C3%ADcio-6-para-os-centroides-dos-estados-do-brasil-criado-no-exerc%C3%ADcio-5-atribuindo-%C3%A0-coluna-val-do-objeto-espacial-chamado-br_valid_poly_cent_ra."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-6" class="section level3" number="2.2.14">
+<h3>
+<span class="header-section-number">2.2.14</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-6"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">br_valid_poly_cent_ra</span> <span class="op">&lt;-</span> <span class="va">br_valid_poly_cen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>val <span class="op">=</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/extract.html">extract</a></span><span class="op">(</span><span class="va">ra_br_poly</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span><span class="op">(</span><span class="va">br_valid_poly_cent_ra</span><span class="op">$</span><span class="va">val</span><span class="op">)</span>
+<span class="co">#&gt; [1]  0.34010132 -0.41939572 -0.43822052  0.01952621</span>
+<span class="co">#&gt; [5]  0.30264067  0.51001327</span></code></pre></div>
+</div>
+<div id="crie-um-mapa-final-usando-os-resultados-dos-exercícios-4-5-e-6.-utilize-o-pacote-tmap-e-inclua-todos-os-principais-elementos-de-um-mapa." class="section level3" number="2.2.15">
+<h3>
+<span class="header-section-number">2.2.15</span> 15.8 Crie um mapa final usando os resultados dos exercícios 4, 5 e 6. Utilize o pacote <strong>tmap</strong> e inclua todos os principais elementos de um mapa.<a class="anchor" aria-label="anchor" href="#crie-um-mapa-final-usando-os-resultados-dos-exerc%C3%ADcios-4-5-e-6.-utilize-o-pacote-tmap-e-inclua-todos-os-principais-elementos-de-um-mapa."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-7" class="section level3" number="2.2.16">
+<h3>
+<span class="header-section-number">2.2.16</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-7"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mtennekes/tmap">tmap</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">ra_br_poly</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_raster.html">tm_raster</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Raster"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">br_valid_poly</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">br_valid_poly_cent_ra</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_symbols.html">tm_bubbles</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"val"</span>, size <span class="op">=</span> <span class="fl">.2</span>, legend.col.show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span>, 
+                  labels.format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>big.mark <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, 
+                  labels.rot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">90</span><span class="op">)</span>,
+                  labels.size <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_compass.html">tm_compass</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"right"</span>, <span class="st">"top"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_scale_bar.html">tm_scale_bar</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/axis_labels.html">tm_xlab</a></span><span class="op">(</span><span class="st">"Longitude"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/axis_labels.html">tm_ylab</a></span><span class="op">(</span><span class="st">"Latitude"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_credits.html">tm_credits</a></span><span class="op">(</span><span class="st">"CRS: SIRGAS2000/Policônica"</span>, position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">.15</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">.6</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_credits.html">tm_credits</a></span><span class="op">(</span><span class="st">"Fonte: Natural Earth (2022)"</span>, position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">.12</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">.6</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_layout.html">tm_layout</a></span><span class="op">(</span>main.title <span class="op">=</span> <span class="st">"Estados do Brasil"</span>,
+              main.title.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.95</span><span class="op">)</span>,
+              main.title.size <span class="op">=</span> <span class="fl">1.5</span>,
+              title.fontface <span class="op">=</span> <span class="st">"bold"</span>,
+              legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"bottom"</span><span class="op">)</span>,
+              legend.title.fontface <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_15_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+
+</div>
+</div>
+<div id="exercícios-do-capítulo-4" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Exercícios do capítulo 4<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-4"><i class="fas fa-link"></i></a>
+</h2>
+<div id="use-o-r-para-verificar-o-resultado-da-operação-7-7-7-7-x-7---7." class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> 4.1 Use o R para verificar o resultado da operação <code>7 + 7 ÷ 7 + 7 x 7 - 7</code>.<a class="anchor" aria-label="anchor" href="#use-o-r-para-verificar-o-resultado-da-opera%C3%A7%C3%A3o-7-7-7-7-x-7---7."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-8" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-8"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">7</span> <span class="op">+</span> <span class="fl">7</span> <span class="op">/</span> <span class="fl">7</span> <span class="op">+</span> <span class="fl">7</span> <span class="op">*</span> <span class="fl">7</span> <span class="op">-</span> <span class="fl">7</span>
+<span class="co">#&gt; [1] 50</span></code></pre></div>
+</div>
+<div id="verifique-através-do-r-se-3x2³-é-maior-que-2x3²." class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> 4.2 Verifique através do R se <code>3x2³</code> é maior que <code>2x3²</code>.<a class="anchor" aria-label="anchor" href="#verifique-atrav%C3%A9s-do-r-se-3x2%C2%B3-%C3%A9-maior-que-2x3%C2%B2."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-9" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-9"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">3</span> <span class="op">*</span> <span class="fl">2</span><span class="op">^</span><span class="fl">3</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span><span class="op">^</span><span class="fl">2</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+</div>
+<div id="crie-dois-objetos-qualquer-nome-com-os-valores-100-e-300.-multiplique-esses-objetos-função-prod-e-atribuam-ao-objeto-mult.-faça-o-logaritmo-natural-função-log-do-objeto-mult-e-atribuam-ao-objeto-ln." class="section level3" number="2.3.5">
+<h3>
+<span class="header-section-number">2.3.5</span> 4.3 Crie dois objetos (qualquer nome) com os valores 100 e 300. Multiplique esses objetos (função <code>prod()</code>) e atribuam ao objeto <strong>mult</strong>. Faça o logaritmo natural (função <code>log()</code>) do objeto <strong>mult</strong> e atribuam ao objeto <strong>ln</strong>.<a class="anchor" aria-label="anchor" href="#crie-dois-objetos-qualquer-nome-com-os-valores-100-e-300.-multiplique-esses-objetos-fun%C3%A7%C3%A3o-prod-e-atribuam-ao-objeto-mult.-fa%C3%A7a-o-logaritmo-natural-fun%C3%A7%C3%A3o-log-do-objeto-mult-e-atribuam-ao-objeto-ln."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-10" class="section level3" number="2.3.6">
+<h3>
+<span class="header-section-number">2.3.6</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-10"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">obj1</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">obj2</span> <span class="op">&lt;-</span> <span class="fl">300</span>
+<span class="va">mult</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">obj1</span>, <span class="va">obj2</span><span class="op">)</span>
+<span class="va">ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">obj1</span>, <span class="va">obj2</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="quantos-pacotes-existem-no-cran-nesse-momento-execute-essa-combinação-no-console-nrowavailable.packagesrepos-httpcran.r-project.org." class="section level3" number="2.3.7">
+<h3>
+<span class="header-section-number">2.3.7</span> 4.4 Quantos pacotes existem no CRAN nesse momento? Execute essa combinação no Console: <code>nrow(available.packages(repos = "http://cran.r-project.org"))</code>.<a class="anchor" aria-label="anchor" href="#quantos-pacotes-existem-no-cran-nesse-momento-execute-essa-combina%C3%A7%C3%A3o-no-console-nrowavailable.packagesrepos-httpcran.r-project.org."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-11" class="section level3" number="2.3.8">
+<h3>
+<span class="header-section-number">2.3.8</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-11"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html">available.packages</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="st">"http://cran.r-project.org"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 18897</span></code></pre></div>
+</div>
+<div id="instale-o-pacote-tidyverse-do-cran." class="section level3" number="2.3.9">
+<h3>
+<span class="header-section-number">2.3.9</span> 4.5 Instale o pacote <code>tidyverse</code> do CRAN.<a class="anchor" aria-label="anchor" href="#instale-o-pacote-tidyverse-do-cran."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-12" class="section level3" number="2.3.10">
+<h3>
+<span class="header-section-number">2.3.10</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-12"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="escolha-números-para-jogar-na-mega-sena-usando-o-r-nomeando-o-objeto-como-mega.-lembrando-são-6-valores-de-1-a-60-e-atribuam-a-um-objeto." class="section level3" number="2.3.11">
+<h3>
+<span class="header-section-number">2.3.11</span> 4.6 Escolha números para jogar na mega-sena usando o R, nomeando o objeto como <strong>mega</strong>. Lembrando: são 6 valores de 1 a 60 e atribuam a um objeto.<a class="anchor" aria-label="anchor" href="#escolha-n%C3%BAmeros-para-jogar-na-mega-sena-usando-o-r-nomeando-o-objeto-como-mega.-lembrando-s%C3%A3o-6-valores-de-1-a-60-e-atribuam-a-um-objeto."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-13" class="section level3" number="2.3.12">
+<h3>
+<span class="header-section-number">2.3.12</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-13"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">60</span>, size <span class="op">=</span> <span class="fl">6</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">mega</span>
+<span class="co">#&gt; [1] 37 36 42 51 56 32</span></code></pre></div>
+</div>
+<div id="crie-um-fator-chamado-tr-com-dois-níveis-cont-e-trat-para-descrever-100-locais-de-amostragem-50-de-cada-tratamento.-o-fator-deve-ser-dessa-forma-cont-cont-cont-....-cont-trat-trat-....-trat." class="section level3" number="2.3.13">
+<h3>
+<span class="header-section-number">2.3.13</span> 4.7 Crie um fator chamado <strong>tr</strong>, com dois níveis (“cont” e “trat”) para descrever 100 locais de amostragem, 50 de cada tratamento. O fator deve ser dessa forma <code>cont, cont, cont, ...., cont, trat, trat, ...., trat</code>.<a class="anchor" aria-label="anchor" href="#crie-um-fator-chamado-tr-com-dois-n%C3%ADveis-cont-e-trat-para-descrever-100-locais-de-amostragem-50-de-cada-tratamento.-o-fator-deve-ser-dessa-forma-cont-cont-cont-....-cont-trat-trat-....-trat."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-14" class="section level3" number="2.3.14">
+<h3>
+<span class="header-section-number">2.3.14</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-14"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"cont"</span>, each <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"trat"</span>, each <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tr</span>
+<span class="co">#&gt;   [1] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [12] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [23] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [34] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [45] cont cont cont cont cont cont trat trat trat trat trat</span>
+<span class="co">#&gt;  [56] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [67] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [78] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [89] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt; [100] trat</span>
+<span class="co">#&gt; Levels: cont trat</span></code></pre></div>
+</div>
+<div id="crie-uma-matriz-chamada-ma-resultante-da-disposição-de-um-vetor-composto-por-1000-valores-aleatórios-entre-0-e-10.-a-matriz-deve-conter-100-linhas-e-ser-disposta-por-colunas." class="section level3" number="2.3.15">
+<h3>
+<span class="header-section-number">2.3.15</span> 4.8 Crie uma matriz chamada <strong>ma</strong>, resultante da disposição de um vetor composto por 1000 valores aleatórios entre 0 e 10. A matriz deve conter 100 linhas e ser disposta por colunas.<a class="anchor" aria-label="anchor" href="#crie-uma-matriz-chamada-ma-resultante-da-disposi%C3%A7%C3%A3o-de-um-vetor-composto-por-1000-valores-aleat%C3%B3rios-entre-0-e-10.-a-matriz-deve-conter-100-linhas-e-ser-disposta-por-colunas."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-15" class="section level3" number="2.3.16">
+<h3>
+<span class="header-section-number">2.3.16</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-15"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1000</span>, rep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, byrow <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">ma</span>
+<span class="co">#&gt;        [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]</span>
+<span class="co">#&gt;   [1,]    7    1    2    8    6    9   10    6   10     0</span>
+<span class="co">#&gt;   [2,]    7    5    2    1    0    2    2    6    0     9</span>
+<span class="co">#&gt;   [3,]    1    8    8    5    9    4    3   10    3     9</span>
+<span class="co">#&gt;   [4,]    4    5    8   10    0    6    0    0    7     7</span>
+<span class="co">#&gt;   [5,]    1    1    8    4    9   10    3    4    9     5</span>
+<span class="co">#&gt;   [6,]    4    0    9    1    2    2    1    0    6     3</span>
+<span class="co">#&gt;   [7,]    1    3    7    8    1    8    1   10    5     2</span>
+<span class="co">#&gt;   [8,]    7    7    4    2    0    9    0    9    4     2</span>
+<span class="co">#&gt;   [9,]    5    3    5    0    0    8   10    7    6     6</span>
+<span class="co">#&gt;  [10,]    2    5    5    2    7   10    6    7    5     9</span>
+<span class="co">#&gt;  [11,]    7    3    0    9    3    8    1    8    5     6</span>
+<span class="co">#&gt;  [12,]    3    3    3    9    4    6    5   10    3    10</span>
+<span class="co">#&gt;  [13,]    4    7    4    8    6    2    7    5    5    10</span>
+<span class="co">#&gt;  [14,]    6    5    5    8    8    6    9    6    2     3</span>
+<span class="co">#&gt;  [15,]    2    9    3    8    2    7    5    6   10     2</span>
+<span class="co">#&gt;  [16,]   10   10   10    8    0    9    0   10    3     7</span>
+<span class="co">#&gt;  [17,]    0    9    0    3   10   10   10    4    1     8</span>
+<span class="co">#&gt;  [18,]    7    5    4    1    1    3   10    8    7     2</span>
+<span class="co">#&gt;  [19,]    3    4   10   10   10    1    1    0    3     9</span>
+<span class="co">#&gt;  [20,]    7    9    1    7    4    4   10    9    8    10</span>
+<span class="co">#&gt;  [21,]    4    6   10   10    6    6    6   10    9     4</span>
+<span class="co">#&gt;  [22,]    1    9    9    1    6    0    8    9    2     7</span>
+<span class="co">#&gt;  [23,]    7   10    4    0    0    0    1    2   10    10</span>
+<span class="co">#&gt;  [24,]    7    6    6    1    1    4    3    3    1     9</span>
+<span class="co">#&gt;  [25,]    1    8    6    3    1    2    7    3   10     1</span>
+<span class="co">#&gt;  [26,]    1    7    4    1    8    9    7   10    8     4</span>
+<span class="co">#&gt;  [27,]    9    9    3    0    9    2    0    3    0     5</span>
+<span class="co">#&gt;  [28,]    0    7    0    3    4    0    1    7    1     0</span>
+<span class="co">#&gt;  [29,]    5    5    1    6    8    0    3    9    2     8</span>
+<span class="co">#&gt;  [30,]    3    4   10    9   10    2    8    0    5     1</span>
+<span class="co">#&gt;  [31,]    1    7    4    4    5    1    1    5    7     1</span>
+<span class="co">#&gt;  [32,]    1    5   10    4    6    7    4    5    2     6</span>
+<span class="co">#&gt;  [33,]    4    0    4   10    9    6    8    4    7     6</span>
+<span class="co">#&gt;  [34,]    1   10    4    8   10    6    4    9   10     6</span>
+<span class="co">#&gt;  [35,]    7    7    6   10    3    7    1    5    9     8</span>
+<span class="co">#&gt;  [36,]    5    3   10    4    8    2    1    0    3     6</span>
+<span class="co">#&gt;  [37,]    0    0   10    7    2    7    9   10    6     1</span>
+<span class="co">#&gt;  [38,]    9    6    2    8    8    6    3    7    5     1</span>
+<span class="co">#&gt;  [39,]    2    2    7    1    8    2    9    6    2     8</span>
+<span class="co">#&gt;  [40,]    4    3    0    9    2    7   10    2    0     7</span>
+<span class="co">#&gt;  [41,]    7    2    9   10    9    8    5    1    5     0</span>
+<span class="co">#&gt;  [42,]    1    5    3    3    4    9    0   10    3     8</span>
+<span class="co">#&gt;  [43,]    7    3    2    6    5    3    6    4    9     2</span>
+<span class="co">#&gt;  [44,]    8    8   10   10   10    3    5    4    5     4</span>
+<span class="co">#&gt;  [45,]    4    2    4    2    7    3    2    7    9     0</span>
+<span class="co">#&gt;  [46,]    6    7    1    9   10    0   10    5    7     6</span>
+<span class="co">#&gt;  [47,]    3    1   10    2    5    3    4    6    4     9</span>
+<span class="co">#&gt;  [48,]    7    0    9    4    8    5    9    5    2     2</span>
+<span class="co">#&gt;  [49,]    2    9    1    6    0    5   10    0    8     4</span>
+<span class="co">#&gt;  [50,]   10    4    2    7    9    1    8    0    4     4</span>
+<span class="co">#&gt;  [51,]    1    0    9    5    3    5    2    3    9     4</span>
+<span class="co">#&gt;  [52,]    9    0    3    1    4    8    9    6    1     5</span>
+<span class="co">#&gt;  [53,]    1    8    8    6    7   10    1    9    7     9</span>
+<span class="co">#&gt;  [54,]    3    9    9    3    4    5    7    3    0     2</span>
+<span class="co">#&gt;  [55,]    9    6    4    9    7    7    6    1    6     4</span>
+<span class="co">#&gt;  [56,]   10    9    5    7    1    3    0    8    2     5</span>
+<span class="co">#&gt;  [57,]    7    5    8    7    1    7    4    8   10     3</span>
+<span class="co">#&gt;  [58,]    6    7    4    4    7    6    3    4    3    10</span>
+<span class="co">#&gt;  [59,]    6    8    8    3    2   10    3    0   10     5</span>
+<span class="co">#&gt;  [60,]    1    9    6    1    1    5    1    5   10     2</span>
+<span class="co">#&gt;  [61,]    2    6    6    1    0    4    6    4   10     2</span>
+<span class="co">#&gt;  [62,]    5    7    1    9    6   10    7    1    6     2</span>
+<span class="co">#&gt;  [63,]    8    1    2    4    9    6    3    6    0     2</span>
+<span class="co">#&gt;  [64,]    1    1    4    7    5    6    2    4    4     7</span>
+<span class="co">#&gt;  [65,]    3    7    9    4    3    5    3    0    8     1</span>
+<span class="co">#&gt;  [66,]    7    7    7   10    1    5    6    3    9     9</span>
+<span class="co">#&gt;  [67,]   10    5    3    1    7    1    0    1    4     4</span>
+<span class="co">#&gt;  [68,]    5    0    7    8    3    1    8    0   10     9</span>
+<span class="co">#&gt;  [69,]    7   10    2    0    1    2    1    2    8     5</span>
+<span class="co">#&gt;  [70,]    4   10    9    4    6    3   10    6    6    10</span>
+<span class="co">#&gt;  [71,]    1    0    3    2    6   10   10   10   10     7</span>
+<span class="co">#&gt;  [72,]    7    0    2    3    2    0    7    5    8     9</span>
+<span class="co">#&gt;  [73,]   10   10    5    1    9    5    3   10    7     5</span>
+<span class="co">#&gt;  [74,]    2    3    6    2    0    3    3    9    2     6</span>
+<span class="co">#&gt;  [75,]    9    1    1    5    7    0    3    5    3    10</span>
+<span class="co">#&gt;  [76,]    3    0    1    6    7    5    9    6    6     2</span>
+<span class="co">#&gt;  [77,]   10    8    4    1   10    7    4    6   10     7</span>
+<span class="co">#&gt;  [78,]    5    5    6    6   10   10    3   10    6     3</span>
+<span class="co">#&gt;  [79,]    4   10    6    3    5    2    0    8    6     7</span>
+<span class="co">#&gt;  [80,]    9    0    0    7    6    4    5    6    4     0</span>
+<span class="co">#&gt;  [81,]    5    7    8    0    6    3    3    5    4     5</span>
+<span class="co">#&gt;  [82,]    1    2    5    9    6    7    4    9    1     7</span>
+<span class="co">#&gt;  [83,]    6    1    4    6    4    4    6    2    7     7</span>
+<span class="co">#&gt;  [84,]    1    3    2    7    0   10    5    9    9     4</span>
+<span class="co">#&gt;  [85,]    5    2    0    2    9    8   10    9    3     5</span>
+<span class="co">#&gt;  [86,]    7    7    8    4    5    2    0    3   10     9</span>
+<span class="co">#&gt;  [87,]    8   10    4    8    3    3    6    4    8     4</span>
+<span class="co">#&gt;  [88,]    8   10    5    6    5    7    9    0    7     6</span>
+<span class="co">#&gt;  [89,]   10    6    4    5    4    5    8    7    1     5</span>
+<span class="co">#&gt;  [90,]    5   10    7    1    7    4    8    9    1     5</span>
+<span class="co">#&gt;  [91,]    9    4    5    8   10    0    8    6    2     6</span>
+<span class="co">#&gt;  [92,]    5    9    9    0    7    4    0    6    5     0</span>
+<span class="co">#&gt;  [93,]    5    8    1    8    2    6    4    6    7    10</span>
+<span class="co">#&gt;  [94,]    8    5    2    8    9    8    1   10    5     5</span>
+<span class="co">#&gt;  [95,]    7    3   10    3    8    9    9    5    0     2</span>
+<span class="co">#&gt;  [96,]    9   10    1    3    9    4    5    6    0     2</span>
+<span class="co">#&gt;  [97,]   10    9    6    4    3    9    5    4    7     2</span>
+<span class="co">#&gt;  [98,]    6    9    1    1    0    8    5    9    2     4</span>
+<span class="co">#&gt;  [99,]    2    8    0    1   10    0    1    1    5     4</span>
+<span class="co">#&gt; [100,]    1    3    2   10    0    8    8    9    8     4</span></code></pre></div>
+</div>
+<div id="crie-um-data-frame-chamado-df-resultante-da-composição-dos-vetores" class="section level3" number="2.3.17">
+<h3>
+<span class="header-section-number">2.3.17</span> 4.9 Crie um data frame chamado <strong>df</strong>, resultante da composição dos vetores:<a class="anchor" aria-label="anchor" href="#crie-um-data-frame-chamado-df-resultante-da-composi%C3%A7%C3%A3o-dos-vetores"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><code>id: 1:50</code></li>
+<li><code>sp: sp01, sp02, ..., sp49, sp50</code></li>
+<li><code>ab: 50 valores aleatórios entre 0 a 5</code></li>
+</ol>
+</div>
+<div id="solução-16" class="section level3" number="2.3.18">
+<h3>
+<span class="header-section-number">2.3.18</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-16"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>,
+                  sp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"sp0"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"sp"</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span>,
+                  ab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">50</span>, rep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="va">df</span>
+<span class="co">#&gt;    id   sp ab</span>
+<span class="co">#&gt; 1   1 sp01  3</span>
+<span class="co">#&gt; 2   2 sp02  5</span>
+<span class="co">#&gt; 3   3 sp03  1</span>
+<span class="co">#&gt; 4   4 sp04  1</span>
+<span class="co">#&gt; 5   5 sp05  1</span>
+<span class="co">#&gt; 6   6 sp06  5</span>
+<span class="co">#&gt; 7   7 sp07  3</span>
+<span class="co">#&gt; 8   8 sp08  0</span>
+<span class="co">#&gt; 9   9 sp09  1</span>
+<span class="co">#&gt; 10 10 sp10  1</span>
+<span class="co">#&gt; 11 11 sp11  1</span>
+<span class="co">#&gt; 12 12 sp12  1</span>
+<span class="co">#&gt; 13 13 sp13  3</span>
+<span class="co">#&gt; 14 14 sp14  0</span>
+<span class="co">#&gt; 15 15 sp15  4</span>
+<span class="co">#&gt; 16 16 sp16  5</span>
+<span class="co">#&gt; 17 17 sp17  5</span>
+<span class="co">#&gt; 18 18 sp18  4</span>
+<span class="co">#&gt; 19 19 sp19  0</span>
+<span class="co">#&gt; 20 20 sp20  0</span>
+<span class="co">#&gt; 21 21 sp21  5</span>
+<span class="co">#&gt; 22 22 sp22  0</span>
+<span class="co">#&gt; 23 23 sp23  4</span>
+<span class="co">#&gt; 24 24 sp24  1</span>
+<span class="co">#&gt; 25 25 sp25  2</span>
+<span class="co">#&gt; 26 26 sp26  2</span>
+<span class="co">#&gt; 27 27 sp27  5</span>
+<span class="co">#&gt; 28 28 sp28  1</span>
+<span class="co">#&gt; 29 29 sp29  1</span>
+<span class="co">#&gt; 30 30 sp30  4</span>
+<span class="co">#&gt; 31 31 sp31  2</span>
+<span class="co">#&gt; 32 32 sp32  0</span>
+<span class="co">#&gt; 33 33 sp33  4</span>
+<span class="co">#&gt; 34 34 sp34  1</span>
+<span class="co">#&gt; 35 35 sp35  0</span>
+<span class="co">#&gt; 36 36 sp36  1</span>
+<span class="co">#&gt; 37 37 sp37  3</span>
+<span class="co">#&gt; 38 38 sp38  1</span>
+<span class="co">#&gt; 39 39 sp39  2</span>
+<span class="co">#&gt; 40 40 sp40  2</span>
+<span class="co">#&gt; 41 41 sp41  3</span>
+<span class="co">#&gt; 42 42 sp42  1</span>
+<span class="co">#&gt; 43 43 sp43  0</span>
+<span class="co">#&gt; 44 44 sp44  4</span>
+<span class="co">#&gt; 45 45 sp45  2</span>
+<span class="co">#&gt; 46 46 sp46  5</span>
+<span class="co">#&gt; 47 47 sp47  1</span>
+<span class="co">#&gt; 48 48 sp48  1</span>
+<span class="co">#&gt; 49 49 sp49  3</span>
+<span class="co">#&gt; 50 50 sp50  4</span></code></pre></div>
+</div>
+<div id="crie-uma-lista-com-os-objetos-criados-anteriormente-mega-tr-ma-e-df." class="section level3" number="2.3.19">
+<h3>
+<span class="header-section-number">2.3.19</span> 4.10 Crie uma lista com os objetos criados anteriormente: <strong>mega</strong>, <strong>tr</strong>, <strong>ma</strong> e <strong>df</strong>.<a class="anchor" aria-label="anchor" href="#crie-uma-lista-com-os-objetos-criados-anteriormente-mega-tr-ma-e-df."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-17" class="section level3" number="2.3.20">
+<h3>
+<span class="header-section-number">2.3.20</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-17"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mega</span>, <span class="va">tr</span>, <span class="va">ma</span>, <span class="va">df</span><span class="op">)</span>
+<span class="va">lis</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] 37 36 42 51 56 32</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt;   [1] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [12] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [23] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [34] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt;  [45] cont cont cont cont cont cont trat trat trat trat trat</span>
+<span class="co">#&gt;  [56] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [67] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [78] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt;  [89] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt; [100] trat</span>
+<span class="co">#&gt; Levels: cont trat</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt;        [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]</span>
+<span class="co">#&gt;   [1,]    7    1    2    8    6    9   10    6   10     0</span>
+<span class="co">#&gt;   [2,]    7    5    2    1    0    2    2    6    0     9</span>
+<span class="co">#&gt;   [3,]    1    8    8    5    9    4    3   10    3     9</span>
+<span class="co">#&gt;   [4,]    4    5    8   10    0    6    0    0    7     7</span>
+<span class="co">#&gt;   [5,]    1    1    8    4    9   10    3    4    9     5</span>
+<span class="co">#&gt;   [6,]    4    0    9    1    2    2    1    0    6     3</span>
+<span class="co">#&gt;   [7,]    1    3    7    8    1    8    1   10    5     2</span>
+<span class="co">#&gt;   [8,]    7    7    4    2    0    9    0    9    4     2</span>
+<span class="co">#&gt;   [9,]    5    3    5    0    0    8   10    7    6     6</span>
+<span class="co">#&gt;  [10,]    2    5    5    2    7   10    6    7    5     9</span>
+<span class="co">#&gt;  [11,]    7    3    0    9    3    8    1    8    5     6</span>
+<span class="co">#&gt;  [12,]    3    3    3    9    4    6    5   10    3    10</span>
+<span class="co">#&gt;  [13,]    4    7    4    8    6    2    7    5    5    10</span>
+<span class="co">#&gt;  [14,]    6    5    5    8    8    6    9    6    2     3</span>
+<span class="co">#&gt;  [15,]    2    9    3    8    2    7    5    6   10     2</span>
+<span class="co">#&gt;  [16,]   10   10   10    8    0    9    0   10    3     7</span>
+<span class="co">#&gt;  [17,]    0    9    0    3   10   10   10    4    1     8</span>
+<span class="co">#&gt;  [18,]    7    5    4    1    1    3   10    8    7     2</span>
+<span class="co">#&gt;  [19,]    3    4   10   10   10    1    1    0    3     9</span>
+<span class="co">#&gt;  [20,]    7    9    1    7    4    4   10    9    8    10</span>
+<span class="co">#&gt;  [21,]    4    6   10   10    6    6    6   10    9     4</span>
+<span class="co">#&gt;  [22,]    1    9    9    1    6    0    8    9    2     7</span>
+<span class="co">#&gt;  [23,]    7   10    4    0    0    0    1    2   10    10</span>
+<span class="co">#&gt;  [24,]    7    6    6    1    1    4    3    3    1     9</span>
+<span class="co">#&gt;  [25,]    1    8    6    3    1    2    7    3   10     1</span>
+<span class="co">#&gt;  [26,]    1    7    4    1    8    9    7   10    8     4</span>
+<span class="co">#&gt;  [27,]    9    9    3    0    9    2    0    3    0     5</span>
+<span class="co">#&gt;  [28,]    0    7    0    3    4    0    1    7    1     0</span>
+<span class="co">#&gt;  [29,]    5    5    1    6    8    0    3    9    2     8</span>
+<span class="co">#&gt;  [30,]    3    4   10    9   10    2    8    0    5     1</span>
+<span class="co">#&gt;  [31,]    1    7    4    4    5    1    1    5    7     1</span>
+<span class="co">#&gt;  [32,]    1    5   10    4    6    7    4    5    2     6</span>
+<span class="co">#&gt;  [33,]    4    0    4   10    9    6    8    4    7     6</span>
+<span class="co">#&gt;  [34,]    1   10    4    8   10    6    4    9   10     6</span>
+<span class="co">#&gt;  [35,]    7    7    6   10    3    7    1    5    9     8</span>
+<span class="co">#&gt;  [36,]    5    3   10    4    8    2    1    0    3     6</span>
+<span class="co">#&gt;  [37,]    0    0   10    7    2    7    9   10    6     1</span>
+<span class="co">#&gt;  [38,]    9    6    2    8    8    6    3    7    5     1</span>
+<span class="co">#&gt;  [39,]    2    2    7    1    8    2    9    6    2     8</span>
+<span class="co">#&gt;  [40,]    4    3    0    9    2    7   10    2    0     7</span>
+<span class="co">#&gt;  [41,]    7    2    9   10    9    8    5    1    5     0</span>
+<span class="co">#&gt;  [42,]    1    5    3    3    4    9    0   10    3     8</span>
+<span class="co">#&gt;  [43,]    7    3    2    6    5    3    6    4    9     2</span>
+<span class="co">#&gt;  [44,]    8    8   10   10   10    3    5    4    5     4</span>
+<span class="co">#&gt;  [45,]    4    2    4    2    7    3    2    7    9     0</span>
+<span class="co">#&gt;  [46,]    6    7    1    9   10    0   10    5    7     6</span>
+<span class="co">#&gt;  [47,]    3    1   10    2    5    3    4    6    4     9</span>
+<span class="co">#&gt;  [48,]    7    0    9    4    8    5    9    5    2     2</span>
+<span class="co">#&gt;  [49,]    2    9    1    6    0    5   10    0    8     4</span>
+<span class="co">#&gt;  [50,]   10    4    2    7    9    1    8    0    4     4</span>
+<span class="co">#&gt;  [51,]    1    0    9    5    3    5    2    3    9     4</span>
+<span class="co">#&gt;  [52,]    9    0    3    1    4    8    9    6    1     5</span>
+<span class="co">#&gt;  [53,]    1    8    8    6    7   10    1    9    7     9</span>
+<span class="co">#&gt;  [54,]    3    9    9    3    4    5    7    3    0     2</span>
+<span class="co">#&gt;  [55,]    9    6    4    9    7    7    6    1    6     4</span>
+<span class="co">#&gt;  [56,]   10    9    5    7    1    3    0    8    2     5</span>
+<span class="co">#&gt;  [57,]    7    5    8    7    1    7    4    8   10     3</span>
+<span class="co">#&gt;  [58,]    6    7    4    4    7    6    3    4    3    10</span>
+<span class="co">#&gt;  [59,]    6    8    8    3    2   10    3    0   10     5</span>
+<span class="co">#&gt;  [60,]    1    9    6    1    1    5    1    5   10     2</span>
+<span class="co">#&gt;  [61,]    2    6    6    1    0    4    6    4   10     2</span>
+<span class="co">#&gt;  [62,]    5    7    1    9    6   10    7    1    6     2</span>
+<span class="co">#&gt;  [63,]    8    1    2    4    9    6    3    6    0     2</span>
+<span class="co">#&gt;  [64,]    1    1    4    7    5    6    2    4    4     7</span>
+<span class="co">#&gt;  [65,]    3    7    9    4    3    5    3    0    8     1</span>
+<span class="co">#&gt;  [66,]    7    7    7   10    1    5    6    3    9     9</span>
+<span class="co">#&gt;  [67,]   10    5    3    1    7    1    0    1    4     4</span>
+<span class="co">#&gt;  [68,]    5    0    7    8    3    1    8    0   10     9</span>
+<span class="co">#&gt;  [69,]    7   10    2    0    1    2    1    2    8     5</span>
+<span class="co">#&gt;  [70,]    4   10    9    4    6    3   10    6    6    10</span>
+<span class="co">#&gt;  [71,]    1    0    3    2    6   10   10   10   10     7</span>
+<span class="co">#&gt;  [72,]    7    0    2    3    2    0    7    5    8     9</span>
+<span class="co">#&gt;  [73,]   10   10    5    1    9    5    3   10    7     5</span>
+<span class="co">#&gt;  [74,]    2    3    6    2    0    3    3    9    2     6</span>
+<span class="co">#&gt;  [75,]    9    1    1    5    7    0    3    5    3    10</span>
+<span class="co">#&gt;  [76,]    3    0    1    6    7    5    9    6    6     2</span>
+<span class="co">#&gt;  [77,]   10    8    4    1   10    7    4    6   10     7</span>
+<span class="co">#&gt;  [78,]    5    5    6    6   10   10    3   10    6     3</span>
+<span class="co">#&gt;  [79,]    4   10    6    3    5    2    0    8    6     7</span>
+<span class="co">#&gt;  [80,]    9    0    0    7    6    4    5    6    4     0</span>
+<span class="co">#&gt;  [81,]    5    7    8    0    6    3    3    5    4     5</span>
+<span class="co">#&gt;  [82,]    1    2    5    9    6    7    4    9    1     7</span>
+<span class="co">#&gt;  [83,]    6    1    4    6    4    4    6    2    7     7</span>
+<span class="co">#&gt;  [84,]    1    3    2    7    0   10    5    9    9     4</span>
+<span class="co">#&gt;  [85,]    5    2    0    2    9    8   10    9    3     5</span>
+<span class="co">#&gt;  [86,]    7    7    8    4    5    2    0    3   10     9</span>
+<span class="co">#&gt;  [87,]    8   10    4    8    3    3    6    4    8     4</span>
+<span class="co">#&gt;  [88,]    8   10    5    6    5    7    9    0    7     6</span>
+<span class="co">#&gt;  [89,]   10    6    4    5    4    5    8    7    1     5</span>
+<span class="co">#&gt;  [90,]    5   10    7    1    7    4    8    9    1     5</span>
+<span class="co">#&gt;  [91,]    9    4    5    8   10    0    8    6    2     6</span>
+<span class="co">#&gt;  [92,]    5    9    9    0    7    4    0    6    5     0</span>
+<span class="co">#&gt;  [93,]    5    8    1    8    2    6    4    6    7    10</span>
+<span class="co">#&gt;  [94,]    8    5    2    8    9    8    1   10    5     5</span>
+<span class="co">#&gt;  [95,]    7    3   10    3    8    9    9    5    0     2</span>
+<span class="co">#&gt;  [96,]    9   10    1    3    9    4    5    6    0     2</span>
+<span class="co">#&gt;  [97,]   10    9    6    4    3    9    5    4    7     2</span>
+<span class="co">#&gt;  [98,]    6    9    1    1    0    8    5    9    2     4</span>
+<span class="co">#&gt;  [99,]    2    8    0    1   10    0    1    1    5     4</span>
+<span class="co">#&gt; [100,]    1    3    2   10    0    8    8    9    8     4</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt;    id   sp ab</span>
+<span class="co">#&gt; 1   1 sp01  3</span>
+<span class="co">#&gt; 2   2 sp02  5</span>
+<span class="co">#&gt; 3   3 sp03  1</span>
+<span class="co">#&gt; 4   4 sp04  1</span>
+<span class="co">#&gt; 5   5 sp05  1</span>
+<span class="co">#&gt; 6   6 sp06  5</span>
+<span class="co">#&gt; 7   7 sp07  3</span>
+<span class="co">#&gt; 8   8 sp08  0</span>
+<span class="co">#&gt; 9   9 sp09  1</span>
+<span class="co">#&gt; 10 10 sp10  1</span>
+<span class="co">#&gt; 11 11 sp11  1</span>
+<span class="co">#&gt; 12 12 sp12  1</span>
+<span class="co">#&gt; 13 13 sp13  3</span>
+<span class="co">#&gt; 14 14 sp14  0</span>
+<span class="co">#&gt; 15 15 sp15  4</span>
+<span class="co">#&gt; 16 16 sp16  5</span>
+<span class="co">#&gt; 17 17 sp17  5</span>
+<span class="co">#&gt; 18 18 sp18  4</span>
+<span class="co">#&gt; 19 19 sp19  0</span>
+<span class="co">#&gt; 20 20 sp20  0</span>
+<span class="co">#&gt; 21 21 sp21  5</span>
+<span class="co">#&gt; 22 22 sp22  0</span>
+<span class="co">#&gt; 23 23 sp23  4</span>
+<span class="co">#&gt; 24 24 sp24  1</span>
+<span class="co">#&gt; 25 25 sp25  2</span>
+<span class="co">#&gt; 26 26 sp26  2</span>
+<span class="co">#&gt; 27 27 sp27  5</span>
+<span class="co">#&gt; 28 28 sp28  1</span>
+<span class="co">#&gt; 29 29 sp29  1</span>
+<span class="co">#&gt; 30 30 sp30  4</span>
+<span class="co">#&gt; 31 31 sp31  2</span>
+<span class="co">#&gt; 32 32 sp32  0</span>
+<span class="co">#&gt; 33 33 sp33  4</span>
+<span class="co">#&gt; 34 34 sp34  1</span>
+<span class="co">#&gt; 35 35 sp35  0</span>
+<span class="co">#&gt; 36 36 sp36  1</span>
+<span class="co">#&gt; 37 37 sp37  3</span>
+<span class="co">#&gt; 38 38 sp38  1</span>
+<span class="co">#&gt; 39 39 sp39  2</span>
+<span class="co">#&gt; 40 40 sp40  2</span>
+<span class="co">#&gt; 41 41 sp41  3</span>
+<span class="co">#&gt; 42 42 sp42  1</span>
+<span class="co">#&gt; 43 43 sp43  0</span>
+<span class="co">#&gt; 44 44 sp44  4</span>
+<span class="co">#&gt; 45 45 sp45  2</span>
+<span class="co">#&gt; 46 46 sp46  5</span>
+<span class="co">#&gt; 47 47 sp47  1</span>
+<span class="co">#&gt; 48 48 sp48  1</span>
+<span class="co">#&gt; 49 49 sp49  3</span>
+<span class="co">#&gt; 50 50 sp50  4</span></code></pre></div>
+</div>
+<div id="selecione-os-elementos-ímpares-do-objeto-tr-e-atribua-ao-objeto-tr_impar." class="section level3" number="2.3.21">
+<h3>
+<span class="header-section-number">2.3.21</span> 4.11 Selecione os elementos ímpares do objeto <strong>tr</strong> e atribua ao objeto <strong>tr_impar</strong>.<a class="anchor" aria-label="anchor" href="#selecione-os-elementos-%C3%ADmpares-do-objeto-tr-e-atribua-ao-objeto-tr_impar."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-18" class="section level3" number="2.3.22">
+<h3>
+<span class="header-section-number">2.3.22</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-18"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tr_impar</span> <span class="op">&lt;-</span> <span class="va">tr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">99</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span>
+<span class="va">tr_impar</span>
+<span class="co">#&gt;  [1] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt; [12] cont cont cont cont cont cont cont cont cont cont cont</span>
+<span class="co">#&gt; [23] cont cont cont trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt; [34] trat trat trat trat trat trat trat trat trat trat trat</span>
+<span class="co">#&gt; [45] trat trat trat trat trat trat</span>
+<span class="co">#&gt; Levels: cont trat</span></code></pre></div>
+</div>
+<div id="selecione-as-linhas-com-ids-pares-do-objeto-df-e-atribua-ao-objeto-df_ids_par." class="section level3" number="2.3.23">
+<h3>
+<span class="header-section-number">2.3.23</span> 4.12 Selecione as linhas com ids pares do objeto <strong>df</strong> e atribua ao objeto <strong>df_ids_par</strong>.<a class="anchor" aria-label="anchor" href="#selecione-as-linhas-com-ids-pares-do-objeto-df-e-atribua-ao-objeto-df_ids_par."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-19" class="section level3" number="2.3.24">
+<h3>
+<span class="header-section-number">2.3.24</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-19"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_ids_par</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>, <span class="op">]</span>
+<span class="va">df_ids_par</span>
+<span class="co">#&gt;       id   sp ab</span>
+<span class="co">#&gt; 2      2 sp02  5</span>
+<span class="co">#&gt; 4      4 sp04  1</span>
+<span class="co">#&gt; 6      6 sp06  5</span>
+<span class="co">#&gt; 8      8 sp08  0</span>
+<span class="co">#&gt; 10    10 sp10  1</span>
+<span class="co">#&gt; 12    12 sp12  1</span>
+<span class="co">#&gt; 14    14 sp14  0</span>
+<span class="co">#&gt; 16    16 sp16  5</span>
+<span class="co">#&gt; 18    18 sp18  4</span>
+<span class="co">#&gt; 20    20 sp20  0</span>
+<span class="co">#&gt; 22    22 sp22  0</span>
+<span class="co">#&gt; 24    24 sp24  1</span>
+<span class="co">#&gt; 26    26 sp26  2</span>
+<span class="co">#&gt; 28    28 sp28  1</span>
+<span class="co">#&gt; 30    30 sp30  4</span>
+<span class="co">#&gt; 32    32 sp32  0</span>
+<span class="co">#&gt; 34    34 sp34  1</span>
+<span class="co">#&gt; 36    36 sp36  1</span>
+<span class="co">#&gt; 38    38 sp38  1</span>
+<span class="co">#&gt; 40    40 sp40  2</span>
+<span class="co">#&gt; 42    42 sp42  1</span>
+<span class="co">#&gt; 44    44 sp44  4</span>
+<span class="co">#&gt; 46    46 sp46  5</span>
+<span class="co">#&gt; 48    48 sp48  1</span>
+<span class="co">#&gt; 50    50 sp50  4</span>
+<span class="co">#&gt; NA    NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.1  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.2  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.3  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.4  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.5  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.6  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.7  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.8  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.9  NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.10 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.11 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.12 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.13 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.14 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.15 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.16 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.17 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.18 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.19 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.20 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.21 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.22 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.23 NA &lt;NA&gt; NA</span>
+<span class="co">#&gt; NA.24 NA &lt;NA&gt; NA</span></code></pre></div>
+</div>
+<div id="faça-uma-amostragem-de-10-linhas-do-objeto-df-e-atribua-ao-objeto-df_amos10." class="section level3" number="2.3.25">
+<h3>
+<span class="header-section-number">2.3.25</span> 4.13 Faça uma amostragem de 10 linhas do objeto <strong>df</strong> e atribua ao objeto <strong>df_amos10</strong>.<a class="anchor" aria-label="anchor" href="#fa%C3%A7a-uma-amostragem-de-10-linhas-do-objeto-df-e-atribua-ao-objeto-df_amos10."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-20" class="section level3" number="2.3.26">
+<h3>
+<span class="header-section-number">2.3.26</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-20"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_amos10</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span>, <span class="op">]</span>
+<span class="va">df_amos10</span>
+<span class="co">#&gt;    id   sp ab</span>
+<span class="co">#&gt; 41 41 sp41  3</span>
+<span class="co">#&gt; 28 28 sp28  1</span>
+<span class="co">#&gt; 37 37 sp37  3</span>
+<span class="co">#&gt; 22 22 sp22  0</span>
+<span class="co">#&gt; 13 13 sp13  3</span>
+<span class="co">#&gt; 29 29 sp29  1</span>
+<span class="co">#&gt; 7   7 sp07  3</span>
+<span class="co">#&gt; 19 19 sp19  0</span>
+<span class="co">#&gt; 48 48 sp48  1</span>
+<span class="co">#&gt; 32 32 sp32  0</span></code></pre></div>
+</div>
+<div id="amostre-10-linhas-do-objeto-ma-mas-utilizando-as-linhas-amostradas-do-df_amos10-e-atribua-ao-objeto-ma_amos10." class="section level3" number="2.3.27">
+<h3>
+<span class="header-section-number">2.3.27</span> 4.14 Amostre 10 linhas do objeto <strong>ma</strong>, mas utilizando as linhas amostradas do <strong>df_amos10</strong> e atribua ao objeto <strong>ma_amos10</strong>.<a class="anchor" aria-label="anchor" href="#amostre-10-linhas-do-objeto-ma-mas-utilizando-as-linhas-amostradas-do-df_amos10-e-atribua-ao-objeto-ma_amos10."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-21" class="section level3" number="2.3.28">
+<h3>
+<span class="header-section-number">2.3.28</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-21"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ma_amos10</span> <span class="op">&lt;-</span> <span class="va">ma</span><span class="op">[</span><span class="va">df_amos10</span><span class="op">$</span><span class="va">id</span>, <span class="op">]</span>
+<span class="va">ma_amos10</span>
+<span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]</span>
+<span class="co">#&gt;  [1,]    7    2    9   10    9    8    5    1    5     0</span>
+<span class="co">#&gt;  [2,]    0    7    0    3    4    0    1    7    1     0</span>
+<span class="co">#&gt;  [3,]    0    0   10    7    2    7    9   10    6     1</span>
+<span class="co">#&gt;  [4,]    1    9    9    1    6    0    8    9    2     7</span>
+<span class="co">#&gt;  [5,]    4    7    4    8    6    2    7    5    5    10</span>
+<span class="co">#&gt;  [6,]    5    5    1    6    8    0    3    9    2     8</span>
+<span class="co">#&gt;  [7,]    1    3    7    8    1    8    1   10    5     2</span>
+<span class="co">#&gt;  [8,]    3    4   10   10   10    1    1    0    3     9</span>
+<span class="co">#&gt;  [9,]    7    0    9    4    8    5    9    5    2     2</span>
+<span class="co">#&gt; [10,]    1    5   10    4    6    7    4    5    2     6</span></code></pre></div>
+</div>
+<div id="una-as-colunas-dos-objetos-df_amos10-e-ma_amos10-e-atribua-ao-objeto" class="section level3" number="2.3.29">
+<h3>
+<span class="header-section-number">2.3.29</span> 4.15 Una as colunas dos objetos <strong>df_amos10</strong> e <strong>ma_amos10</strong> e atribua ao objeto<a class="anchor" aria-label="anchor" href="#una-as-colunas-dos-objetos-df_amos10-e-ma_amos10-e-atribua-ao-objeto"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>dados_amos10</strong>.</p>
+</div>
+<div id="solução-22" class="section level3" number="2.3.30">
+<h3>
+<span class="header-section-number">2.3.30</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-22"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dados_amos10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df_amos10</span>, <span class="va">ma_amos10</span><span class="op">)</span>
+<span class="va">dados_amos10</span>
+<span class="co">#&gt;    id   sp ab 1 2  3  4  5 6 7  8 9 10</span>
+<span class="co">#&gt; 41 41 sp41  3 7 2  9 10  9 8 5  1 5  0</span>
+<span class="co">#&gt; 28 28 sp28  1 0 7  0  3  4 0 1  7 1  0</span>
+<span class="co">#&gt; 37 37 sp37  3 0 0 10  7  2 7 9 10 6  1</span>
+<span class="co">#&gt; 22 22 sp22  0 1 9  9  1  6 0 8  9 2  7</span>
+<span class="co">#&gt; 13 13 sp13  3 4 7  4  8  6 2 7  5 5 10</span>
+<span class="co">#&gt; 29 29 sp29  1 5 5  1  6  8 0 3  9 2  8</span>
+<span class="co">#&gt; 7   7 sp07  3 1 3  7  8  1 8 1 10 5  2</span>
+<span class="co">#&gt; 19 19 sp19  0 3 4 10 10 10 1 1  0 3  9</span>
+<span class="co">#&gt; 48 48 sp48  1 7 0  9  4  8 5 9  5 2  2</span>
+<span class="co">#&gt; 32 32 sp32  0 1 5 10  4  6 7 4  5 2  6</span></code></pre></div>
+
+</div>
+</div>
+<div id="exercícios-do-capítulo-5" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Exercícios do capítulo 5<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-5"><i class="fas fa-link"></i></a>
+</h2>
+<div id="reescreva-as-operações-abaixo-utilizando-pipes-." class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> 5.1 Reescreva as operações abaixo utilizando pipes <code>%&gt;%</code>.<a class="anchor" aria-label="anchor" href="#reescreva-as-opera%C3%A7%C3%B5es-abaixo-utilizando-pipes-."><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><code>log10(cumsum(1:100))</code></li>
+<li><code>sum(sqrt(abs(rnorm(100))))</code></li>
+<li><code>sum(sort(sample(1:10, 10000, rep = TRUE)))</code></li>
+</ul>
+</div>
+<div id="solução-23" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-23"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="co">#&gt; ── Attaching packages ─────────────────── tidyverse 1.3.1 ──</span>
+<span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
+<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.7</span>
+<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
+<span class="co">#&gt; ✓ readr   2.1.1     ✓ forcats 0.5.1</span>
+<span class="co">#&gt; ── Conflicts ────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
+<span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
+
+<span class="fl">1</span><span class="op">:</span><span class="fl">100</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;   [1] 0.0000000 0.4771213 0.7781513 1.0000000 1.1760913</span>
+<span class="co">#&gt;   [6] 1.3222193 1.4471580 1.5563025 1.6532125 1.7403627</span>
+<span class="co">#&gt;  [11] 1.8195439 1.8920946 1.9590414 2.0211893 2.0791812</span>
+<span class="co">#&gt;  [16] 2.1335389 2.1846914 2.2329961 2.2787536 2.3222193</span>
+<span class="co">#&gt;  [21] 2.3636120 2.4031205 2.4409091 2.4771213 2.5118834</span>
+<span class="co">#&gt;  [26] 2.5453071 2.5774918 2.6085260 2.6384893 2.6674530</span>
+<span class="co">#&gt;  [31] 2.6954817 2.7226339 2.7489629 2.7745170 2.7993405</span>
+<span class="co">#&gt;  [36] 2.8234742 2.8469553 2.8698182 2.8920946 2.9138139</span>
+<span class="co">#&gt;  [41] 2.9350032 2.9556878 2.9758911 2.9956352 3.0149403</span>
+<span class="co">#&gt;  [46] 3.0338257 3.0523091 3.0704073 3.0881361 3.1055102</span>
+<span class="co">#&gt;  [51] 3.1225435 3.1392492 3.1556396 3.1717265 3.1875207</span>
+<span class="co">#&gt;  [56] 3.2030329 3.2182729 3.2332500 3.2479733 3.2624511</span>
+<span class="co">#&gt;  [61] 3.2766915 3.2907022 3.3044905 3.3180633 3.3314273</span>
+<span class="co">#&gt;  [66] 3.3445887 3.3575537 3.3703280 3.3829171 3.3953264</span>
+<span class="co">#&gt;  [71] 3.4075608 3.4196254 3.4315246 3.4432630 3.4548449</span>
+<span class="co">#&gt;  [76] 3.4662743 3.4775553 3.4886917 3.4996871 3.5105450</span>
+<span class="co">#&gt;  [81] 3.5212689 3.5318619 3.5423274 3.5526682 3.5628874</span>
+<span class="co">#&gt;  [86] 3.5729877 3.5829719 3.5928427 3.6026025 3.6122539</span>
+<span class="co">#&gt;  [91] 3.6217992 3.6312408 3.6405808 3.6498215 3.6589648</span>
+<span class="co">#&gt;  [96] 3.6680130 3.6769678 3.6858313 3.6946052 3.7032914</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 77.73289</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10000</span>, rep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 55685</span></code></pre></div>
+</div>
+<div id="use-a-função-download.file-e-unzip-para-baixar-e-extrair-o-arquivo-do-data-paper-de-médios-e-grandes-mamíferos-atlantic-mammals.-em-seguinda-importe-para-o-r-usando-a-função-readrread_csv." class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> 5.2 Use a função <code>download.file()</code> e <code>unzip()</code> para baixar e extrair o arquivo do data paper de médios e grandes mamíferos: <a href="https://doi.org/10.1002/ecy.2785">ATLANTIC MAMMALS</a>. Em seguinda, importe para o R, usando a função <code>readr::read_csv()</code>.<a class="anchor" aria-label="anchor" href="#use-a-fun%C3%A7%C3%A3o-download.file-e-unzip-para-baixar-e-extrair-o-arquivo-do-data-paper-de-m%C3%A9dios-e-grandes-mam%C3%ADferos-atlantic-mammals.-em-seguinda-importe-para-o-r-usando-a-fun%C3%A7%C3%A3o-readrread_csv."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="solução-24" class="section level3" number="2.4.4">
+<h3>
+<span class="header-section-number">2.4.4</span> Solução<a class="anchor" aria-label="anchor" href="#solu%C3%A7%C3%A3o-24"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&amp;file=ecy2785-sup-0001-DataS1.zip"</span>, 
+              destfile <span class="op">=</span> <span class="st">"ecy2785-sup-0001-DataS1.zip"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">"ecy2785-sup-0001-DataS1.zip"</span><span class="op">)</span>
+
+<span class="va">dp_lm</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for</span>
+<span class="co">#&gt; details</span>
+<span class="co">#&gt; Rows: 4680 Columns: 40</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; chr (27): ID, Country, State, Municipality, Study_locati...</span>
+<span class="co">#&gt; dbl (11): Reference_paper_number, Publication_year, Year...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+</div>
+<div id="use-a-função-tibbleglimpse-para-ter-uma-noção-geral-dos-dados" class="section level3" number="2.4.5">
+<h3>
+<span class="header-section-number">2.4.5</span> 5.3 Use a função <code>tibble::glimpse()</code> para ter uma noção geral dos dados<a class="anchor" aria-label="anchor" href="#use-a-fun%C3%A7%C3%A3o-tibbleglimpse-para-ter-uma-no%C3%A7%C3%A3o-geral-dos-dados"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Sobre</a></div>
+<div class="next"><a href="importados-no-item-anterior..html"><span class="header-section-number">3</span> importados no item anterior.</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hello-bookdown"><span class="header-section-number">2</span> Hello bookdown</a></li>
+<li>
+<a class="nav-link" href="#a-section"><span class="header-section-number">2.1</span> A section</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#an-unnumbered-section">An unnumbered section</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-15"><span class="header-section-number">2.2</span> Exercícios do capítulo 15</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#importe-o-limite-dos-estados-brasileiros-no-formato-sf-com-o-nome-br.-para-isso-use-a-fun%C3%A7%C3%A3o-ne_states-do-pacote-rnaturalearth.-crie-um-mapa-simples-cinza-utilizando-a-fun%C3%A7%C3%A3o-plot-selecionando-a-coluna-geometry-com-o-operador-e-com-os-argumentos-axes-e-graticule-verdadeiros."><span class="header-section-number">2.2.1</span> 15.1 Importe o limite dos estados brasileiros no formato sf com o nome br. Para isso, use a função ne_states do pacote rnaturalearth. Crie um mapa simples cinza utilizando a função plot(), selecionando a coluna geometry com o operador $ e com os argumentos axes e graticule verdadeiros.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o"><span class="header-section-number">2.2.2</span> Solução</a></li>
+<li><a class="nav-link" href="#dados-vetoriais-podem-ser-criados-com-diversos-erros-de-topologia-e.g.-sobreposi%C3%A7%C3%A3o-de-linhas-ou-pol%C3%ADgonos-ou-buracos.-algumas-fun%C3%A7%C3%B5es-exigem-que-os-objetos-vetoriais-aos-quais-s%C3%A3o-atribu%C3%ADdos-esses-dados-n%C3%A3o-possuam-esses-erros-para-que-o-algoritmo-funcione.-para-verificar-se-h%C3%A1-erros-podemos-usar-a-fun%C3%A7%C3%A3o-st_is_valid-do-pacote-sf.-h%C3%A1-diversas-forma-de-corre%C3%A7%C3%B5es-desses-erros-mas-vamos-usar-uma-corre%C3%A7%C3%A3o-simples-do-r-com-a-fun%C3%A7%C3%A3o-st_make_valid.-vamos-fazer-essa-corre%C3%A7%C3%A3o-para-o-br-importado-anteriormente-e-atribuindo-ao-objeto-br_valid.-podemos-conferir-para-saber-se-h%C3%A1-erros-e-fazer-um-plot."><span class="header-section-number">2.2.3</span> 15.2 Dados vetoriais podem ser criados com diversos erros de topologia, e.g., sobreposição de linhas ou polígonos ou buracos. Algumas funções exigem que os objetos vetoriais aos quais são atribuídos esses dados não possuam esses erros para que o algoritmo funcione. Para verificar se há erros, podemos usar a função st_is_valid() do pacote sf. Há diversas forma de correções desses erros, mas vamos usar uma correção simples do R, com a função st_make_valid(). Vamos fazer essa correção para o br importado anteriormente e atribuindo ao objeto br_valid. Podemos conferir para saber se há erros e fazer um plot.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-1"><span class="header-section-number">2.2.4</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-um-objeto-rasterlayer-vazio-chamado-ra-com-resolu%C3%A7%C3%A3o-de-5%C2%BA-600-km.-atribua-um-sistema-de-refer%C3%AAncia-de-coordendas-com-o-c%C3%B3digo-4326.-atribua-valores-aleat%C3%B3rios-de-uma-distribui%C3%A7%C3%A3o-normal-e-plote-o-mesmo."><span class="header-section-number">2.2.5</span> 15.3 Crie um objeto RasterLayer vazio chamado ra com resolução de 5º (~600 km). Atribua um sistema de referência de coordendas com o código 4326. Atribua valores aleatórios de uma distribuição normal e plote o mesmo.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-2"><span class="header-section-number">2.2.6</span> Solução</a></li>
+<li><a class="nav-link" href="#reprojete-o-limite-dos-estados-brasileiros-do-exerc%C3%ADcio-anterior-para-o-crs-sirgas-2000brazil-polyconic-utilizando-o-c%C3%B3digo-epsg5880-e-chamando-de-br_poly.-fa%C3%A7a-um-mapa-simples-como-no-exerc%C3%ADcio-1.-atente-para-as-curvaturas-das-linhas."><span class="header-section-number">2.2.7</span> 15.4 Reprojete o limite dos estados brasileiros do exercício anterior para o CRS SIRGAS 2000/Brazil Polyconic, utilizando o código EPSG:5880 e chamando de br_poly. Faça um mapa simples como no exercício 1. Atente para as curvaturas das linhas.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-3"><span class="header-section-number">2.2.8</span> Solução</a></li>
+<li><a class="nav-link" href="#utilizando-a-fun%C3%A7%C3%A3o-st_centroid-do-pacote-sf-crie-um-vetor-chamado-br_valid_cen-que-armazenar%C3%A1-o-centroide-de-cada-estado-brasileiro-do-objeto-br_valid-do-exerc%C3%ADcio-2-e-plot-o-resultado."><span class="header-section-number">2.2.9</span> 15.5 Utilizando a função st_centroid do pacote sf, crie um vetor chamado br_valid_cen que armazenará o centroide de cada estado brasileiro do objeto br_valid do exercício 2 e plot o resultado.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-4"><span class="header-section-number">2.2.10</span> Solução</a></li>
+<li><a class="nav-link" href="#ajuste-o-limite-e-m%C3%A1scara-do-objeto-raster-criado-no-exerc%C3%ADcio-3-para-o-limite-do-brasil-atribuindo-ao-objeto-ra_br.-depois-reprojete-esse-raster-para-a-mesma-proje%C3%A7%C3%A3o-utilizada-no-exerc%C3%ADcio-4-com-o-nome-ra_br_poly-e-plote-o-mapa-resultante."><span class="header-section-number">2.2.11</span> 15.6 Ajuste o limite e máscara do objeto raster criado no exercício 3 para o limite do Brasil, atribuindo ao objeto ra_br. Depois reprojete esse raster para a mesma projeção utilizada no exercício 4 com o nome ra_br_poly e plote o mapa resultante.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-5"><span class="header-section-number">2.2.12</span> Solução</a></li>
+<li><a class="nav-link" href="#extraia-os-valores-de-cada-pixel-do-raster-criado-no-exerc%C3%ADcio-6-para-os-centroides-dos-estados-do-brasil-criado-no-exerc%C3%ADcio-5-atribuindo-%C3%A0-coluna-val-do-objeto-espacial-chamado-br_valid_poly_cent_ra."><span class="header-section-number">2.2.13</span> 15.7 Extraia os valores de cada pixel do raster criado no exercício 6 para os centroides dos estados do Brasil criado no exercício 5, atribuindo à coluna val do objeto espacial chamado br_valid_poly_cent_ra.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-6"><span class="header-section-number">2.2.14</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-um-mapa-final-usando-os-resultados-dos-exerc%C3%ADcios-4-5-e-6.-utilize-o-pacote-tmap-e-inclua-todos-os-principais-elementos-de-um-mapa."><span class="header-section-number">2.2.15</span> 15.8 Crie um mapa final usando os resultados dos exercícios 4, 5 e 6. Utilize o pacote tmap e inclua todos os principais elementos de um mapa.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-7"><span class="header-section-number">2.2.16</span> Solução</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-4"><span class="header-section-number">2.3</span> Exercícios do capítulo 4</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#use-o-r-para-verificar-o-resultado-da-opera%C3%A7%C3%A3o-7-7-7-7-x-7---7."><span class="header-section-number">2.3.1</span> 4.1 Use o R para verificar o resultado da operação 7 + 7 ÷ 7 + 7 x 7 - 7.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-8"><span class="header-section-number">2.3.2</span> Solução</a></li>
+<li><a class="nav-link" href="#verifique-atrav%C3%A9s-do-r-se-3x2%C2%B3-%C3%A9-maior-que-2x3%C2%B2."><span class="header-section-number">2.3.3</span> 4.2 Verifique através do R se 3x2³ é maior que 2x3².</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-9"><span class="header-section-number">2.3.4</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-dois-objetos-qualquer-nome-com-os-valores-100-e-300.-multiplique-esses-objetos-fun%C3%A7%C3%A3o-prod-e-atribuam-ao-objeto-mult.-fa%C3%A7a-o-logaritmo-natural-fun%C3%A7%C3%A3o-log-do-objeto-mult-e-atribuam-ao-objeto-ln."><span class="header-section-number">2.3.5</span> 4.3 Crie dois objetos (qualquer nome) com os valores 100 e 300. Multiplique esses objetos (função prod()) e atribuam ao objeto mult. Faça o logaritmo natural (função log()) do objeto mult e atribuam ao objeto ln.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-10"><span class="header-section-number">2.3.6</span> Solução</a></li>
+<li><a class="nav-link" href="#quantos-pacotes-existem-no-cran-nesse-momento-execute-essa-combina%C3%A7%C3%A3o-no-console-nrowavailable.packagesrepos-httpcran.r-project.org."><span class="header-section-number">2.3.7</span> 4.4 Quantos pacotes existem no CRAN nesse momento? Execute essa combinação no Console: nrow(available.packages(repos = "http://cran.r-project.org")).</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-11"><span class="header-section-number">2.3.8</span> Solução</a></li>
+<li><a class="nav-link" href="#instale-o-pacote-tidyverse-do-cran."><span class="header-section-number">2.3.9</span> 4.5 Instale o pacote tidyverse do CRAN.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-12"><span class="header-section-number">2.3.10</span> Solução</a></li>
+<li><a class="nav-link" href="#escolha-n%C3%BAmeros-para-jogar-na-mega-sena-usando-o-r-nomeando-o-objeto-como-mega.-lembrando-s%C3%A3o-6-valores-de-1-a-60-e-atribuam-a-um-objeto."><span class="header-section-number">2.3.11</span> 4.6 Escolha números para jogar na mega-sena usando o R, nomeando o objeto como mega. Lembrando: são 6 valores de 1 a 60 e atribuam a um objeto.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-13"><span class="header-section-number">2.3.12</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-um-fator-chamado-tr-com-dois-n%C3%ADveis-cont-e-trat-para-descrever-100-locais-de-amostragem-50-de-cada-tratamento.-o-fator-deve-ser-dessa-forma-cont-cont-cont-....-cont-trat-trat-....-trat."><span class="header-section-number">2.3.13</span> 4.7 Crie um fator chamado tr, com dois níveis (“cont” e “trat”) para descrever 100 locais de amostragem, 50 de cada tratamento. O fator deve ser dessa forma cont, cont, cont, ...., cont, trat, trat, ...., trat.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-14"><span class="header-section-number">2.3.14</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-uma-matriz-chamada-ma-resultante-da-disposi%C3%A7%C3%A3o-de-um-vetor-composto-por-1000-valores-aleat%C3%B3rios-entre-0-e-10.-a-matriz-deve-conter-100-linhas-e-ser-disposta-por-colunas."><span class="header-section-number">2.3.15</span> 4.8 Crie uma matriz chamada ma, resultante da disposição de um vetor composto por 1000 valores aleatórios entre 0 e 10. A matriz deve conter 100 linhas e ser disposta por colunas.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-15"><span class="header-section-number">2.3.16</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-um-data-frame-chamado-df-resultante-da-composi%C3%A7%C3%A3o-dos-vetores"><span class="header-section-number">2.3.17</span> 4.9 Crie um data frame chamado df, resultante da composição dos vetores:</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-16"><span class="header-section-number">2.3.18</span> Solução</a></li>
+<li><a class="nav-link" href="#crie-uma-lista-com-os-objetos-criados-anteriormente-mega-tr-ma-e-df."><span class="header-section-number">2.3.19</span> 4.10 Crie uma lista com os objetos criados anteriormente: mega, tr, ma e df.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-17"><span class="header-section-number">2.3.20</span> Solução</a></li>
+<li><a class="nav-link" href="#selecione-os-elementos-%C3%ADmpares-do-objeto-tr-e-atribua-ao-objeto-tr_impar."><span class="header-section-number">2.3.21</span> 4.11 Selecione os elementos ímpares do objeto tr e atribua ao objeto tr_impar.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-18"><span class="header-section-number">2.3.22</span> Solução</a></li>
+<li><a class="nav-link" href="#selecione-as-linhas-com-ids-pares-do-objeto-df-e-atribua-ao-objeto-df_ids_par."><span class="header-section-number">2.3.23</span> 4.12 Selecione as linhas com ids pares do objeto df e atribua ao objeto df_ids_par.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-19"><span class="header-section-number">2.3.24</span> Solução</a></li>
+<li><a class="nav-link" href="#fa%C3%A7a-uma-amostragem-de-10-linhas-do-objeto-df-e-atribua-ao-objeto-df_amos10."><span class="header-section-number">2.3.25</span> 4.13 Faça uma amostragem de 10 linhas do objeto df e atribua ao objeto df_amos10.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-20"><span class="header-section-number">2.3.26</span> Solução</a></li>
+<li><a class="nav-link" href="#amostre-10-linhas-do-objeto-ma-mas-utilizando-as-linhas-amostradas-do-df_amos10-e-atribua-ao-objeto-ma_amos10."><span class="header-section-number">2.3.27</span> 4.14 Amostre 10 linhas do objeto ma, mas utilizando as linhas amostradas do df_amos10 e atribua ao objeto ma_amos10.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-21"><span class="header-section-number">2.3.28</span> Solução</a></li>
+<li><a class="nav-link" href="#una-as-colunas-dos-objetos-df_amos10-e-ma_amos10-e-atribua-ao-objeto"><span class="header-section-number">2.3.29</span> 4.15 Una as colunas dos objetos df_amos10 e ma_amos10 e atribua ao objeto</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-22"><span class="header-section-number">2.3.30</span> Solução</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exerc%C3%ADcios-do-cap%C3%ADtulo-5"><span class="header-section-number">2.4</span> Exercícios do capítulo 5</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#reescreva-as-opera%C3%A7%C3%B5es-abaixo-utilizando-pipes-."><span class="header-section-number">2.4.1</span> 5.1 Reescreva as operações abaixo utilizando pipes %&gt;%.</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-23"><span class="header-section-number">2.4.2</span> Solução</a></li>
+<li><a class="nav-link" href="#use-a-fun%C3%A7%C3%A3o-download.file-e-unzip-para-baixar-e-extrair-o-arquivo-do-data-paper-de-m%C3%A9dios-e-grandes-mam%C3%ADferos-atlantic-mammals.-em-seguinda-importe-para-o-r-usando-a-fun%C3%A7%C3%A3o-readrread_csv."><span class="header-section-number">2.4.3</span> 5.2 Use a função download.file() e unzip() para baixar e extrair o arquivo do data paper de médios e grandes mamíferos: ATLANTIC MAMMALS. Em seguinda, importe para o R, usando a função readr::read_csv().</a></li>
+<li><a class="nav-link" href="#solu%C3%A7%C3%A3o-24"><span class="header-section-number">2.4.4</span> Solução</a></li>
+<li><a class="nav-link" href="#use-a-fun%C3%A7%C3%A3o-tibbleglimpse-para-ter-uma-no%C3%A7%C3%A3o-geral-dos-dados"><span class="header-section-number">2.4.5</span> 5.3 Use a função tibble::glimpse() para ter uma noção geral dos dados</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/01-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Exercícios: Análises Ecológicas no R</strong>" was written by . It was last built on 07-02-2022.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

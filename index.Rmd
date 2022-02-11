@@ -1,0 +1,18 @@
+--- 
+title: "Análises Ecológicas no R: Exercícios e Soluções"
+author: ""
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  Aqui você encontra os exercícios e soluções do livo Análises Ecológicas no R.
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+---
+
+# Sobre {.unlisted .unnumbered}
+
+Aqui você encontra os **exercícios e soluções** do livo [Análises Ecológicas no R](https://analises-ecologicas.netlify.app/).
