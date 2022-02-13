@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções</title>
 <meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
-<meta name="description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<meta name="description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) 1:100 %&gt;%  ...">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
 <meta property="og:title" content="Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-5---tidyverse.html">
-<meta property="og:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<meta property="og:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) 1:100 %&gt;%  ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cap. 5 - Tidyverse | Análises Ecológicas no R: Exercícios e Soluções">
-<meta name="twitter:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) #&gt; ── Attaching...">
+<meta name="twitter:description" content="5.1 Reescreva as operações abaixo utilizando pipes %&gt;%. - log10(cumsum(1:100)) - sum(sqrt(abs(rnorm(100)))) - sum(sort(sample(1:10, 10000, rep = TRUE))) Solução: library(tidyverse) 1:100 %&gt;%  ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,6 +49,7 @@
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
 <li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
 </ul>
 
@@ -68,14 +69,6 @@ Reescreva as operações abaixo utilizando pipes <code>%&gt;%</code>.
 <p>Solução:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="co">#&gt; ── Attaching packages ─────────────────── tidyverse 1.3.1 ──</span>
-<span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.7</span>
-<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
-<span class="co">#&gt; ✓ readr   2.1.1     ✓ forcats 0.5.1</span>
-<span class="co">#&gt; ── Conflicts ────────────────────── tidyverse_conflicts() ──</span>
-<span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
-<span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
 
 <span class="fl">1</span><span class="op">:</span><span class="fl">100</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -105,12 +98,12 @@ Reescreva as operações abaixo utilizando pipes <code>%&gt;%</code>.
     <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 78.05671</span>
+<span class="co">#&gt; [1] 82.55207</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10000</span>, rep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 54887</span></code></pre></div>
+<span class="co">#&gt; [1] 55176</span></code></pre></div>
 <p><strong>5.2</strong>
 Use a função <code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> e <code><a href="https://rdrr.io/r/utils/unzip.html">unzip()</a></code> para baixar e extrair o arquivo do data paper de médios e grandes mamíferos: <a href="https://doi.org/10.1002/ecy.2785">ATLANTIC MAMMALS</a>. Em seguinda, importe para o R, usando a função <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>.</p>
 <p>Solução:</p>
@@ -121,17 +114,7 @@ Use a função <code><a href="https://rdrr.io/r/utils/download.file.html">downlo
 
 <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="st">"ecy2785-sup-0001-DataS1.zip"</span><span class="op">)</span>
 
-<span class="va">dp_lm</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"</span><span class="op">)</span>
-<span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for</span>
-<span class="co">#&gt; details</span>
-<span class="co">#&gt; Rows: 4680 Columns: 40</span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────</span>
-<span class="co">#&gt; Delimiter: ","</span>
-<span class="co">#&gt; chr (27): ID, Country, State, Municipality, Study_locati...</span>
-<span class="co">#&gt; dbl (11): Reference_paper_number, Publication_year, Year...</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<span class="va">dp_lm</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"</span><span class="op">)</span></code></pre></div>
 <p><strong>5.3</strong>
 Use a função <code><a href="https://pillar.r-lib.org/reference/glimpse.html">tibble::glimpse()</a></code> para ter uma noção geral dos dados importados no item anterior.</p>
 <p>Solução:</p>
@@ -287,7 +270,7 @@ Oficialmente a pandemia de COVID-19 começou no Brasil com o primeiro caso no di
 <span class="va">intervalo_vacina</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html">interval</a></span><span class="op">(</span><span class="va">covid_inicio_br</span>, <span class="va">vacina</span><span class="op">)</span>
 
 <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.period.html">as.period</a></span><span class="op">(</span><span class="va">intervalo_covid</span><span class="op">)</span>
-<span class="co">#&gt; [1] "1y 11m 15d 0H 0M 0S"</span>
+<span class="co">#&gt; [1] "1y 11m 18d 0H 0M 0S"</span>
 <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.period.html">as.period</a></span><span class="op">(</span><span class="va">intervalo_vacina</span><span class="op">)</span>
 <span class="co">#&gt; [1] "1y 4m 24d 0H 0M 0S"</span></code></pre></div>
 
@@ -314,7 +297,7 @@ Oficialmente a pandemia de COVID-19 começou no Brasil com o primeiro caso no di
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

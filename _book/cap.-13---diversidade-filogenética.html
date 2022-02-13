@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções</title>
 <meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
-<meta name="description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<meta name="description" content="# Pacotes necessários library(devtools) library(ecodados) library(V.PhyloMaker) library(vegan) library(ggplot2) library(GGally) library(ggpubr) library(picante) library(phytools) library(ape)...">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
 <meta property="og:title" content="Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-13---diversidade-filogenética.html">
-<meta property="og:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<meta property="og:description" content="# Pacotes necessários library(devtools) library(ecodados) library(V.PhyloMaker) library(vegan) library(ggplot2) library(GGally) library(ggpubr) library(picante) library(phytools) library(ape)...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cap. 13 - Diversidade Filogenética | Análises Ecológicas no R: Exercícios e Soluções">
-<meta name="twitter:description" content="# Pacotes necessários library(devtools) #&gt; Loading required package: usethis library(ecodados) library(V.PhyloMaker) #&gt; Loading required package: ape library(vegan) #&gt; Loading required package:...">
+<meta name="twitter:description" content="# Pacotes necessários library(devtools) library(ecodados) library(V.PhyloMaker) library(vegan) library(ggplot2) library(GGally) library(ggpubr) library(picante) library(phytools) library(ape)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,6 +49,7 @@
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="active" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
 <li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
 </ul>
 
@@ -63,39 +64,14 @@
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pacotes necessários</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: usethis</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">V.PhyloMaker</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ape</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: permute</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'permute'</span>
-<span class="co">#&gt; The following object is masked from 'package:devtools':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     check</span>
-<span class="co">#&gt; Loading required package: lattice</span>
-<span class="co">#&gt; This is vegan 2.5-7</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
-<span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'ggpubr'</span>
-<span class="co">#&gt; The following object is masked from 'package:ape':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rotate</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">picante</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: nlme</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: maps</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'phytools'</span>
-<span class="co">#&gt; The following object is masked from 'package:vegan':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     scores</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mwpennell/geiger-v2">geiger</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/darunabas/phyloregion">phyloregion</a></span><span class="op">)</span>
@@ -103,7 +79,6 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">betapart</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bbolker/bbmle">bbmle</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: stats4</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span></code></pre></div>
 <p><strong>13.1</strong>
 Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e temperatura anual na distribuição espacial da diversidade filogenética (PD) e Endemismo filogenético (PE). Calcule o SES para verificar se os resultados da diversidade filogenética (PD) diferem do esperado ao acaso devido ao número de espécies em cada comunidade. Qual a sua interpretação sobre os resultados?</p>
@@ -334,7 +309,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></div>
-<div class="next"><a href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></div>
+<div class="next"><a href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-13---diversidade-filogen%C3%A9tica">Cap. 13 - Diversidade Filogenética</a></li></ul>
@@ -354,7 +329,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

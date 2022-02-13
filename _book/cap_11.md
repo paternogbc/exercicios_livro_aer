@@ -8,22 +8,8 @@ library(iNEXT)
 library(ecodados)
 library(ggplot2)
 library(vegan)
-#> Loading required package: permute
-#> Loading required package: lattice
-#> This is vegan 2.5-7
 library(nlme)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following object is masked from 'package:nlme':
-#> 
-#>     collapse
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ```
 
 **11.1**

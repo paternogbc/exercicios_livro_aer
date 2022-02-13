@@ -49,6 +49,7 @@
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
 <li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
 </ul>
 
@@ -97,11 +98,7 @@ Utilizando o banco de dados <code>penguins</code> faça um <a href="https://anal
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Massa corporal (g)"</span>,
        y <span class="op">=</span> <span class="st">"Frequência"</span>,
-       fill <span class="op">=</span> <span class="st">"Espécie"</span><span class="op">)</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with</span>
-<span class="co">#&gt; `binwidth`.</span>
-<span class="co">#&gt; Warning: Removed 2 rows containing non-finite values</span>
-<span class="co">#&gt; (stat_bin).</span></code></pre></div>
+       fill <span class="op">=</span> <span class="st">"Espécie"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p><strong>6.3</strong>
 Utilizando o banco de dados <code>penguins</code>, faça três gráficos com o mesmo eixo Y e eixo X. Coloque o comprimento das nadadeiras no eixo Y e as espécies de pinguins no eixo X. No primeiro gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> para plotar os dados brutos. No segundo gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code> para mostrar a distribuição de densidade dos dados. No terceiro gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> para destacar a mediana e os quartis.</p>
@@ -177,7 +174,6 @@ Utilize o banco de dados <code><a href="https://rdrr.io/pkg/ecodados/man/anova_d
     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Idade</span>, <span class="va">Pessoas</span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>media <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Tempo</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                      desvio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Tempo</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'Idade'. You can override using the `.groups` argument.</span>
 <span class="co">#Veja como ficou </span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">anova_media</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 4</span>
@@ -242,7 +238,7 @@ Utilize o banco de dados <code>penguins</code> para criar um <a href="https://an
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-11.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
