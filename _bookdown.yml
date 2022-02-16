@@ -5,3 +5,5 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: ""
+edit: https://github.com/paternogbc/exercicios_livro_aer/edit/master/%s
+view: https://github.com/paternogbc/exercicios_livro_aer/blob/master/%s

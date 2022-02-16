@@ -11,10 +11,12 @@
 <meta property="og:title" content="Cap. 6 - Visualização de dados | Análises Ecológicas no R: Exercícios e Soluções">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-6---visualização-de-dados.html">
+<meta property="og:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
 <meta property="og:description" content="6.1 Utilizando o banco de dados penguins compare o comprimento do bico entre as diferentes espécies de penguins. Utilize um gráfico de caixa (boxplot) para ilustrar a variação intraespecífica e...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cap. 6 - Visualização de dados | Análises Ecológicas no R: Exercícios e Soluções">
 <meta name="twitter:description" content="6.1 Utilizando o banco de dados penguins compare o comprimento do bico entre as diferentes espécies de penguins. Utilize um gráfico de caixa (boxplot) para ilustrar a variação intraespecífica e...">
+<meta name="twitter:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -38,13 +40,14 @@
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+      <nav aria-label="Sumário"><h2>Sumário</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Sobre</a></li>
+<li><a class="" href="index.html">Bem-vindos</a></li>
 <li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
 <li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
 <li><a class="active" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
 <li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></li>
 <li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
@@ -54,7 +57,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">Ver código fonte <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -220,13 +223,13 @@ Utilize o banco de dados <code>penguins</code> para criar um <a href="https://an
 <div class="prev"><a href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></div>
 <div class="next"><a href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+    <nav id="toc" data-toggle="toc" aria-label="Neste capítulo"><h2>Nesta página</h2>
       <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-6---visualiza%C3%A7%C3%A3o-de-dados">Cap. 6 - Visualização de dados</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_06.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_06.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_06.Rmd">Ver fonte <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_06.Rmd">Edite esta página <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -238,11 +241,11 @@ Utilize o banco de dados <code>penguins</code> para criar um <a href="https://an
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" was written by Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. It was last built on 2022-02-13.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p>Este livro foi compilado com o pacote <a class="text-light" href="https://bookdown.org">bookdown</a> </p>
   </div>
 
 </div></div>
