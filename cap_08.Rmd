@@ -1,5 +1,4 @@
-# Cap. 8 - Modelos Lineares Generalizados  {-}
-
+# Cap. 8 - Modelos Lineares Generalizados {-}
 
 ```{r}
 # Pacotes necessários
@@ -15,8 +14,7 @@ library(vcd)
 library(effectsize)
 ```
 
-**8.1**
-
+**8.1** 
 Baixe [estes dados](https://www.stat.berkeley.edu/~statlabs/labs.html#video) que foram coletados numa pesquisa de opinião sobre uso de vídeo games por 91 estudantes de graduação no outono de 1994. Utilizando estes dados, constra um modelo: 1) Predizer a frequência com que uma pessoa joga vídeo game em função da idade; 2) Predizer a nota do estudante em função do tempo que jogou na semana antes da entrevista. Dica: esses são dados ordinais!
 
 Solução:
@@ -68,7 +66,6 @@ summary(modelo2)
 ```
 
 **8.2**
-
 Uma pesquisadora interessada em entender o efeito de diferentes usos de solo sobre a abundância de morcegos em paisagens agroecológicas desenvolveu uma simulação para gerar dados parecidos com o que irá coletar em breve no campo. Ela utilizou uma abordagem que simula a abundância de uma espécie sob deriva ecológica segundo a Teoria Neutra da Biodiversidade. A simulação gerou os seguintes dados:
 
 ```{r}

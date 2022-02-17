@@ -12,13 +12,11 @@ library(spdep)
 library(adespatial)
 ```
 
-**9.1**
+**9.1** Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?
 
-Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?
-
-A. Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises? 
-B. Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?
-C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.
+A) Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises? 
+B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?
+C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.
 
 Dados necessários:
 
@@ -35,14 +33,16 @@ Solução:
 ```r
 # Matriz padronizada - Hellinger
 species.hel <- decostand(x = mite, method = "hellinger")
-
-sum(rowSums(species.hel)==0) # verificar se algum local está sem nenhuma espécie
-#> [1] 0
-sum(colSums(species.hel)==0) # verificar se algum espécie não está em nenhuma localidade
+# verificar se algum local está sem nenhuma espécie
+sum(rowSums(species.hel)==0) 
 #> [1] 0
 
+# verificar se algum espécie não está em nenhuma localidade
+sum(colSums(species.hel)==0) 
+#> [1] 0
 
 # RDA
+#*******************************************************
 
 ## RDA com dados ambientais
 rda.mite <- rda(species.hel ~ ., data = mite.env)
@@ -90,6 +90,7 @@ res.var
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # dbRDA
+#*******************************************************
 dbrda.mite <- capscale(species.hel ~ ., 
                        data = mite.env, dist="bray")
 
@@ -137,7 +138,7 @@ dbrda.var
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # PERMANOVA
-
+#*******************************************************
 species.dis <- vegdist(species.hel, "bray")
 
 permanova.mite <- adonis(species.hel~., data = mite.env, method = "bray")
@@ -164,7 +165,7 @@ permanova.mite
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # RDAp
-
+#*******************************************************
 # Gerar vetores espaciais: MEM
 
 mite_knn <- knearneigh(as.matrix(mite.xy), k = 2, longlat = FALSE)
@@ -245,7 +246,7 @@ rda.p.var
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-## Respostas
+**Respostas**
 
 **A) Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?**
 
@@ -263,9 +264,7 @@ A partição de variância indica que o valor espacial "puro" é mais importante
 
 As análises que não incluem o componente espacial (RDA, dbRDA e PERMANOVA) enfatizam a relevância das variáveis ambientais e não foram capazes de identificar que parte da explicação atribuída à variação ambiental é, de fato, explicada pela estrutura espacial nas variáveis ambientais e na composição de espécies
 
-**9.2**
-
-Efetue uma análise de agrupamento pela função `hclust`. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função. 
+**9.2** Efetue uma análise de agrupamento pela função `hclust`. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função. 
 
 A) utilizando o método UPGMA e o índice de Bray-Curtis. 
 B) Faça agora o dendrograma com outro índice de dissimilaridade e compare os resultados. São diferentes? No que eles influenciaríam a interpretação do resultado?
@@ -274,7 +273,8 @@ Solução:
 
 
 ```r
-matriz<-vegdist(mite, method="bray")##trans. numa matriz de dissimilaridade
+##trans. numa matriz de dissimilaridade
+matriz<-vegdist(mite, method="bray")
 
 matriz1<-hclust(matriz, method="complete")
 plot(matriz1)
@@ -284,16 +284,15 @@ plot(matriz1)
 
 ```r
 
-outroindice<-vegdist(mite, method="jaccard")##transforma a matriz com outro índice
+##transforma a matriz com outro índice
+outroindice<-vegdist(mite, method="jaccard")
 outro<-hclust(outroindice, method="complete")
 plot(outro)
 ```
 
 <img src="cap_09_files/figure-html/unnamed-chunk-4-2.png" width="672" />
 
-**9.3**
-
-Na perspectiva de metacomunidades (Leibold et al., 2004), a dispersão dos organismos tem um papel proeminente para entender como as espécies estão distribuídas na natureza. Com o objetivo de testar se a dispersão influencia a composição de espécies de cladóceros e copépodos, e portanto a estrutura da metacomunidade, um pesquisador selecionou dois conjuntos de lagos: em um deles todos os lagos são isolados e no outro os lagos são conectados. 
+**9.3** Na perspectiva de metacomunidades (Leibold et al., 2004), a dispersão dos organismos tem um papel proeminente para entender como as espécies estão distribuídas na natureza. Com o objetivo de testar se a dispersão influencia a composição de espécies de cladóceros e copépodos, e portanto a estrutura da metacomunidade, um pesquisador selecionou dois conjuntos de lagos: em um deles todos os lagos são isolados e no outro os lagos são conectados. 
 
 A) Importe o conjunto de dados lagos do pacote `ecodados` e responda a pergunta se o fato de os lagos estarem conectados ou não influencia a composição de espécies desses microcrustáceos. Utilize métodos baseados em modelos que você aprendeu ao longo do capítulo para modelar a abundância multivariada.
 
@@ -359,9 +358,7 @@ plot(lagos_abund, conec)
 
 <img src="cap_09_files/figure-html/unnamed-chunk-5-2.png" width="672" />
 
-**9.4**
-
-Carregue o pacote `MASS` para utilizar os dados `crabs`. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo *Leptograpsus variegatus* coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
+**9.4** Carregue o pacote `MASS` para utilizar os dados `crabs`. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo *Leptograpsus variegatus* coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
 ao objeto e use a função `biplot` para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.
 
 Solução:

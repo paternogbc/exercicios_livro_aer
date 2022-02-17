@@ -47,6 +47,7 @@
 <li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
 <li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
 <li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-8---modelos-lineares-generalizados.html">Cap. 8 - Modelos Lineares Generalizados</a></li>
 <li><a class="" href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></li>
 <li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
@@ -64,7 +65,7 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-13---diversidade-filogenética" class="section level1 unnumbered">
 <h1>Cap. 13 - Diversidade Filogenética<a class="anchor" aria-label="anchor" href="#cap.-13---diversidade-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pacotes necessários</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
@@ -86,7 +87,7 @@
 <p><strong>13.1</strong>
 Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e temperatura anual na distribuição espacial da diversidade filogenética (PD) e Endemismo filogenético (PE). Calcule o SES para verificar se os resultados da diversidade filogenética (PD) diferem do esperado ao acaso devido ao número de espécies em cada comunidade. Qual a sua interpretação sobre os resultados?</p>
 <p>Solução:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Carregar as planilhas com os dados</span>
 <span class="va">anuros</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">anuros_composicao</span>
 <span class="va">anuros_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">anuros</span><span class="op">)</span> <span class="co"># Transpor dados</span>
@@ -116,7 +117,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_PD</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">PD</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -126,7 +127,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 
 <span class="co">## Phylogenetic Endemism (PE)</span>
@@ -144,7 +145,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_PE</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-3.png" width="672"></div>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">PE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -154,7 +155,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-4.png" width="672"></div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 
 <span class="co">## Standardized Effect Size (SES) para o PD</span>
@@ -172,7 +173,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_SES</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-2-5.png" width="672"></div>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Prec_anual</span>, y <span class="op">=</span> <span class="va">SES</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -185,7 +186,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <p><strong>13.2</strong>
 Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e temperatura anual na distribuição espacial do NRI e NTI. Qual a sua interpretação sobre os resultados?</p>
 <p>Solução:</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Nearest Relative Index (NRI)</span>
 <span class="co">#*****************************************************************************</span>
@@ -203,7 +204,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_NRI</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Range_altitude</span>, y <span class="op">=</span> <span class="va">NRI</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -213,7 +214,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Nearest Taxon Index (NTI)</span>
 <span class="co">#*****************************************************************************</span>
@@ -231,7 +232,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_NTI</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Temperatura'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-3-3.png" width="672"></div>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Range_altitude</span>, y <span class="op">=</span> <span class="va">NTI</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -244,7 +245,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <p><strong>13.3</strong>
 Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados em 44 localidades na Mata Atlântica), anuros_ambientais (i.e., variáveis climáticas, topográficas e coordenadas geográficas) &amp; filogenia_anuros (filogenia das 211 espécies) - que estão no pacote ecodados. Use a função <code>varpart</code>do pacote <code>vegan</code> para testar a importância relativa dos efeitos da precipitação anual, range altitudinal e distância geográfica na distribuição espacial dos diferentes componentes da diversidade beta filogenética (Phylosor). Qual a sua interpretação sobre os resultados?</p>
 <p>Solução:</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Temos que transformar os dados para presença e ausência das espécies nas comunidades.</span>
 <span class="va">anuros_PA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">anuros_P</span>, <span class="st">"pa"</span><span class="op">)</span>
@@ -277,7 +278,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_subst</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Distância'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados_phylosor</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dis_coord</span><span class="op">*</span><span class="fl">10</span>, y <span class="op">=</span> <span class="va">substituicao</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -288,7 +289,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Partição da variância do componente aninhamento do Physolor</span>
 <span class="co">#*******************************************************************************</span>
@@ -297,7 +298,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span> <span class="op">(</span><span class="va">particao_anin</span>, digits <span class="op">=</span> <span class="fl">1</span>, Xnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Precipitação'</span>, <span class="st">'Altitude'</span>, <span class="st">'Distância'</span><span class="op">)</span>, 
       bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'navy'</span>, <span class="st">'darkorange'</span>, <span class="st">'green'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_13_files/figure-html/unnamed-chunk-4-3.png" width="672"></div>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Gráfico</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dados_phylosor</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dis_alt</span>, y <span class="op">=</span> <span class="va">substituicao</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -332,7 +333,7 @@ Carregue os dados - anuros_composicao (i.e., 211 espécies de anuros coletados e
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-16.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

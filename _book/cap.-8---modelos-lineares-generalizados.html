@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cap. 8 - Modelos Lineares Generalizados | Análises Ecológicas no R: Exercícios e Soluções</title>
+<meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
+<meta name="description" content="# Pacotes necessários library(tidyverse) library(ordinal) library(naniar) library(generalhoslem) library(ecolottery) library(DHARMa) library(parameters) library(piecewiseSEM) library(vcd)...">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="Cap. 8 - Modelos Lineares Generalizados | Análises Ecológicas no R: Exercícios e Soluções">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-8---modelos-lineares-generalizados.html">
+<meta property="og:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
+<meta property="og:description" content="# Pacotes necessários library(tidyverse) library(ordinal) library(naniar) library(generalhoslem) library(ecolottery) library(DHARMa) library(parameters) library(piecewiseSEM) library(vcd)...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cap. 8 - Modelos Lineares Generalizados | Análises Ecológicas no R: Exercícios e Soluções">
+<meta name="twitter:description" content="# Pacotes necessários library(tidyverse) library(ordinal) library(naniar) library(generalhoslem) library(ecolottery) library(DHARMa) library(parameters) library(piecewiseSEM) library(vcd)...">
+<meta name="twitter:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Análises Ecológicas no R: Exercícios e Soluções</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Sumário"><h2>Sumário</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Bem-vindos</a></li>
+<li><a class="" href="cap.-4---introdu%C3%A7%C3%A3o-ao-r.html">Cap. 4 - Introdução ao R</a></li>
+<li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
+<li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
+<li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="active" href="cap.-8---modelos-lineares-generalizados.html">Cap. 8 - Modelos Lineares Generalizados</a></li>
+<li><a class="" href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></li>
+<li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
+<li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
+<li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
+<li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
+<li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/paternogbc/exercicios_livro_aer">Ver código fonte <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-8---modelos-lineares-generalizados" class="section level1 unnumbered">
+<h1>Cap. 8 - Modelos Lineares Generalizados<a class="anchor" aria-label="anchor" href="#cap.-8---modelos-lineares-generalizados"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Pacotes necessários</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/runehaubo/ordinal">ordinal</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/njtierney/naniar">naniar</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">generalhoslem</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/frmunoz/ecolottery">ecolottery</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://florianhartig.github.io/DHARMa/">DHARMa</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/">parameters</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jslefche/">piecewiseSEM</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">vcd</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></code></pre></div>
+<p><strong>8.1</strong>
+Baixe <a href="https://www.stat.berkeley.edu/~statlabs/labs.html#video">estes dados</a> que foram coletados numa pesquisa de opinião sobre uso de vídeo games por 91 estudantes de graduação no outono de 1994. Utilizando estes dados, constra um modelo: 1) Predizer a frequência com que uma pessoa joga vídeo game em função da idade; 2) Predizer a nota do estudante em função do tempo que jogou na semana antes da entrevista. Dica: esses são dados ordinais!</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#---Importando os dados</span>
+
+<span class="va">videogame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"https://www.stat.berkeley.edu/~statlabs/data/video.data"</span>, h<span class="op">=</span><span class="cn">TRUE</span>, na.strings <span class="op">=</span> <span class="st">"99"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">videogame</span><span class="op">)</span>
+<span class="co">#&gt;   time like where freq busy educ sex age home math work own</span>
+<span class="co">#&gt; 1  2.0    3     3    2    0    1   0  19    1    0   10   1</span>
+<span class="co">#&gt; 2  0.0    3     3    3    0    0   0  18    1    1    0   1</span>
+<span class="co">#&gt; 3  0.0    3     1    3    0    0   1  19    1    0    0   1</span>
+<span class="co">#&gt; 4  0.5    3     3    3    0    1   0  19    1    0    0   1</span>
+<span class="co">#&gt; 5  0.0    3     3    4    0    1   0  19    1    1    0   0</span>
+<span class="co">#&gt; 6  0.0    3     2    4    0    0   1  19    0    0   12   0</span>
+<span class="co">#&gt;   cdrom email grade</span>
+<span class="co">#&gt; 1     0     1     4</span>
+<span class="co">#&gt; 2     1     1     2</span>
+<span class="co">#&gt; 3     0     1     3</span>
+<span class="co">#&gt; 4     0     1     3</span>
+<span class="co">#&gt; 5     0     1     3</span>
+<span class="co">#&gt; 6     0     0     3</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">videogame</span><span class="op">)</span>
+<span class="co">#&gt; 'data.frame':    91 obs. of  15 variables:</span>
+<span class="co">#&gt;  $ time : num  2 0 0 0.5 0 0 0 0 2 0 ...</span>
+<span class="co">#&gt;  $ like : int  3 3 3 3 3 3 4 3 3 3 ...</span>
+<span class="co">#&gt;  $ where: int  3 3 1 3 3 2 3 3 2 3 ...</span>
+<span class="co">#&gt;  $ freq : int  2 3 3 3 4 4 4 4 1 4 ...</span>
+<span class="co">#&gt;  $ busy : int  0 0 0 0 0 0 0 0 1 0 ...</span>
+<span class="co">#&gt;  $ educ : int  1 0 0 1 1 0 0 0 1 1 ...</span>
+<span class="co">#&gt;  $ sex  : int  0 0 1 0 0 1 1 0 1 1 ...</span>
+<span class="co">#&gt;  $ age  : int  19 18 19 19 19 19 20 19 19 19 ...</span>
+<span class="co">#&gt;  $ home : int  1 1 1 1 1 0 1 1 0 1 ...</span>
+<span class="co">#&gt;  $ math : int  0 1 0 0 1 0 1 0 0 1 ...</span>
+<span class="co">#&gt;  $ work : int  10 0 0 0 0 12 10 13 0 0 ...</span>
+<span class="co">#&gt;  $ own  : int  1 1 1 1 0 0 1 0 0 1 ...</span>
+<span class="co">#&gt;  $ cdrom: int  0 1 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">#&gt;  $ email: int  1 1 1 1 1 0 1 1 0 1 ...</span>
+<span class="co">#&gt;  $ grade: int  4 2 3 3 3 3 3 3 4 4 ...</span>
+<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">videogame</span><span class="op">$</span><span class="va">freq</span><span class="op">)</span>
+<span class="co">#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span>
+<span class="co">#&gt; [10] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</span>
+<span class="co">#&gt; [19] FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE</span>
+<span class="co">#&gt; [28] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span>
+<span class="co">#&gt; [37] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</span>
+<span class="co">#&gt; [46] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</span>
+<span class="co">#&gt; [55] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</span>
+<span class="co">#&gt; [64] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span>
+<span class="co">#&gt; [73]  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE</span>
+<span class="co">#&gt; [82]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span>
+<span class="co">#&gt; [91] FALSE</span>
+
+<span class="co">#---Explorando os dados</span>
+<span class="fu"><a href="https://docs.ropensci.org/visdat/reference/vis_miss.html">vis_miss</a></span><span class="op">(</span><span class="va">videogame</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">novo_vide_game</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/remove_missing.html">remove_missing</a></span><span class="op">(</span><span class="va">videogame</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">novo_vide_game</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">freq</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">novo_vide_game</span><span class="op">$</span><span class="va">freq</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">novo_vide_game</span><span class="op">$</span><span class="va">freq</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"4"</span>, <span class="st">"3"</span>, <span class="st">"2"</span>, <span class="st">"1"</span><span class="op">)</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">novo_vide_game</span><span class="op">$</span><span class="va">grade</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">novo_vide_game</span><span class="op">$</span><span class="va">grade</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span><span class="op">)</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co">#---Modelagem</span>
+<span class="va">modelo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/clm.html">clm</a></span><span class="op">(</span><span class="va">freq</span><span class="op">~</span><span class="va">age</span>, data<span class="op">=</span><span class="va">novo_vide_game</span><span class="op">)</span>
+<span class="va">predprob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>age <span class="op">=</span> <span class="va">novo_vide_game</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
+<span class="va">fv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">modelo</span>, newdata <span class="op">=</span> <span class="va">predprob</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span><span class="op">$</span><span class="va">fit</span>
+
+<span class="va">modelo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/clm.html">clm</a></span><span class="op">(</span><span class="va">grade</span><span class="op">~</span><span class="va">time</span>, data<span class="op">=</span><span class="va">novo_vide_game</span><span class="op">)</span>
+<span class="va">predprob2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">novo_vide_game</span><span class="op">$</span><span class="va">time</span><span class="op">)</span>
+<span class="va">fv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">modelo2</span>, newdata <span class="op">=</span> <span class="va">predprob2</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span><span class="op">$</span><span class="va">fit</span>
+
+<span class="co">#---Diagnose</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generalhoslem/man/logitgof.html">logitgof</a></span><span class="op">(</span><span class="va">novo_vide_game</span><span class="op">$</span><span class="va">freq</span>, <span class="va">fv</span>, g<span class="op">=</span><span class="fl">4</span>, ord <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Hosmer and Lemeshow test (ordinal model)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  novo_vide_game$freq, fv</span>
+<span class="co">#&gt; X-squared = 8.8602, df = 8, p-value = 0.3542</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generalhoslem/man/lipsitz.test.html">lipsitz.test</a></span><span class="op">(</span><span class="va">modelo</span>, g<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Lipsitz goodness of fit test for ordinal response</span>
+<span class="co">#&gt;  models</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  formula:  freq ~ age</span>
+<span class="co">#&gt; LR statistic = 2.7104, df = 3, p-value = 0.4385</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/nominal.test.html">scale_test</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span>
+<span class="co">#&gt; Tests of scale effects</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; formula: freq ~ age</span>
+<span class="co">#&gt;        Df  logLik    AIC    LRT Pr(&gt;Chi)  </span>
+<span class="co">#&gt; &lt;none&gt;    -83.993 175.99                  </span>
+<span class="co">#&gt; age     1 -82.552 175.10 2.8807  0.08965 .</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/nominal.test.html">nominal_test</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span>
+<span class="co">#&gt; Tests of nominal effects</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; formula: freq ~ age</span>
+<span class="co">#&gt;        Df  logLik    AIC LRT Pr(&gt;Chi)</span>
+<span class="co">#&gt; &lt;none&gt;    -83.993 175.99             </span>
+<span class="co">#&gt; age</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/generalhoslem/man/logitgof.html">logitgof</a></span><span class="op">(</span><span class="va">novo_vide_game</span><span class="op">$</span><span class="va">grade</span>, <span class="va">fv2</span>, g<span class="op">=</span><span class="fl">5</span>, ord <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Hosmer and Lemeshow test (ordinal model)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  novo_vide_game$grade, fv2</span>
+<span class="co">#&gt; X-squared = 14.973, df = 7, p-value = 0.03634</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generalhoslem/man/lipsitz.test.html">lipsitz.test</a></span><span class="op">(</span><span class="va">modelo2</span>, g<span class="op">=</span><span class="fl">5</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Lipsitz goodness of fit test for ordinal response</span>
+<span class="co">#&gt;  models</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  formula:  grade ~ time</span>
+<span class="co">#&gt; LR statistic = 5.4831, df = 4, p-value = 0.2412</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/nominal.test.html">scale_test</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>
+<span class="co">#&gt; Tests of scale effects</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; formula: grade ~ time</span>
+<span class="co">#&gt;        Df  logLik    AIC    LRT Pr(&gt;Chi)</span>
+<span class="co">#&gt; &lt;none&gt;    -56.238 118.48                </span>
+<span class="co">#&gt; time    1 -55.365 118.73 1.7456   0.1864</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ordinal/man/nominal.test.html">nominal_test</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>
+<span class="co">#&gt; Tests of nominal effects</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; formula: grade ~ time</span>
+<span class="co">#&gt;        Df  logLik    AIC    LRT Pr(&gt;Chi)  </span>
+<span class="co">#&gt; &lt;none&gt;    -56.238 118.48                  </span>
+<span class="co">#&gt; time    1 -54.625 117.25 3.2263  0.07247 .</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+
+<span class="co">#---Inferencia</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo</span><span class="op">)</span>
+<span class="co">#&gt; formula: freq ~ age</span>
+<span class="co">#&gt; data:    novo_vide_game</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  link  threshold nobs logLik AIC    niter max.grad cond.H </span>
+<span class="co">#&gt;  logit flexible  65   -83.99 175.99 5(0)  7.87e-10 1.4e+05</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;     Estimate Std. Error z value Pr(&gt;|z|)</span>
+<span class="co">#&gt; age  -0.1923     0.1253  -1.535    0.125</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Threshold coefficients:</span>
+<span class="co">#&gt;     Estimate Std. Error z value</span>
+<span class="co">#&gt; 4|3   -4.759      2.482  -1.917</span>
+<span class="co">#&gt; 3|2   -3.611      2.457  -1.469</span>
+<span class="co">#&gt; 2|1   -1.613      2.452  -0.658</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span>
+<span class="co">#&gt; formula: grade ~ time</span>
+<span class="co">#&gt; data:    novo_vide_game</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  link  threshold nobs logLik AIC    niter max.grad cond.H </span>
+<span class="co">#&gt;  logit flexible  65   -56.24 118.48 6(0)  4.48e-12 2.5e+01</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;      Estimate Std. Error z value Pr(&gt;|z|)</span>
+<span class="co">#&gt; time  0.04598    0.12085    0.38    0.704</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Threshold coefficients:</span>
+<span class="co">#&gt;     Estimate Std. Error z value</span>
+<span class="co">#&gt; 2|3  -2.6853     0.5254  -5.111</span>
+<span class="co">#&gt; 3|4   0.5143     0.2807   1.832</span></code></pre></div>
+<p><strong>8.2</strong>
+Uma pesquisadora interessada em entender o efeito de diferentes usos de solo sobre a abundância de morcegos em paisagens agroecológicas desenvolveu uma simulação para gerar dados parecidos com o que irá coletar em breve no campo. Ela utilizou uma abordagem que simula a abundância de uma espécie sob deriva ecológica segundo a Teoria Neutra da Biodiversidade. A simulação gerou os seguintes dados:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<span class="va">J</span> <span class="op">&lt;-</span> <span class="fl">5000</span> <span class="co"># número de indivíduos na comunidade local</span>
+<span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="co">#número fundamental da biodiversidade</span>
+<span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">0.05</span> <span class="co">#taxa de dispersão</span>
+<span class="va">comm1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ecolottery/man/coalesc.html">coalesc</a></span><span class="op">(</span><span class="va">J</span>, <span class="va">m</span>, <span class="va">theta</span><span class="op">)</span> <span class="co">#simulação</span>
+<span class="va">abund1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ecolottery/man/abund.html">abund</a></span><span class="op">(</span><span class="va">comm1a</span><span class="op">)</span> <span class="co">#extração de dados de abundância local</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">abund1a</span><span class="op">$</span><span class="va">com</span><span class="op">)</span> <span class="co">#dados da comunidade local</span>
+<span class="co">#&gt;   sp  ab  relab</span>
+<span class="co">#&gt; 1  1 161 0.0322</span>
+<span class="co">#&gt; 2  2  93 0.0186</span>
+<span class="co">#&gt; 3  3 185 0.0370</span>
+<span class="co">#&gt; 4  4  86 0.0172</span>
+<span class="co">#&gt; 5  5  35 0.0070</span>
+<span class="co">#&gt; 6  6  69 0.0138</span>
+
+<span class="co">#histograma da abundância</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">abund1a</span><span class="op">$</span><span class="va">com</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">ab</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"red"</span>, fill<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"non"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p>Além disso, a pesquisadora também simulou dados que representam a porcentagem do solo destinado à agricultura:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">porc_solo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">abund1a</span><span class="op">$</span><span class="va">com</span><span class="op">$</span><span class="va">ab</span><span class="op">)</span>, <span class="fl">10</span>, <span class="fl">90</span><span class="op">)</span> <span class="co">#simulação uso do solo para agricultura</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">porc_solo</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">dados_finais</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>abund<span class="op">=</span><span class="va">abund1a</span><span class="op">$</span><span class="va">com</span><span class="op">$</span><span class="va">ab</span>, solo<span class="op">=</span><span class="va">porc_solo</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dados_finais</span><span class="op">)</span>
+<span class="co">#&gt;   abund       solo</span>
+<span class="co">#&gt; 1   161 0.11063484</span>
+<span class="co">#&gt; 2    93 0.11498853</span>
+<span class="co">#&gt; 3   185 0.05718937</span>
+<span class="co">#&gt; 4    86 0.06134667</span>
+<span class="co">#&gt; 5    35 0.18910965</span>
+<span class="co">#&gt; 6    69 0.12660113</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dados_finais</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">solo</span>, <span class="va">abund</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
+<p>Agora com esses dados ela pode ter uma idéia do que esperar quando for pra campo. Ajude a pesquisadora a construir um modelo linear generalizado que seja adequado para modelar a abundância desta espécie de morcego em função da porcentagem de agricultura. Lembre-se de que ela vai precisar diagnosticar o modelo antes de utilizá-lo para fazer uma inferência. Por fim, interprete os resultados e sugira uma possível interpretação para a pesquisadora.</p>
+<p>Solução:</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#--- Poisson GLM</span>
+<span class="fu"><a href="https://rdrr.io/pkg/vcd/man/Ord_plot.html">Ord_plot</a></span><span class="op">(</span><span class="va">dados_finais</span><span class="op">$</span><span class="va">abund</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">##--- Modelagen</span>
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">abund</span> <span class="op">~</span> <span class="va">solo</span>, family <span class="op">=</span> <span class="va">poisson</span>, data<span class="op">=</span><span class="va">dados_finais</span><span class="op">)</span>
+
+<span class="co">##--- Diagnose</span>
+<span class="fu"><a href="https://rdrr.io/pkg/DHARMa/man/simulateResiduals.html">simulateResiduals</a></span><span class="op">(</span>fittedModel <span class="op">=</span> <span class="va">mod</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="co">#vários problemas</span></code></pre></div>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+<pre><code>#&gt; Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+#&gt;  
+#&gt; Scaled residual values: 1 1 1 1 0.7261688 1 1 1 1 1 1 1 0.9929127 1 1 1 0.7470071 0 0 0 ...
+
+#--- Negative Binomial GLM
+mod2 &lt;- glm.nb(abund ~ solo,  data=dados_finais)
+
+##--- Modelagem
+simulateResiduals(fittedModel = mod2, plot = TRUE)#resíduos OK</code></pre>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-5-3.png" width="672"></div>
+<pre><code>#&gt; Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+#&gt;  
+#&gt; Scaled residual values: 0.98 0.916 0.9761553 0.9102875 0.6904015 0.8732464 0.8223153 0.92 0.987653 1 0.876 0.828 0.7650707 0.94 0.8980019 0.972 0.672 0.3506113 0.2914758 0.2701042 ...
+
+##--- Inferencia
+parameters(mod2)
+#&gt; Parameter   | Log-Mean |   SE |        95% CI |     z |      p
+#&gt; --------------------------------------------------------------
+#&gt; (Intercept) |     3.66 | 0.36 | [ 2.92, 4.42] | 10.26 | &lt; .001
+#&gt; solo        |    -1.20 | 3.21 | [-7.86, 5.66] | -0.37 | 0.709
+standardize_parameters(mod2)#tamanho do efeito
+#&gt; # Standardization method: refit
+#&gt; 
+#&gt; Parameter   | Coefficient (std.) |        95% CI
+#&gt; ------------------------------------------------
+#&gt; (Intercept) |               3.53 | [ 3.34, 3.74]
+#&gt; solo        |              -0.04 | [-0.25, 0.18]
+#&gt; 
+#&gt; (Response is unstandardized)
+rsquared(mod2)
+#&gt;   Response                    family link     method
+#&gt; 1    abund Negative Binomial(0.6941)  log nagelkerke
+#&gt;      R.squared
+#&gt; 1 0.0008249756
+
+ggplot(dados_finais, aes(solo, abund))+
+  geom_point()+
+  geom_smooth(method = "glm.nb")</code></pre>
+<div class="inline-figure"><img src="cap_08_files/figure-html/unnamed-chunk-5-4.png" width="672"></div>
+<p>Resposta: existe um ligeiro efeito negativo da porcentagem de agricultura sobre a abundância desta espécie de morcego. Agora a pesquisadora está mais tranquila porque já sabe como serão os dados e possíveis resultados que terá.</p>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></div>
+<div class="next"><a href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="Neste capítulo"><h2>Nesta página</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-8---modelos-lineares-generalizados">Cap. 8 - Modelos Lineares Generalizados</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/paternogbc/exercicios_livro_aer/blob/master/cap_08.Rmd">Ver fonte <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/paternogbc/exercicios_livro_aer/edit/master/cap_08.Rmd">Edite esta página <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+        <p>Este livro foi compilado com o pacote <a class="text-light" href="https://bookdown.org">bookdown</a> </p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
