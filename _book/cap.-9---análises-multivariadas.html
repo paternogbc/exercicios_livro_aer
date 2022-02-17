@@ -47,6 +47,7 @@
 <li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
 <li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
 <li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-8---modelos-lineares-generalizados.html">Cap. 8 - Modelos Lineares Generalizados</a></li>
 <li><a class="active" href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></li>
 <li><a class="" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
@@ -64,7 +65,7 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-9---análises-multivariadas" class="section level1 unnumbered">
 <h1>Cap. 9 - Análises Multivariadas<a class="anchor" aria-label="anchor" href="#cap.-9---an%C3%A1lises-multivariadas"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pacotes necessários</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mvabund</span><span class="op">)</span>
@@ -73,28 +74,31 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spdep/">spdep</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sdray/adespatial">adespatial</a></span><span class="op">)</span></code></pre></div>
-<p><strong>9.1</strong></p>
-<p>Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?</p>
-<p>A. Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?
-B. Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?
-C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.</p>
+<p><strong>9.1</strong> Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?</p>
+<ol style="list-style-type: upper-alpha">
+<li>Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?</li>
+<li>Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?</li>
+<li>Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.</li>
+</ol>
 <p>Dados necessários:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mite</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mite.env</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mite.xy</span><span class="op">)</span></code></pre></div>
 <p>Solução:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz padronizada - Hellinger</span>
 <span class="va">species.hel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mite</span>, method <span class="op">=</span> <span class="st">"hellinger"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">species.hel</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> <span class="co"># verificar se algum local está sem nenhuma espécie</span>
-<span class="co">#&gt; [1] 0</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">species.hel</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> <span class="co"># verificar se algum espécie não está em nenhuma localidade</span>
+<span class="co"># verificar se algum local está sem nenhuma espécie</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">species.hel</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> 
 <span class="co">#&gt; [1] 0</span>
 
+<span class="co"># verificar se algum espécie não está em nenhuma localidade</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">species.hel</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> 
+<span class="co">#&gt; [1] 0</span>
 
 <span class="co"># RDA</span>
+<span class="co">#*******************************************************</span>
 
 <span class="co">## RDA com dados ambientais</span>
 <span class="va">rda.mite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/cca.html">rda</a></span><span class="op">(</span><span class="va">species.hel</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">mite.env</span><span class="op">)</span>
@@ -142,6 +146,7 @@ C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOV
 <span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 
 <span class="co"># dbRDA</span>
+<span class="co">#*******************************************************</span>
 <span class="va">dbrda.mite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/capscale.html">capscale</a></span><span class="op">(</span><span class="va">species.hel</span> <span class="op">~</span> <span class="va">.</span>, 
                        data <span class="op">=</span> <span class="va">mite.env</span>, dist<span class="op">=</span><span class="st">"bray"</span><span class="op">)</span>
 
@@ -189,7 +194,7 @@ C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOV
 <span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 
 <span class="co"># PERMANOVA</span>
-
+<span class="co">#*******************************************************</span>
 <span class="va">species.dis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">species.hel</span>, <span class="st">"bray"</span><span class="op">)</span>
 
 <span class="va">permanova.mite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/adonis.html">adonis</a></span><span class="op">(</span><span class="va">species.hel</span><span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">mite.env</span>, method <span class="op">=</span> <span class="st">"bray"</span><span class="op">)</span>
@@ -216,7 +221,7 @@ C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOV
 <span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 
 <span class="co"># RDAp</span>
-
+<span class="co">#*******************************************************</span>
 <span class="co"># Gerar vetores espaciais: MEM</span>
 
 <span class="va">mite_knn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/spdep/reference/knearneigh.html">knearneigh</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">mite.xy</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">2</span>, longlat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -295,10 +300,7 @@ C. Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOV
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  </span>
 <span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre></div>
-<div id="respostas" class="section level2" number="0.1">
-<h2>
-<span class="header-section-number">0.1</span> Respostas<a class="anchor" aria-label="anchor" href="#respostas"><i class="fas fa-link"></i></a>
-</h2>
+<p><strong>Respostas</strong></p>
 <p><strong>A) Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?</strong></p>
 <p>RDA simples -&gt; todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 35,07)
 dbRDA -&gt; todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 36,53)
@@ -309,33 +311,33 @@ RDAp -&gt; todas as variáveis afetaram a composição de espécies, mas a vari�
 A partição de variância indica que o valor espacial “puro” é mais importante do que o ambiental “puro”. Porém, a variação ambiental espacialmente estruturada tem maior poder de explicação.</p>
 <p>*C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.**</p>
 <p>As análises que não incluem o componente espacial (RDA, dbRDA e PERMANOVA) enfatizam a relevância das variáveis ambientais e não foram capazes de identificar que parte da explicação atribuída à variação ambiental é, de fato, explicada pela estrutura espacial nas variáveis ambientais e na composição de espécies</p>
-<p><strong>9.2</strong></p>
-<p>Efetue uma análise de agrupamento pela função <code>hclust</code>. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função.</p>
+<p><strong>9.2</strong> Efetue uma análise de agrupamento pela função <code>hclust</code>. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função.</p>
 <ol style="list-style-type: upper-alpha">
 <li>utilizando o método UPGMA e o índice de Bray-Curtis.</li>
 <li>Faça agora o dendrograma com outro índice de dissimilaridade e compare os resultados. São diferentes? No que eles influenciaríam a interpretação do resultado?</li>
 </ol>
 <p>Solução:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matriz</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">mite</span>, method<span class="op">=</span><span class="st">"bray"</span><span class="op">)</span><span class="co">##trans. numa matriz de dissimilaridade</span>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">##trans. numa matriz de dissimilaridade</span>
+<span class="va">matriz</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">mite</span>, method<span class="op">=</span><span class="st">"bray"</span><span class="op">)</span>
 
 <span class="va">matriz1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">matriz</span>, method<span class="op">=</span><span class="st">"complete"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span><span class="op">(</span><span class="va">matriz1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">outroindice</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">mite</span>, method<span class="op">=</span><span class="st">"jaccard"</span><span class="op">)</span><span class="co">##transforma a matriz com outro índice</span>
+<span class="co">##transforma a matriz com outro índice</span>
+<span class="va">outroindice</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html">vegdist</a></span><span class="op">(</span><span class="va">mite</span>, method<span class="op">=</span><span class="st">"jaccard"</span><span class="op">)</span>
 <span class="va">outro</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">outroindice</span>, method<span class="op">=</span><span class="st">"complete"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span><span class="op">(</span><span class="va">outro</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
-<p><strong>9.3</strong></p>
-<p>Na perspectiva de metacomunidades (Leibold et al., 2004), a dispersão dos organismos tem um papel proeminente para entender como as espécies estão distribuídas na natureza. Com o objetivo de testar se a dispersão influencia a composição de espécies de cladóceros e copépodos, e portanto a estrutura da metacomunidade, um pesquisador selecionou dois conjuntos de lagos: em um deles todos os lagos são isolados e no outro os lagos são conectados.</p>
+<p><strong>9.3</strong> Na perspectiva de metacomunidades (Leibold et al., 2004), a dispersão dos organismos tem um papel proeminente para entender como as espécies estão distribuídas na natureza. Com o objetivo de testar se a dispersão influencia a composição de espécies de cladóceros e copépodos, e portanto a estrutura da metacomunidade, um pesquisador selecionou dois conjuntos de lagos: em um deles todos os lagos são isolados e no outro os lagos são conectados.</p>
 <ol style="list-style-type: upper-alpha">
 <li><p>Importe o conjunto de dados lagos do pacote <code>ecodados</code> e responda a pergunta se o fato de os lagos estarem conectados ou não influencia a composição de espécies desses microcrustáceos. Utilize métodos baseados em modelos que você aprendeu ao longo do capítulo para modelar a abundância multivariada.</p></li>
 <li><p>Faça um plot mostrando a abundância relativa das espécies com maior abundância e veja se elas são diferentes entre os tipos lagos. Combine este resultado com o do item anterior para interpretar o resultado final.</p></li>
 </ol>
 <p>Solução:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#A) </span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">ecodados</span><span class="fu">::</span><span class="va">lagos</span><span class="op">)</span>
 <span class="co">#&gt;         sp1 sp2 sp3 sp4 sp5 sp6 sp7 sp8 sp9 sp10 sp11 sp12</span>
@@ -366,7 +368,7 @@ A partição de variância indica que o valor espacial “puro” é mais import
 <span class="va">modelo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/manyglm.html">manyglm</a></span><span class="op">(</span><span class="va">lagos_abund</span><span class="op">~</span><span class="va">conec</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/mvabund/man/mvabund-internal.html">plot</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Test statistics:</span>
@@ -386,11 +388,10 @@ A partição de variância indica que o valor espacial “puro” é mais import
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  PIPING TO 1st MVFACTOR</span></code></pre></div>
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
-<p><strong>9.4</strong></p>
-<p>Carregue o pacote <code>MASS</code> para utilizar os dados <code>crabs</code>. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo <em>Leptograpsus variegatus</em> coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
+<p><strong>9.4</strong> Carregue o pacote <code>MASS</code> para utilizar os dados <code>crabs</code>. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo <em>Leptograpsus variegatus</em> coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
 ao objeto e use a função <code>biplot</code> para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.</p>
 <p>Solução:</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crabs</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crabs</span><span class="op">)</span>
 <span class="co">#&gt;   sp sex index   FL  RW   CL   CW  BD</span>
@@ -406,16 +407,12 @@ ao objeto e use a função <code>biplot</code> para plotar o resultado do teste.
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 
 </div>
-</div>
   <div class="chapter-nav">
-<div class="prev"><a href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></div>
+<div class="prev"><a href="cap.-8---modelos-lineares-generalizados.html">Cap. 8 - Modelos Lineares Generalizados</a></div>
 <div class="next"><a href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="Neste capítulo"><h2>Nesta página</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cap.-9---an%C3%A1lises-multivariadas">Cap. 9 - Análises Multivariadas</a></li>
-<li><a class="nav-link" href="#respostas"><span class="header-section-number">0.1</span> Respostas</a></li>
-</ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#cap.-9---an%C3%A1lises-multivariadas">Cap. 9 - Análises Multivariadas</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -432,7 +429,7 @@ ao objeto e use a função <code>biplot</code> para plotar o resultado do teste.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-16.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

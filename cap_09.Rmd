@@ -97,7 +97,7 @@ rda.p.axis
 rda.p.var
 ```
 
-## Respostas
+**Respostas**
 
 **A) Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?**
 

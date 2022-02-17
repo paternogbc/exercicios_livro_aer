@@ -1,0 +1,130 @@
+# Cap. 8 - Modelos Lineares Generalizados  {-}
+
+```{r}
+# Pacotes necessários
+library(tidyverse)
+library(ordinal)
+library(naniar)
+library(generalhoslem)
+library(ecolottery)
+library(DHARMa)
+library(parameters)
+library(piecewiseSEM)
+library(vcd)
+library(effectsize)
+```
+
+**8.1** 
+Baixe [estes dados](https://www.stat.berkeley.edu/~statlabs/labs.html#video) que foram coletados numa pesquisa de opinião sobre uso de vídeo games por 91 estudantes de graduação no outono de 1994. Utilizando estes dados, constra um modelo: 1) Predizer a frequência com que uma pessoa joga vídeo game em função da idade; 2) Predizer a nota do estudante em função do tempo que jogou na semana antes da entrevista. Dica: esses são dados ordinais!
+
+Solução:
+
+```{r warning=FALSE, message=FALSE}
+#---Importando os dados
+
+videogame <- read.table("https://www.stat.berkeley.edu/~statlabs/data/video.data", h=TRUE, na.strings = "99")
+head(videogame)
+str(videogame)
+is.na(videogame$freq)
+
+#---Explorando os dados
+vis_miss(videogame)
+
+novo_vide_game <- remove_missing(videogame)
+
+ggplot(novo_vide_game, aes(age, freq))+
+       geom_point()
+
+novo_vide_game$freq<-factor(novo_vide_game$freq, levels = c( "4", "3", "2", "1"), ordered = TRUE)
+novo_vide_game$grade<-factor(novo_vide_game$grade, levels = c( "0", "1", "2", "3", "4"), ordered = TRUE)
+
+#---Modelagem
+modelo <- clm(freq~age, data=novo_vide_game)
+predprob <- data.frame(age = novo_vide_game$age)
+fv <- predict(modelo, newdata = predprob, type = "prob")$fit
+
+modelo2 <- clm(grade~time, data=novo_vide_game)
+predprob2 <- data.frame(time = novo_vide_game$time)
+fv2 <- predict(modelo2, newdata = predprob2, type = "prob")$fit
+
+#---Diagnose
+logitgof(novo_vide_game$freq, fv, g=4, ord = TRUE)
+lipsitz.test(modelo, g=4)
+
+scale_test(modelo)
+nominal_test(modelo)
+
+logitgof(novo_vide_game$grade, fv2, g=5, ord = TRUE)
+lipsitz.test(modelo2, g=5)
+
+scale_test(modelo2)
+nominal_test(modelo2)
+
+#---Inferencia
+summary(modelo)
+summary(modelo2)
+```
+
+**8.2**
+Uma pesquisadora interessada em entender o efeito de diferentes usos de solo sobre a abundância de morcegos em paisagens agroecológicas desenvolveu uma simulação para gerar dados parecidos com o que irá coletar em breve no campo. Ela utilizou uma abordagem que simula a abundância de uma espécie sob deriva ecológica segundo a Teoria Neutra da Biodiversidade. A simulação gerou os seguintes dados:
+
+```{r}
+set.seed(42)
+J <- 5000 # número de indivíduos na comunidade local
+theta <- 50 #número fundamental da biodiversidade
+m <- 0.05 #taxa de dispersão
+comm1a <- coalesc(J, m, theta) #simulação
+abund1a <- abund(comm1a) #extração de dados de abundância local
+
+head(abund1a$com) #dados da comunidade local
+
+#histograma da abundância
+ggplot(abund1a$com, aes(ab))+
+  geom_density(aes(col="red", fill="red"))+
+  theme(legend.position = "non")
+```
+
+Além disso, a pesquisadora também simulou dados que representam a porcentagem do solo destinado à agricultura:
+
+```{r}
+porc_solo <- rbeta(length(abund1a$com$ab), 10, 90) #simulação uso do solo para agricultura
+hist(porc_solo)
+
+dados_finais <- data.frame(abund=abund1a$com$ab, solo=porc_solo)
+head(dados_finais)
+
+ggplot(dados_finais, aes(solo, abund))+
+  geom_point()
+```
+
+Agora com esses dados ela pode ter uma idéia do que esperar quando for pra campo. Ajude a pesquisadora a construir um modelo linear generalizado que seja adequado para modelar a abundância desta espécie de morcego em função da porcentagem de agricultura. Lembre-se de que ela vai precisar diagnosticar o modelo antes de utilizá-lo para fazer uma inferência. Por fim, interprete os resultados e sugira uma possível interpretação para a pesquisadora.
+
+Solução:
+
+```{r}
+#--- Poisson GLM
+Ord_plot(dados_finais$abund)
+
+##--- Modelagen
+mod <- glm(abund ~ solo, family = poisson, data=dados_finais)
+
+##--- Diagnose
+simulateResiduals(fittedModel = mod, plot = TRUE)#vários problemas
+
+#--- Negative Binomial GLM
+mod2 <- glm.nb(abund ~ solo,  data=dados_finais)
+
+##--- Modelagem
+simulateResiduals(fittedModel = mod2, plot = TRUE)#resíduos OK
+
+##--- Inferencia
+parameters(mod2)
+standardize_parameters(mod2)#tamanho do efeito
+rsquared(mod2)
+
+ggplot(dados_finais, aes(solo, abund))+
+  geom_point()+
+  geom_smooth(method = "glm.nb")
+```
+
+Resposta: existe um ligeiro efeito negativo da porcentagem de agricultura sobre a abundância desta espécie de morcego. Agora a pesquisadora está mais tranquila porque já sabe como serão os dados e possíveis resultados que terá.

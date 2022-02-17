@@ -47,6 +47,7 @@
 <li><a class="" href="cap.-5---tidyverse.html">Cap. 5 - Tidyverse</a></li>
 <li><a class="" href="cap.-6---visualiza%C3%A7%C3%A3o-de-dados.html">Cap. 6 - Visualização de dados</a></li>
 <li><a class="" href="cap.-7---modelos-lineares.html">Cap. 7 - Modelos lineares</a></li>
+<li><a class="" href="cap.-8---modelos-lineares-generalizados.html">Cap. 8 - Modelos Lineares Generalizados</a></li>
 <li><a class="" href="cap.-9---an%C3%A1lises-multivariadas.html">Cap. 9 - Análises Multivariadas</a></li>
 <li><a class="active" href="cap.-10---rarefa%C3%A7%C3%A3o.html">Cap. 10 - Rarefação</a></li>
 <li><a class="" href="cap.-11---estimadores-de-riqueza.html">Cap. 11 - Estimadores de riqueza</a></li>
@@ -64,7 +65,7 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap.-10---rarefação" class="section level1 unnumbered">
 <h1>Cap. 10 - Rarefação<a class="anchor" aria-label="anchor" href="#cap.-10---rarefa%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pacotes necessários</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://chao.stat.nthu.edu.tw/wordpress/software_download/">iNEXT</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
@@ -72,7 +73,7 @@
 <p><strong>10.1</strong>
 Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, área de pastagem e cana de açúcar) apresentam diferentes riquezas de espécies? Qual a sua interpretação? Faça um gráfico com os resultados.</p>
 <p>Solução:¨</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
 <span class="va">exercicio_1</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap10_exercicio1</span>
 
@@ -97,7 +98,7 @@ Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, 
 <p><strong>10.2</strong></p>
 <p>O estudo é o mesmo do exercício anterior. Contudo, ao invés da rarefação baseada na abundância, faça rarefações baseadas no número de amostras. Qual a sua interpretação considerando os resultados do exercício 1? Faça um gráfico com os resultados.</p>
 <p>Solução:¨</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
 <span class="va">exercicio_2</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap10_exercicio2</span>
 
@@ -128,7 +129,7 @@ Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, 
 <p><strong>10.3</strong>
 Use os dados dos exercícios anteriores e calcule a rarefação baseada na cobertura de amostragem (coverage-based). Qual a sua interpretação considerando os resultados anteriores? Faça um gráfico com os resultados.</p>
 <p>Solução:¨</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Rarefação considerando a cobertura da abundância </span>
 <span class="va">resultados_exercicio_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/iNEXT/man/iNEXT.html">iNEXT</a></span><span class="op">(</span><span class="va">exercicio_1</span>, q <span class="op">=</span> <span class="fl">0</span>, 
                              datatype <span class="op">=</span> <span class="st">"abundance"</span>, endpoint <span class="op">=</span> <span class="fl">300</span><span class="op">)</span>
@@ -142,7 +143,7 @@ Use os dados dos exercícios anteriores e calcule a rarefação baseada na cober
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Representatividade da abundância"</span>, y <span class="op">=</span> <span class="st">"Riqueza de espécies"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_10_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 
 <span class="co"># Rarefação considerando a cobertura das amostras </span>
@@ -182,7 +183,7 @@ Use os dados dos exercícios anteriores e calcule a rarefação baseada na cober
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-16.</p>
+    <p>"<strong>Análises Ecológicas no R: Exercícios e Soluções</strong>" foi escrito por Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine. ültima atualização: 2022-02-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

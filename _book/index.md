@@ -1,7 +1,7 @@
 --- 
 title: "Análises Ecológicas no R: Exercícios e Soluções"
 author: "Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine"
-date: "2022-02-16"
+date: "2022-02-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
