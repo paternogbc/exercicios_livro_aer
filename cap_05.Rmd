@@ -2,9 +2,10 @@
 
 **5.1** 
 Reescreva as operações abaixo utilizando pipes `%>%`.
--   `log10(cumsum(1:100))`
--   `sum(sqrt(abs(rnorm(100))))`
--   `sum(sort(sample(1:10, 10000, rep = TRUE)))`
+
+- `log10(cumsum(1:100))`
+- `sum(sqrt(abs(rnorm(100))))`
+- `sum(sort(sample(1:10, 10000, rep = TRUE)))`
 
  Solução:
 ```{r}
