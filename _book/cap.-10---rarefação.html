@@ -54,7 +54,7 @@
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
 <li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
-<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais.html">Cap. 15 - Dados geoespaciais</a></li>
 </ul>
 
         <div class="book-extra">
@@ -72,7 +72,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
 <p><strong>10.1</strong>
 Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, área de pastagem e cana de açúcar) apresentam diferentes riquezas de espécies? Qual a sua interpretação? Faça um gráfico com os resultados.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
 <span class="va">exercicio_1</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap10_exercicio1</span>
@@ -97,7 +97,7 @@ Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, 
 <div class="inline-figure"><img src="cap_10_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p><strong>10.2</strong></p>
 <p>O estudo é o mesmo do exercício anterior. Contudo, ao invés da rarefação baseada na abundância, faça rarefações baseadas no número de amostras. Qual a sua interpretação considerando os resultados do exercício 1? Faça um gráfico com os resultados.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Carregar a planilha com os dados</span>
 <span class="va">exercicio_2</span> <span class="op">&lt;-</span> <span class="fu">ecodados</span><span class="fu">::</span><span class="va">Cap10_exercicio2</span>
@@ -128,7 +128,7 @@ Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, 
 <div class="inline-figure"><img src="cap_10_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p><strong>10.3</strong>
 Use os dados dos exercícios anteriores e calcule a rarefação baseada na cobertura de amostragem (coverage-based). Qual a sua interpretação considerando os resultados anteriores? Faça um gráfico com os resultados.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Rarefação considerando a cobertura da abundância </span>
 <span class="va">resultados_exercicio_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/iNEXT/man/iNEXT.html">iNEXT</a></span><span class="op">(</span><span class="va">exercicio_1</span>, q <span class="op">=</span> <span class="fl">0</span>, 

@@ -3,7 +3,6 @@
 **14.1**
 Utilize os dados “aviurba” do pacote ade4 para testar o efeito de variáveis ambientais na dispersão (FDis) e regularidade funcional (FEve). Utilize modelos lineares (lm) para testar quais variáveis ambientais são as mais importantes para a dispersão e regularidade funcional. Além disso, faça um boxplot comparando os valores de FDis e FEve entre as categorias das variáveis ambientais mais relevantes. 
 
-
 Solução:
 
 ```r
@@ -119,7 +118,6 @@ library(ggplot2)
 library(tidyverse)
 library(ecodados)
 
-
 data(mafragh)
 trait_ma <- mafragh$traits$tabQuantitative  # atributos funcionais das espécies
 amb_ma <- mafragh$env # matriz de variáveis ambientais
@@ -197,7 +195,6 @@ library(ggplot2)
 library(tidyverse)
 library(ecodados)
 
-
 data(mafragh)
 trait_ma <- mafragh$traits$tabQuantitative  # atributos funcionais das espécies
 amb_ma <- mafragh$env # matriz de variáveis ambientais
@@ -231,4 +228,3 @@ plot(betadisper_cwm)
 ```
 
 <img src="cap_14_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-

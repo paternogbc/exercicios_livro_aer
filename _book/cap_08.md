@@ -1,4 +1,4 @@
-# Cap. 8 - Modelos Lineares Generalizados  {-}
+# Cap. 8 - Modelos Lineares Generalizados {-}
 
 
 ```r

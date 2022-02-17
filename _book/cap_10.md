@@ -11,7 +11,7 @@ library(ggplot2)
 **10.1**
 Avalie se diferentes tipos de uso da terra (fragmento florestal, borda de mata, área de pastagem e cana de açúcar) apresentam diferentes riquezas de espécies? Qual a sua interpretação? Faça um gráfico com os resultados.
 
-Solução:¨
+Solução:
 
 
 ```r
@@ -43,7 +43,7 @@ ggiNEXT(resultados_exercicio_1, type = 1) +
 
 O estudo é o mesmo do exercício anterior. Contudo, ao invés da rarefação baseada na abundância, faça rarefações baseadas no número de amostras. Qual a sua interpretação considerando os resultados do exercício 1? Faça um gráfico com os resultados.
 
-Solução:¨
+Solução:
 
 
 ```r
@@ -80,7 +80,7 @@ ggiNEXT(resultados_exercicio_2, type = 1, color.var = "site") +
 **10.3**
 Use os dados dos exercícios anteriores e calcule a rarefação baseada na cobertura de amostragem (coverage-based). Qual a sua interpretação considerando os resultados anteriores? Faça um gráfico com os resultados. 
 
-Solução:¨
+Solução:
 
 ```r
 # Rarefação considerando a cobertura da abundância 
@@ -117,4 +117,3 @@ ggiNEXT(resultados_exercicio_2, type = 3, color.var = "site") +
 ```
 
 <img src="cap_10_files/figure-html/unnamed-chunk-4-2.png" width="672" />
-

@@ -12,7 +12,7 @@ library(spdep)
 library(adespatial)
 ```
 
-**9.1** Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?
+**9.1** Utilize os dados `mite` do pacote `vegan` para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?
 
 A) Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises? 
 B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?
@@ -255,16 +255,16 @@ dbRDA -> todas as variáveis afetaram a composição de espécies, mas a variáv
 PERMANOVA -> todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 35,51)
 RDAp -> todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 35,51). Porém, é importante ressaltar que o efeito é bem menor quando incluimos os vetores espaciais.
 
-**B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?*
+**B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?**
 
 Os vetores espaciais possuem efeito sobre a composição de ácaros, especialmente os MEMs 4, 2, 9, 1, 3, 6, 7, 13 e 31.
 A partição de variância indica que o valor espacial "puro" é mais importante do que o ambiental "puro". Porém, a variação ambiental espacialmente estruturada tem maior poder de explicação.
 
-*C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.**
+**C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.**
 
 As análises que não incluem o componente espacial (RDA, dbRDA e PERMANOVA) enfatizam a relevância das variáveis ambientais e não foram capazes de identificar que parte da explicação atribuída à variação ambiental é, de fato, explicada pela estrutura espacial nas variáveis ambientais e na composição de espécies
 
-**9.2** Efetue uma análise de agrupamento pela função `hclust`. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função. 
+**9.2** Efetue uma análise de agrupamento pela função `hclust()`. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função. 
 
 A) utilizando o método UPGMA e o índice de Bray-Curtis. 
 B) Faça agora o dendrograma com outro índice de dissimilaridade e compare os resultados. São diferentes? No que eles influenciaríam a interpretação do resultado?
@@ -359,7 +359,7 @@ plot(lagos_abund, conec)
 <img src="cap_09_files/figure-html/unnamed-chunk-5-2.png" width="672" />
 
 **9.4** Carregue o pacote `MASS` para utilizar os dados `crabs`. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo *Leptograpsus variegatus* coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
-ao objeto e use a função `biplot` para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.
+ao objeto e use a função `biplot()` para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.
 
 Solução:
 

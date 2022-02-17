@@ -54,7 +54,7 @@
 <li><a class="active" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
 <li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
-<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais.html">Cap. 15 - Dados geoespaciais</a></li>
 </ul>
 
         <div class="book-extra">
@@ -110,7 +110,7 @@ Carregue os dados - anuros_composicao - que está no pacote ecodados. Este conju
 <span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">resultados</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="fu"><a href="https://ggobi.github.io/ggally/reference/wrap.html">wrap</a></span><span class="op">(</span><span class="st">"cor"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">tema_livro</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
-<p><strong>11.2</strong>
+<p><strong>12.2</strong>
 Usando os resultados anteriores, selecione as duas comunidades com os maiores e menores valores de Shannon-Wiener. Em seguida, faça um Diagrama de Whittaker. Por fim, interprete as curvas considerando as curvas teóricas (i.e., geométrica, broken-stick, etc.) descritas nos livros de ecologia.</p>
 <p>Solução:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
@@ -140,7 +140,7 @@ Usando os resultados anteriores, selecione as duas comunidades com os maiores e 
        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkorange"</span>, <span class="st">"red"</span>, <span class="st">"cyan4"</span>, <span class="st">"darkblue"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">3</span>, 
        cex <span class="op">=</span> <span class="fl">1.2</span>, box.lty <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cap_12_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
-<p><strong>11.3</strong>
+<p><strong>12.3</strong>
 Usando os dados - anuros_composicao - calcule a partição da diversidade beta considerando os dados de abundância e presença e ausência. a) Faça um gráfico boxplot com os resultados. Discuta se os resultados usando abundância ou presença e ausência são congruentes ou discrepantes. b) Calcule a distância geográfica (use a planilha anuros_ambientais) entre as localidaes (use a Distância euclidiana). Em seguida, faça uma análise de regressão para verificar se as localidades que estão próximas apresentam maior similaridade na composição de espécies (use componente turnover - Bsim) do que as comunidades que estão distantes (e.g., Decaimento da similaridade).</p>
 <p>Solução:</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">

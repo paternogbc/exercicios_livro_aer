@@ -54,7 +54,7 @@
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
 <li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
-<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais.html">Cap. 15 - Dados geoespaciais</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,7 +67,7 @@
 </h1>
 <p><strong>6.1</strong>
 Utilizando o banco de dados <code>penguins</code> compare o comprimento do bico entre as diferentes espécies de penguins. Utilize um gráfico de caixa (<a href="https://analises-ecologicas.netlify.app/cap6.html#gr%C3%A1fico-de-caixa-boxplot">boxplot</a>) para ilustrar a variação intraespecífica e possíveis outliers nos dados. Para melhorar o seu gráfico, lembre-se de nomear os dois eixos corretamente, definir um tema e posicionar a legenda.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Carregando pacotes necesários</span>
@@ -95,7 +95,7 @@ Utilizando o banco de dados <code>penguins</code> compare o comprimento do bico 
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
 <p><strong>6.2</strong>
 Utilizando o banco de dados <code>penguins</code> faça um <a href="https://analises-ecologicas.netlify.app/cap6.html#histograma-histogram">histograma</a> com a distribuição da massa corporal para cada uma das espécies. Utilize uma cor de preenchimento para cada espécie.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">massa_corporal</span>, fill <span class="op">=</span> <span class="va">especies</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.5</span>,  position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -106,7 +106,7 @@ Utilizando o banco de dados <code>penguins</code> faça um <a href="https://anal
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p><strong>6.3</strong>
 Utilizando o banco de dados <code>penguins</code>, faça três gráficos com o mesmo eixo Y e eixo X. Coloque o comprimento das nadadeiras no eixo Y e as espécies de pinguins no eixo X. No primeiro gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> para plotar os dados brutos. No segundo gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code> para mostrar a distribuição de densidade dos dados. No terceiro gráfico, utilize o <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> para destacar a mediana e os quartis.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Gráfico de jitter com dados brutos</span>
 <span class="va">pjitter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">comprimento_nadadeira</span>, x <span class="op">=</span> <span class="va">especies</span> <span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -129,7 +129,7 @@ Utilizando o banco de dados <code>penguins</code>, faça três gráficos com o m
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-3-3.png" width="672"></div>
 <p><strong>6.4</strong>
 Se você conseguiu resolver o exercício 6.3, agora dê um passo a mais e compare os três gráficos lado a lado utilizando a função <code><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange()</a></code>. Lembre-se de colocar um título informativo em cada um dos gráficos antes de juntá-los em uma prancha única. Ao comparar os 3 tipos de gráficos, qual você considera mais informativo? Experimente combinar mais de um “geom” (camadas) e produzir gráficos ainda mais interessantes.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># colocando um título em cada gráfico</span>
 <span class="va">pjitter</span> <span class="op">&lt;-</span> <span class="va">pjitter</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot com jitter"</span><span class="op">)</span>
@@ -155,7 +155,7 @@ Se você conseguiu resolver o exercício 6.3, agora dê um passo a mais e compar
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p><strong>6.5</strong>
 Utilize o banco de dados <code><a href="https://rdrr.io/pkg/ecodados/man/anova_dois_fatores.html">ecodados::anova_dois_fatores</a></code> para construir um <a href="https://analises-ecologicas.netlify.app/cap6.html#gr%C3%A1fico-de-barras-bar-plot">gráfico de barras</a> com a média e o erro padrão do Tempo (Tempo para eliminar a droga do corpo) no eixo Y em função da variável Pessoas (XX, ou XY) e Idade (jovem ou idoso). Antes de fazer o gráfico leia com atenção a descrição do mesmo através do comando <code><a href="https://rdrr.io/pkg/ecodados/man/anova_dois_fatores.html">?ecodados::anova_dois_fatores</a></code>. Uma dica, utilize <code>fill</code> dentro do <code>aes</code> para representar um dos fatores (ex. Pessoas). O outro fator você pode representar no eixo X. Veja se consegue, se não conseguir pode olhar a cola com a solução para aprender como é feito. Outra dica, pesquise sobre a função <code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary()</a></code> ela irá te ajudar a calcular a média e o erro padrão dentro do comando que gera o gráfico.</p>
-<p>Solução:¨</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># entenda o banco de dados primeiro</span>
 <span class="op">?</span><span class="fu">ecodados</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ecodados/man/anova_dois_fatores.html">anova_dois_fatores</a></span></code></pre></div>
@@ -202,6 +202,7 @@ Utilize o banco de dados <code><a href="https://rdrr.io/pkg/ecodados/man/anova_d
 <div class="inline-figure"><img src="cap_06_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
 <p><strong>6.6</strong>
 Utilize o banco de dados <code>penguins</code> para criar um <a href="https://analises-ecologicas.netlify.app/cap6.html#gr%C3%A1fico-de-dispers%C3%A3o-scatter-plot">gráfico de dispersão</a> entre o tamanho da nadadeira (eixo Y) e a massa corporal (eixo X). Utilize o argumento <code>fill</code> para ilustrar com cores as diferenças entre os sexos e utilize a função <code>facte_grid()</code> para criar um gráfico separado para cada espécie de pinguim. Se você não conhece essa função, dê uma olhada no help <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">?facet_grid</a></code>. Você também pode utilizar a função <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> para excluir os dados faltantes da coluna <code>sexo</code>.</p>
+<p>Solução:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># primeiro vamos traduizir a coluna sexo para o português</span>
 <span class="va">penguins</span><span class="op">$</span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">sexo</span>, masculino <span class="op">=</span> <span class="st">"male"</span>, feminino <span class="op">=</span> <span class="st">"female"</span><span class="op">)</span>

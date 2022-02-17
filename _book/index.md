@@ -8,7 +8,7 @@ bibliography: [book.bib, packages.bib]
 url: https://exercicios-livro-aer.netlify.app/
 cover-image: img/capa.jpeg
 description: |
-  Aqui você encontra os exercícios e soluções do livo Análises Ecológicas no R.
+  Aqui você encontra os exercícios e soluções do livro Análises Ecológicas no R.
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
@@ -19,21 +19,4 @@ csl: chicago-fullnote-bibliography.csl
 
 Aqui você encontra os **exercícios e soluções** do livo [Análises Ecológicas no R](https://analises-ecologicas.netlify.app/).
 
-[![analises ecologicas](img/capa.jpeg){.cover width="150"}](https://analises-ecologicas.netlify.app/) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[![analises ecologicas](img/capa.jpeg){.cover width="150"}](https://analises-ecologicas.netlify.app/)

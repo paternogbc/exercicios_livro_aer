@@ -54,7 +54,7 @@ ggpairs(resultados, upper = list(continuous = wrap("cor", size = 4))) +
 
 <img src="cap_12_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
-**11.2**
+**12.2**
 Usando os resultados anteriores, selecione as duas comunidades com os maiores e menores valores de Shannon-Wiener. Em seguida, faça um Diagrama de Whittaker. Por fim, interprete as curvas considerando as curvas teóricas (i.e., geométrica, broken-stick, etc.) descritas nos livros de ecologia.
 
 Solução:
@@ -90,7 +90,7 @@ legend(20, 8, legend = c("Comunidade 6", "Comunidade 23",
 
 <img src="cap_12_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-**11.3**
+**12.3**
 Usando os dados - anuros_composicao - calcule a partição da diversidade beta considerando os dados de abundância e presença e ausência. a) Faça um gráfico boxplot com os resultados. Discuta se os resultados usando abundância ou presença e ausência são congruentes ou discrepantes. b) Calcule a distância geográfica (use a planilha anuros_ambientais) entre as localidaes (use a Distância euclidiana). Em seguida, faça uma análise de regressão para verificar se as localidades que estão próximas apresentam maior similaridade na composição de espécies (use componente turnover - Bsim) do que as comunidades que estão distantes (e.g., Decaimento da similaridade).
 
 Solução:

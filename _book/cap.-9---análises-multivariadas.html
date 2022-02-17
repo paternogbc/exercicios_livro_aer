@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Cap. 9 - Análises Multivariadas | Análises Ecológicas no R: Exercícios e Soluções</title>
 <meta name="author" content="Fernando Rodrigues da Silva, Thiago Gonçalves-Souza, Gustavo Brant Paterno, Diogo Borges Provete, Maurício Humberto Vancine">
-<meta name="description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados “mite” do pacote vegan para testar...">
+<meta name="description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados mite do pacote vegan para testar o...">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
 <meta property="og:title" content="Cap. 9 - Análises Multivariadas | Análises Ecológicas no R: Exercícios e Soluções">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://exercicios-livro-aer.netlify.app/cap.-9---análises-multivariadas.html">
 <meta property="og:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
-<meta property="og:description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados “mite” do pacote vegan para testar...">
+<meta property="og:description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados mite do pacote vegan para testar o...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cap. 9 - Análises Multivariadas | Análises Ecológicas no R: Exercícios e Soluções">
-<meta name="twitter:description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados “mite” do pacote vegan para testar...">
+<meta name="twitter:description" content="# Pacotes necessários library(vegan) library(mvabund) library(MASS) library(FactoMineR) library(ecodados) library(spdep) library(adespatial) 9.1 Utilize os dados mite do pacote vegan para testar o...">
 <meta name="twitter:image" content="https://exercicios-livro-aer.netlify.app/img/capa.jpeg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 <li><a class="" href="cap.-12---diversidade-tax%C3%B4nomica.html">Cap. 12 - Diversidade Taxônomica</a></li>
 <li><a class="" href="cap.-13---diversidade-filogen%C3%A9tica.html">Cap. 13 - Diversidade Filogenética</a></li>
 <li><a class="" href="cap.-14---diversidade-funcional.html">Cap. 14 - Diversidade Funcional</a></li>
-<li><a class="" href="cap.-15---dados-geoespaciais-no-r.html">Cap. 15 - Dados geoespaciais no R</a></li>
+<li><a class="" href="cap.-15---dados-geoespaciais.html">Cap. 15 - Dados geoespaciais</a></li>
 </ul>
 
         <div class="book-extra">
@@ -74,7 +74,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ecodados</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spdep/">spdep</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sdray/adespatial">adespatial</a></span><span class="op">)</span></code></pre></div>
-<p><strong>9.1</strong> Utilize os dados “mite” do pacote vegan para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?</p>
+<p><strong>9.1</strong> Utilize os dados <code>mite</code> do pacote <code>vegan</code> para testar o efeito de variáveis ambientais sobre a composição de espécies de ácaros utilizando as seguintes análises: RDA, RDAp (combinada com MEM), dbRDA e PERMANOVA. Após realizar as cinco análises, responda às seguintes perguntas?</p>
 <ol style="list-style-type: upper-alpha">
 <li>Quais são as variáveis ambientais (mite.env) mais importantes para a composição de ácaros em cada uma das análises?</li>
 <li>Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?</li>
@@ -306,12 +306,12 @@
 dbRDA -&gt; todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 36,53)
 PERMANOVA -&gt; todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 35,51)
 RDAp -&gt; todas as variáveis afetaram a composição de espécies, mas a variável WatrCont foi a mais importante (F = 35,51). Porém, é importante ressaltar que o efeito é bem menor quando incluimos os vetores espaciais.</p>
-<p>**B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?*</p>
+<p><strong>B) Os vetores espaciais obtidos com a análise MEM explicam a variação na composição de espécies? Eles são mais ou menos importantes do que as variáveis ambientais?</strong></p>
 <p>Os vetores espaciais possuem efeito sobre a composição de ácaros, especialmente os MEMs 4, 2, 9, 1, 3, 6, 7, 13 e 31.
 A partição de variância indica que o valor espacial “puro” é mais importante do que o ambiental “puro”. Porém, a variação ambiental espacialmente estruturada tem maior poder de explicação.</p>
-<p>*C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.**</p>
+<p><strong>C) Discuta as diferenças de interpretação entre a RDA, RDAp, dbRDA e PERMANOVA.</strong></p>
 <p>As análises que não incluem o componente espacial (RDA, dbRDA e PERMANOVA) enfatizam a relevância das variáveis ambientais e não foram capazes de identificar que parte da explicação atribuída à variação ambiental é, de fato, explicada pela estrutura espacial nas variáveis ambientais e na composição de espécies</p>
-<p><strong>9.2</strong> Efetue uma análise de agrupamento pela função <code>hclust</code>. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função.</p>
+<p><strong>9.2</strong> Efetue uma análise de agrupamento pela função <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>. Lembre-se de dar nome ao objeto para poder plotar o dendrograma depois. Utilize a ajuda para encontrar como entrar com os argumentos da função.</p>
 <ol style="list-style-type: upper-alpha">
 <li>utilizando o método UPGMA e o índice de Bray-Curtis.</li>
 <li>Faça agora o dendrograma com outro índice de dissimilaridade e compare os resultados. São diferentes? No que eles influenciaríam a interpretação do resultado?</li>
@@ -389,7 +389,7 @@ A partição de variância indica que o valor espacial “puro” é mais import
 <span class="co">#&gt;  PIPING TO 1st MVFACTOR</span></code></pre></div>
 <div class="inline-figure"><img src="cap_09_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
 <p><strong>9.4</strong> Carregue o pacote <code>MASS</code> para utilizar os dados <code>crabs</code>. Este conjunto traz medidas morfológicas de dois morfo-tipos da espécie de carangueijo <em>Leptograpsus variegatus</em> coletada em Fremantle, Austrália. Calcule uma PCA e veja se existe uma semelhança morfológica entre os dois morfo-tipos. Lembre-se de dar nome
-ao objeto e use a função <code>biplot</code> para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.</p>
+ao objeto e use a função <code><a href="https://rdrr.io/r/stats/biplot.html">biplot()</a></code> para plotar o resultado do teste. Dica: a projeção de um objeto perpendicular à seta do descritor fornece a posição aproximada do objeto ao longo desse descritor. A distância dos objetos no espaço cartesiano reflete a distância euclidiana entre eles.</p>
 <p>Solução:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crabs</span><span class="op">)</span>
