@@ -4,28 +4,13 @@
 ```r
 # Pacotes necessários
 library(devtools)
-#> Loading required package: usethis
 library(ecodados)
 library (vegan)
-#> Loading required package: permute
-#> 
-#> Attaching package: 'permute'
-#> The following object is masked from 'package:devtools':
-#> 
-#>     check
-#> Loading required package: lattice
-#> This is vegan 2.5-7
 library(ggplot2)
 library(BiodiversityR)
-#> Loading required package: tcltk
-#> BiodiversityR 2.14-1: Use command BiodiversityRGUI() to launch the Graphical User Interface; 
-#> to see changes use BiodiversityRGUI(changeLog=TRUE, backward.compatibility.messages=TRUE)
 library(hillR)
 library(betapart)
 library(GGally)
-#> Registered S3 method overwritten by 'GGally':
-#>   method from   
-#>   +.gg   ggplot2
 ```
 
 **12.1**

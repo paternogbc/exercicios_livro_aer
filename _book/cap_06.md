@@ -47,10 +47,6 @@ ggplot(penguins, aes(x = massa_corporal, fill = especies)) +
   labs(x = "Massa corporal (g)",
        y = "Frequência",
        fill = "Espécie")
-#> `stat_bin()` using `bins = 30`. Pick better value with
-#> `binwidth`.
-#> Warning: Removed 2 rows containing non-finite values
-#> (stat_bin).
 ```
 
 <img src="cap_06_files/figure-html/unnamed-chunk-2-1.png" width="672" />
@@ -164,7 +160,6 @@ anova_media <- anova_dois_fatores %>%
     dplyr::group_by(Idade, Pessoas ) %>% 
     dplyr::summarise(media = mean(Tempo, na.rm = TRUE),
                      desvio = sd(Tempo, na.rm = TRUE))
-#> `summarise()` has grouped output by 'Idade'. You can override using the `.groups` argument.
 #Veja como ficou 
 head(anova_media)
 #> # A tibble: 4 × 4

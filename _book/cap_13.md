@@ -4,39 +4,14 @@
 ```r
 # Pacotes necessários
 library(devtools)
-#> Loading required package: usethis
 library(ecodados)
 library(V.PhyloMaker)
-#> Loading required package: ape
 library(vegan)
-#> Loading required package: permute
-#> 
-#> Attaching package: 'permute'
-#> The following object is masked from 'package:devtools':
-#> 
-#>     check
-#> Loading required package: lattice
-#> This is vegan 2.5-7
 library(ggplot2)
 library(GGally)
-#> Registered S3 method overwritten by 'GGally':
-#>   method from   
-#>   +.gg   ggplot2
 library(ggpubr)
-#> 
-#> Attaching package: 'ggpubr'
-#> The following object is masked from 'package:ape':
-#> 
-#>     rotate
 library(picante)
-#> Loading required package: nlme
 library(phytools)
-#> Loading required package: maps
-#> 
-#> Attaching package: 'phytools'
-#> The following object is masked from 'package:vegan':
-#> 
-#>     scores
 library(ape)
 library(geiger)
 library(phyloregion)
@@ -44,7 +19,6 @@ library(pez)
 library(reshape2)
 library(betapart)
 library(bbmle)
-#> Loading required package: stats4
 library(vegan)
 ```
 

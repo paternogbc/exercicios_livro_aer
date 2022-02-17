@@ -1,4 +1,4 @@
-# Cap. 15 - Dados geoespaciais no R {-}
+# Cap. 15 - Dados geoespaciais {-}
 
 **15.1**
 Importe o limite dos estados brasileiros no formato **sf** com o nome **br**. Para isso, use a função **ne_states** do pacote **rnaturalearth**. Crie um mapa simples cinza utilizando a função **plot()**, selecionando a coluna **geometry** com o operador **$** e com os argumentos **axes** e **graticule** verdadeiros.

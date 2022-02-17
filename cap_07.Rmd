@@ -351,4 +351,3 @@ plot(cor_linear_variog, main = "Variograma como Modelo de Covariância Linear")
 summary(cor_linear_model)$tTable 
 summary(no_spat_gls)$tTable
 ```
-

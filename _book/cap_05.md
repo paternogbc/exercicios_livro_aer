@@ -10,14 +10,6 @@ Reescreva as operações abaixo utilizando pipes `%>%`.
 
 ```r
 library(tidyverse)
-#> ── Attaching packages ─────────────────── tidyverse 1.3.1 ──
-#> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-#> ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-#> ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-#> ✓ readr   2.1.1     ✓ forcats 0.5.1
-#> ── Conflicts ────────────────────── tidyverse_conflicts() ──
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
 
 1:100 %>% 
     cumsum() %>% 
@@ -47,12 +39,12 @@ rnorm(100) %>%
     abs() %>% 
     sqrt() %>% 
     sum()
-#> [1] 78.05671
+#> [1] 82.55207
 
 sample(1:10, 10000, rep = TRUE) %>% 
     sort() %>% 
     sum()
-#> [1] 54887
+#> [1] 55176
 ```
 
 **5.2** 
@@ -68,16 +60,6 @@ download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/download
 unzip("ecy2785-sup-0001-DataS1.zip")
 
 dp_lm <- readr::read_csv("ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv")
-#> Warning: One or more parsing issues, see `problems()` for
-#> details
-#> Rows: 4680 Columns: 40
-#> ── Column specification ────────────────────────────────────
-#> Delimiter: ","
-#> chr (27): ID, Country, State, Municipality, Study_locati...
-#> dbl (11): Reference_paper_number, Publication_year, Year...
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 **5.3**
@@ -249,7 +231,7 @@ intervalo_covid <- lubridate::interval(covid_inicio_br, lubridate::today())
 intervalo_vacina <- lubridate::interval(covid_inicio_br, vacina)
 
 lubridate::as.period(intervalo_covid)
-#> [1] "1y 11m 15d 0H 0M 0S"
+#> [1] "1y 11m 18d 0H 0M 0S"
 lubridate::as.period(intervalo_vacina)
 #> [1] "1y 4m 24d 0H 0M 0S"
 ```
